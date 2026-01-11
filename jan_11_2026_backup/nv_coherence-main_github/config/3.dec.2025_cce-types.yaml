@@ -1,0 +1,47 @@
+run_id: '3.dec.2025_cce-types'  # must match the file name! this is added to every param subset
+base_out_dir: './output'
+
+model_params:  # supercell parameters
+  p1_conc: 0  # P1 concentration in number P1s / number of atoms
+  size: 100  # approx length of one side of the supercell in A
+  verbose: true
+  # nonmandatory parameters:
+  # zdir: the z direction of the NV defect; set at [1,1,1]
+  # seed: seed for random configuration of supercell; controlled by the method model.run_ensemble
+  # c13_conc: set at the natural abundance
+  # verbose: set at false
+
+simulator_params:
+  order: 2  # CCE order
+  r_bath: 1.0e3  # bath cutoff radius in Angstroms
+  r_dipole: 6  # cutoff of pairwise clusters in Angstroms
+  # nonmandatory parameters:
+  # p1_hf: consider P1 nuclei-electron hyperfine?; set at true
+  # polarization: polarization (gamma) of the 13C spins; set at 0
+  # NV parameters:
+  # - nv_position: [ 0, 0, 0 ]  # central spin position
+  # - alpha: [ 0, 0, 1 ]  # NV qubit levels in Sz basis
+  # - beta: [ 0, 1, 0 ]
+  # debug_hf:  used to turn off custom P1 HF imap for debugging; set at false
+  # verbose: set at false
+
+compute_params:  # parameters for computing the coherence function
+  parallel: false  # if run with MPI (on Discovery), set to true
+  magnetic_field: [ 0, 0, 1900 ]  # in Gauss
+  pulse_id: "1"  # a string id representing pulse sequence. right now it is simply 1 is 1 pulse in CPMG sequence and
+                 # 'hahn' is x-axis pi Hahn echo
+  time_space: [ 0.0, 2.0, 201 ]  # start, stop, step; in milliseconds
+  cce_types: ["conv", "gen", "MC"]    # a list containing up to three strings representing methods of CCE computation.
+                                      # 'conv' for conventional, 'gen' for generalized, 'MC' for generalized with Monte
+                                      # Carlo random sampling of bath states. whatever methods are included are ran.
+  verbose: true
+  # nonmandatory parameters
+  # n_bath_states: number of random bath states to sample over, assuming MC is being run; set at 20
+  # parallel_states: if run with MPI (on Discovery) and doing MC random bath states, set to true; set at false
+  # verbose: set at false
+
+ensemble_params:
+  ensemble_size: 10  # number of unique baths generated
+  verbose: true
+  # nonmandatory parameters
+  # verbose: set at false
