@@ -176,5 +176,3 @@ if __name__ == '__main__':
         raise SystemExit("Usage: python run.py <config.yaml>")
     yaml_path = sys.argv[1]
     main(yaml_path)
-
-
