@@ -29,6 +29,7 @@ echo "SLURM_CPUS_PER_TASK = $SLURM_NTASKS"
 echo "Working dir: $(pwd)"
 echo "Run ID: $RUN_ID"
 echo "Config file: $YAML_PATH"
+echo "Timestamp: $(date -Iseconds)"
 
 # Send all Python __pycache__ into temp_slurm_out first
 export PYTHONPYCACHEPREFIX="$SLURM_SUBMIT_DIR/temp_slurm_out/pycache_${RUN_ID}_${SLURM_JOB_ID}"

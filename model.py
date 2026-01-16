@@ -84,6 +84,8 @@ def get_pulse(pulse_id):
         return 1
     elif pulse_id == "hahn":
         return [pc.Pulse('x', np.pi)]
+    elif isinstance(pulse_id, int):
+        return pulse_id
     else:
         raise Exception("pulse_id not recognized")
 
@@ -172,6 +174,7 @@ def get_simulator(atoms, simulator_params):
     beta = simulator_params.get("beta", [ 0, 1, 0 ])
     debug_hf = simulator_params.get("debug_hf", False)
     verbose = simulator_params.get("verbose", False)
+    as_delay = simulator_params.get("as_delay", False)
 
     # ================= MAIN CODE ================= #
     # get NV center and imap
@@ -185,7 +188,8 @@ def get_simulator(atoms, simulator_params):
         imap=imap,
         order=order,
         r_bath=r_bath,
-        r_dipole=r_dipole
+        r_dipole=r_dipole,
+        as_delay=as_delay
     )
     if debug_hf:
         calc_params.pop("imap")
@@ -230,6 +234,9 @@ def run_experiment(calc, experiment_params):
     n_bath_states = experiment_params.get("n_bath_states", 20)
     verbose = experiment_params.get("verbose", False)
     checkpoints = experiment_params.get("checkpoints", True)
+    tau = experiment_params.get("tau", -1.0)
+    if tau > 0:
+        time_space = np.linspace(0.2*tau*1.0e-3, 5.0*tau*1.0e-3, len(time_space))
 
     # ================= MAIN CODE ================= #
     # initialize the dictionary to be returned
