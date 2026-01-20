@@ -217,9 +217,6 @@ def run_ensemble(config):
         new_supercell_params["seed"] = (base_seed + i) & 0xFFFFFFFF  # new seed each loop, deterministic though so
                                                                      # separate mpi runs will produce the same supercell
 
-        as_delay = True if isinstance(experiment_params['pulse_id'], int) else False  # cpmg hacky edit
-        simulator_params["as_delay"] = as_delay
-
         supercell = model.get_supercell(new_supercell_params)
         simulator = model.get_simulator(supercell, simulator_params)
         coherence = model.run_experiment(simulator, experiment_params)

@@ -3,6 +3,7 @@ from pathlib import Path
 import numpy as np
 from matplotlib import pyplot as plt
 from scipy.optimize import curve_fit
+import re  # put this near the top of the file with the other imports
 
 
 def average_ensemble(coherence_dict, avg_method):
@@ -176,6 +177,170 @@ def plot_coherence_csv(csv_path: str | Path):
     return fig, ax
 
 
+def plot_cpmg(
+    grid_root: str | Path,
+    csv_name: str = "gcce_averaged.csv",
+    transform: str = "neglog",
+    save_path: str | Path | None = None,
+    show: bool = True,
+):
+    """
+    Build a 2D τ–t_d heatmap from a grid run over many values of N.
+
+    Assumes directory structure like:
+
+        grid_root/
+            pulse_id-1_dummy_var-dummy_val/
+                final_csv_files/gcce_averaged.csv
+            pulse_id-50_dummy_var-dummy_val/
+                final_csv_files/gcce_averaged.csv
+            ...
+
+    Each gcce_averaged.csv must have two columns:
+        τ (ms),  L(τ)
+
+    and the simulation used:
+        pulses = N
+        time_space = np.linspace(1.5e-3, 16.5e-3, 376) [something like this]
+
+    Parameters
+    ----------
+    grid_root : str | Path
+        Root directory containing all the pulse_id-* subdirectories
+        (e.g. "./discovery_runs/2026.1.20_cpmg-grid").
+    csv_name : str
+        File name inside final_csv_files/ (default "gcce_averaged.csv").
+    transform : {"neglog", "abs", "real"}
+        How to map coherence -> color:
+            "abs"    : |L|
+            "real"   : Re(L)
+            "neglog" : -log10( max(1 - |L|, 1e-6) )  (nice 0–6 style scale)
+    save_path : str | Path | None
+        Where to save the figure. If None, saves to
+        grid_root / "gcce_2d_diagonal.png".
+    show : bool
+        Whether to call plt.show().
+
+    Returns
+    -------
+    fig, ax
+    """
+    grid_root = Path(grid_root)
+    if not grid_root.is_dir():
+        raise NotADirectoryError(f"{grid_root} is not a directory")
+
+    # ------------------------------------------------------------------ #
+    # Find all run dirs and parse N from names "pulse_id-N..."
+    # ------------------------------------------------------------------ #
+    run_info = []  # list of (N, run_dir, csv_path)
+    for d in grid_root.iterdir():
+        if not d.is_dir():
+            continue
+        m = re.search(r"pulse_id-(\d+)", d.name)
+        if not m:
+            continue
+        N = int(m.group(1))
+        csv_path = d / "final_csv_files" / csv_name
+        if csv_path.is_file():
+            run_info.append((N, d, csv_path))
+    print("run_info for 2d plot: ", run_info)
+
+    if not run_info:
+        raise RuntimeError(
+            f"No run directories with pattern 'pulse_id-N' and {csv_name} "
+            f"found under {grid_root}"
+        )
+
+    # sort by N so y-axis is increasing pulses / t_d
+    run_info.sort(key=lambda x: x[0])
+
+    tau_ms_master = None
+    Z_rows = []
+    Ns = []
+
+    # ------------------------------------------------------------------ #
+    # Load each gcce_averaged.csv and build color rows
+    # ------------------------------------------------------------------ #
+    for N, run_dir, csv_path in run_info:
+        data = np.loadtxt(csv_path, delimiter=",", skiprows=1)
+        if data.ndim != 2 or data.shape[1] < 2:
+            raise ValueError(f"CSV {csv_path} must have at least two columns")
+
+        t_ms = data[:, 0]  # this is τ in ms
+        L = data[:, 1]
+
+        if tau_ms_master is None:
+            tau_ms_master = t_ms
+        else:
+            if (
+                t_ms.shape != tau_ms_master.shape
+                or not np.allclose(t_ms, tau_ms_master, rtol=1e-8, atol=1e-12)
+            ):
+                raise ValueError(
+                    f"Time grid mismatch between {csv_path} and previous runs.\n"
+                    f"Make sure time_space is the same τ grid for all N."
+                )
+
+        # transform coherence -> color
+        if transform == "abs":
+            z = np.abs(L)
+        elif transform == "real":
+            z = np.real(L)
+        elif transform == "neglog":
+            eps = 1e-6
+            z = -np.log10(np.clip(1.0 - np.abs(L), eps, 1.0))
+        else:
+            raise ValueError(f"Unknown transform '{transform}'")
+
+        Z_rows.append(z)
+        Ns.append(N)
+
+    Z = np.vstack(Z_rows)             # shape (n_runs, n_tau)
+    Ns = np.asarray(Ns, dtype=float)  # pulses for each row
+
+    # ------------------------------------------------------------------ #
+    # Build τ–t_d grids (in µs) and plot
+    # ------------------------------------------------------------------ #
+    tau_ms = np.asarray(tau_ms_master)
+    tau_us = tau_ms * 1e3
+
+    Tau_grid = np.tile(tau_us, (len(Ns), 1))  # same τ along each row
+    Td_grid = 2.0 * Ns.reshape(-1, 1) * Tau_grid  # t_d = 2 N τ, in µs
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+
+    pcm = ax.pcolormesh(Tau_grid, Td_grid, Z, shading="auto")
+    ax.set_yscale("log")
+
+    ax.set_xlabel(r"$\tau$ ($\mu$s)")
+    ax.set_ylabel(r"Time of echo $t_d$ ($\mu$s)")
+
+    if transform == "neglog":
+        cbar_label = r"$-\log_{10}(1-|L|)$"
+    elif transform == "abs":
+        cbar_label = r"$|L|$"
+    else:
+        cbar_label = r"$L$"
+
+    cbar = fig.colorbar(pcm, ax=ax)
+    cbar.set_label(cbar_label)
+
+    fig.tight_layout()
+
+    if save_path is None:
+        save_path = grid_root / "gcce_2d_diagonal.png"
+    save_path = Path(save_path)
+    fig.savefig(save_path, dpi=300)
+
+    if show:
+        plt.show()
+    else:
+        plt.close(fig)
+
+    print(f"Saved 2D gcce heatmap to: {save_path}")
+    return fig, ax
+
+
 # def replot_grid_conv_only(config_path, grid_dict, save_suffix="_conv-only"):
 #     """
 #     [Chat GPT wrote this function.] Rebuild a grid figure using ONLY the conventional CCE averaged results
@@ -289,7 +454,8 @@ def plot_coherence_csv(csv_path: str | Path):
 
 
 def main():
-    plot_coherence_csv("./discovery_runs/2025.12.7_template3.0/final_csv_files/2025.12.7_template3.0_cce_averaged.csv")
+    plot_cpmg("./discovery_runs/2026.1.20_cpmg-grid")
+    # plot_coherence_csv("./discovery_runs/2025.12.7_template3.0/final_csv_files/2025.12.7_template3.0_cce_averaged.csv")
 
 
 if __name__ == '__main__':

@@ -174,7 +174,6 @@ def get_simulator(atoms, simulator_params):
     beta = simulator_params.get("beta", [ 0, 1, 0 ])
     debug_hf = simulator_params.get("debug_hf", False)
     verbose = simulator_params.get("verbose", False)
-    as_delay = simulator_params.get("as_delay", False)
 
     # ================= MAIN CODE ================= #
     # get NV center and imap
@@ -189,7 +188,6 @@ def get_simulator(atoms, simulator_params):
         order=order,
         r_bath=r_bath,
         r_dipole=r_dipole,
-        as_delay=as_delay
     )
     if debug_hf:
         calc_params.pop("imap")
@@ -234,9 +232,11 @@ def run_experiment(calc, experiment_params):
     n_bath_states = experiment_params.get("n_bath_states", 20)
     verbose = experiment_params.get("verbose", False)
     checkpoints = experiment_params.get("checkpoints", True)
-    tau = experiment_params.get("tau", -1.0)
-    if tau > 0:
-        time_space = np.linspace(0.2*tau*1.0e-3, 5.0*tau*1.0e-3, len(time_space))
+
+    # if CPMG, turn normalized off and update timespace
+    normalized = False if isinstance(experiment_params['pulse_id'], int) else True
+    new_time_space = np.linspace(2.0*pulses*time_space[0], 2.0*pulses*time_space[-1], len(time_space))
+    time_space = new_time_space
 
     # ================= MAIN CODE ================= #
     # initialize the dictionary to be returned
@@ -264,6 +264,7 @@ def run_experiment(calc, experiment_params):
             calc_params['method'] = 'cce'
         elif base == 'gcce':
             calc_params['method'] = 'gcce'
+            calc_params['normalized'] = normalized  # if CPMG, turns it off
         else: raise Exception(f"Unknown cce type: {cce_type}")
 
         # calculate coherence and add it to results

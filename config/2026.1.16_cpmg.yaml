@@ -34,8 +34,8 @@ experiment_params:  # parameters for computing the coherence function
   magnetic_field: [ 0, 0, 1900 ]  # in Gauss
   pulse_id: 100  # a string id representing pulse sequence. right now it is simply '1' is 1 pulse in CPMG sequence and
                  # 'hahn' is x-axis pi Hahn echo. see the function model.get_pulses.
-                # if passed as an integer, assumes it is CPMG and the integer is number of pulses
-  time_space: [ 0.0, 4.0, 101 ]  # start, stop, step; in milliseconds
+                # if passed as an integer, assumes it is CPMG and the integer is N
+  time_space: [ 1.5e-3, 16.5e-3, 376 ]  # start, stop, step; in milliseconds
   cce_types: ["gcce"]    # a list containing strings representing methods of CCE computation.
                                       # Currently, the options are:
                                       # 'cce' conventional cce
@@ -51,7 +51,6 @@ experiment_params:  # parameters for computing the coherence function
   # - tau: time delay; only relevant if pulse_id is an integer (cpmg experiment).
   n_bath_states: 32
   verbose: true
-  tau: 5  # in micro seconds. NOTE: THIS OVERRIDES TIMESPACE! will still use num_steps in time_space
 
 
 grid_params:  # if doing a grid run include these. if not, you can delete or keep them, and it will make no difference
