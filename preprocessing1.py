@@ -185,6 +185,7 @@ def plot_cpmg(
     show: bool = True,
 ):
     """
+    disclaimer- used AI to help write this method, will try to improve it soon
     Build a 2D τ–t_d heatmap from a grid run over many values of N.
 
     Assumes directory structure like:
@@ -289,6 +290,7 @@ def plot_cpmg(
         elif transform == "neglog":
             eps = 1e-6
             z = -np.log10(np.clip(1.0 - np.abs(L), eps, 1.0))
+            z = -np.log(np.abs(L))
         else:
             raise ValueError(f"Unknown transform '{transform}'")
 
@@ -454,7 +456,7 @@ def plot_cpmg(
 
 
 def main():
-    plot_cpmg("./discovery_runs/2026.1.20_cpmg-grid")
+    plot_cpmg("./discovery_runs/2026.1.20_cpmg-grid-large")
     # plot_coherence_csv("./discovery_runs/2025.12.7_template3.0/final_csv_files/2025.12.7_template3.0_cce_averaged.csv")
 
 
