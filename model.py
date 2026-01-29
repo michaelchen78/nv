@@ -234,9 +234,11 @@ def run_experiment(calc, experiment_params):
     checkpoints = experiment_params.get("checkpoints", True)
 
     # if CPMG, turn normalized off and update timespace
-    normalized = False if isinstance(experiment_params['pulse_id'], int) else True
-    new_time_space = np.linspace(2.0*pulses*time_space[0], 2.0*pulses*time_space[-1], len(time_space))
-    time_space = new_time_space
+    cpmg = isinstance(experiment_params['pulse_id'], int)
+    normalized = False if cpmg else True
+    if cpmg:
+        new_time_space = np.linspace(2.0*pulses*time_space[0], 2.0*pulses*time_space[-1], len(time_space))
+        time_space = new_time_space
 
     # ================= MAIN CODE ================= #
     # initialize the dictionary to be returned
@@ -264,7 +266,8 @@ def run_experiment(calc, experiment_params):
             calc_params['method'] = 'cce'
         elif base == 'gcce':
             calc_params['method'] = 'gcce'
-            calc_params['normalized'] = normalized  # if CPMG, turns it off
+            if isinstance(pulses, int):
+                calc_params['normalized'] = normalized  # if CPMG, turns it off
         else: raise Exception(f"Unknown cce type: {cce_type}")
 
         # calculate coherence and add it to results

@@ -456,7 +456,7 @@ def plot_cpmg(
 
 
 def main():
-    plot_cpmg("./discovery_runs/2026.1.20_cpmg-grid-large")
+    plot_cpmg("./discovery_runs/2026.1.20_cpmg-long")
     # plot_coherence_csv("./discovery_runs/2025.12.7_template3.0/final_csv_files/2025.12.7_template3.0_cce_averaged.csv")
 
 
