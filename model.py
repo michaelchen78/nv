@@ -34,6 +34,15 @@ def p1_hyperfine(atoms, on):
     """
     e_idx = np.where(atoms.N == 'e')[0]  # get indices
     p1_idx = np.where(atoms.N == '14N')[0]
+    # to debug the NV's own electron add this
+    if len(e_idx) == len(p1_idx) - 1:
+        print("chopped off one 14N")
+        p1_idx = p1_idx[1:]
+    elif len(e_idx) == len(p1_idx):
+        print("same length")
+    else:
+        raise Exception("wrong number of p1 pairs")
+
     assert np.array_equal(atoms[e_idx].xyz, atoms[p1_idx].xyz ) # ensure nuclei and electrons are colocated
     pairs = list(zip(e_idx, p1_idx))  # pair them up
 
@@ -108,6 +117,7 @@ def get_supercell(supercell_params):
     zdir = supercell_params.get("zdir", [1, 1, 1])
     c13_conc = supercell_params.get("c13_conc", 0.011)
     verbose = supercell_params.get("verbose", False)
+    temp_debug = supercell_params.get("temp_debug", True)
 
     # ================= MAIN CODE ================= #
     # build unit cell
@@ -132,8 +142,12 @@ def get_supercell(supercell_params):
     mask = (atoms.N == '14C')
     idx = np.where(mask)[0]
     atoms = append_many_same_loc(atoms, idx, 'e')  # add in electrons where 14Cs are
-    idx_14n = np.where(atoms.N == '14N')[0]
-    atoms = append_many_same_loc(atoms, idx_14n, 'e')  # add in electron where NV nitrogen is
+    if not temp_debug:
+        print("placing electron")
+        idx_14n = np.where(atoms.N == '14N')[0]
+        atoms = append_many_same_loc(atoms, idx_14n, 'e')  # add in electron where NV nitrogen is
+    else:
+        print("no electron placed")
     atoms['N'][idx] = '14N'  # add in P1's by replacing the 14Cs with 14Ns
     assert '14C' not in atoms['N']  # make sure no 14Cs left
 
@@ -236,6 +250,8 @@ def run_experiment(calc, experiment_params):
     # if CPMG, turn normalized off and update timespace
     cpmg = isinstance(experiment_params['pulse_id'], int)
     normalized = False if cpmg else True
+    normalized_override = experiment_params.get("normalized_override", normalized)
+    print("normalized", normalized_override)
     if cpmg:
         new_time_space = np.linspace(2.0*pulses*time_space[0], 2.0*pulses*time_space[-1], len(time_space))
         time_space = new_time_space
@@ -266,8 +282,9 @@ def run_experiment(calc, experiment_params):
             calc_params['method'] = 'cce'
         elif base == 'gcce':
             calc_params['method'] = 'gcce'
-            if isinstance(pulses, int):
-                calc_params['normalized'] = normalized  # if CPMG, turns it off
+            # if isinstance(pulses, int):
+            print("normalized2", normalized_override)
+            calc_params['normalized'] = normalized_override  # if CPMG, turns it off
         else: raise Exception(f"Unknown cce type: {cce_type}")
 
         # calculate coherence and add it to results

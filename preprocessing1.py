@@ -143,7 +143,7 @@ def plot_coherence_panel(ax, time_space, coherence_dict_avg, cce_types, title=No
         text_lines.append(f"size = {config['supercell_params']['size']}, p1_conc = {config['supercell_params']['p1_conc']}")
         text_lines.append(f"order = {config['simulator_params']['order']}, r_bath = "
                           f"{config['simulator_params']['r_bath']}, r_dipole = {config['simulator_params']['r_dipole']}")
-        text_lines.append(f"ensemble = {config['ensemble_size']}, magnetic field = "
+        text_lines.append(f"ensemble = {config['experiment_params']['ensemble_size']}, magnetic field = "
                           f"{config['experiment_params']['magnetic_field']}")
     if fit_results is not None:
         for cce_type, (T2, p) in fit_results.items():

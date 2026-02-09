@@ -171,7 +171,6 @@ def run_ensemble(config):
     # set up configuration
     run_id = config["run_id"]
     base_out_dir_str = config["base_out_dir"]
-    ensemble_size = config["ensemble_size"]
     supercell_params = config["supercell_params"]
     simulator_params = config["simulator_params"]
     experiment_params = config["experiment_params"]
@@ -205,10 +204,10 @@ def run_ensemble(config):
     temp_time = t_start  # so we can record how long EACH ensemble run takes
 
     # run ensemble of experiments
-    coherence_dict = {cce_type: np.empty((len(experiment_params["time_space"]), ensemble_size))
+    coherence_dict = {cce_type: np.empty((len(experiment_params["time_space"]), experiment_params["ensemble_size"]))
                       for cce_type in experiment_params["cce_types"]}
     base_seed = get_seed(run_id)
-    for i in range(ensemble_size):
+    for i in range(experiment_params["ensemble_size"]):
         if is_root():
             logger.info("Starting ensemble experiment %d", i+1)
         set_current_ensemble(i+1)  # or i + 1 if you want 1-based

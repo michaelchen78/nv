@@ -36,7 +36,7 @@ def run_avg_fit_plot(config, grid_axes=None):
     cce_types = config["experiment_params"]["cce_types"]
 
     # average results over the ensemble
-    coherence_dict_avg = average_ensemble(coherence_dict, avg_method=config["avg_method"])
+    coherence_dict_avg = average_ensemble(coherence_dict, avg_method=config["experiment_params"]["avg_method"])
     # save averaged csv files
     final_csv_dir = Path(config["base_out_dir"]) / run_id / "final_csv_files"
     assert final_csv_dir.is_dir(), f"Directory does not exist: {final_csv_dir}"

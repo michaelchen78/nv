@@ -1,0 +1,59 @@
+run_id: '2026.2.8_reproduce'  # must match the file name! this is added to every param subset
+base_out_dir: './runs'  # this should be './runs'
+ensemble_size: 10  # number of unique baths generated
+is_grid: true  # if this is a grid run; only used by run.sh, not used by sim.sh
+avg_method: median  # a string id denoting how to average over the ensemble; only used by run.sh, not used by sim.sh
+                    # currently, only 'mean' and 'median' are supported, and they are straightforward implementations
+
+supercell_params:  # supercell parameters
+  p1_conc: 1.0e-6  # P1 concentration in number P1s / number of atoms
+  size: 50  # approx length of one side of the supercell in A
+  # nonmandatory parameters:
+  # - seed: seed for random configuration of supercell; controlled by the method model.run_ensemble [UPDATE THIS]
+  # - zdir: the z direction of the NV defect; set at [1,1,1]
+  # - c13_conc: set at the natural abundance
+  # - verbose: set at false
+  verbose: true
+
+simulator_params:
+  order: -1  # CCE order
+  r_bath: 1e4  # bath cutoff radius in Angstroms
+  r_dipole: 20  # cutoff of pairwise clusters in Angstroms
+  # nonmandatory parameters:
+  # - p1_hf: consider P1 nuclei-electron hyperfine?; set at true
+  # - polarization: polarization (gamma) of the 13C spins; set at 0
+  # - NV parameters:
+  # - - nv_position: [ 0, 0, 0 ]  # central spin position
+  # - - alpha: [ 0, 0, 1 ]  # NV qubit levels in Sz basis
+  # - - beta: [ 0, 1, 0 ]
+  # - debug_hf:  used to turn off custom P1 HF imap for debugging; set at false
+  # - verbose: set at false
+  verbose: true
+
+experiment_params:  # parameters for computing the coherence function
+  magnetic_field: [ 0, 0, 1900 ]  # in Gauss
+  pulse_id: 'hahn'  # a string id representing pulse sequence. right now it is simply '1' is 1 pulse in CPMG sequence and
+                 # 'hahn' is x-axis pi Hahn echo. see the function model.get_pulses.
+                # if passed as an integer, assumes it is CPMG and the integer is N
+  time_space: [ 1.5e-3, 16.5e-3, 376 ]  # start, stop, step; in milliseconds
+  cce_types: -1    # a list containing strings representing methods of CCE computation.
+                                      # Currently, the options are:
+                                      # 'cce' conventional cce
+                                      # 'gcce' generalized cce 'MC' for generalized with Monte
+                                      # 'cce_mc' conventional cce with monte carlo random bath sampling
+                                      # 'gcce_mc' generalized cce with monte carlo random bath sampling
+  parallel: true  # if run with MPI (on Discovery), set to true; for local runs set to false
+  # nonmandatory parameters
+  # - n_bath_states: number of random bath states to sample over (only for monte carlo cce_type); set at 20
+  #                  have it be divisible by number of mpi processes
+  # - verbose: set at false
+  # - checkpoints: save coherence checkpoints as your go through an ensemble; set at true
+  n_bath_states: 32
+  verbose: true
+
+
+grid_params:  # if doing a grid run include these. if not, you can delete or keep them, and it will make no difference
+  param1: ["simulator_params", "order"]
+  param2: ["experiment_params", "cce_types"]
+  param1_values:  [2, 3]
+  param2_values: [['cce'], ['gcce']]
