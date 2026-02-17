@@ -190,3 +190,5 @@ trash/
 # JetBrains
 .idea/
 *.iml
+/runs/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens1.csv
+/runs/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens2.csv
