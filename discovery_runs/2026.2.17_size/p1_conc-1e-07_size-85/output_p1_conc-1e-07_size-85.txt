@@ -1,0 +1,2299 @@
+2026-02-17 11:16:31,649 Initialized output for run p1_conc-1e-07_size-85 in runs/2026.2.17_size/p1_conc-1e-07_size-85
+2026-02-17 11:16:31,649 Config: {'run_id': 'p1_conc-1e-07_size-85', 'base_out_dir': 'runs/2026.2.17_size', 'is_grid': True, 'supercell_params': {'p1_conc': 1e-07, 'size': 85, 'verbose': True}, 'simulator_params': {'order': 2, 'r_bath': '1e5', 'r_dipole': '1e5', 'verbose': True}, 'experiment_params': {'ensemble_size': 50, 'avg_method': 'median', 'magnetic_field': [0, 0, 1900], 'pulse_id': 'hahn', 'cce_types': ['cce', 'gcce', 'gcce_mc'], 'parallel': True, 'n_bath_states': 32, 'verbose': True, 'time_space': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+       0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
+       0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
+       0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
+       0.44, 0.45, 0.46, 0.47, 0.48, 0.49, 0.5 , 0.51, 0.52, 0.53, 0.54,
+       0.55, 0.56, 0.57, 0.58, 0.59, 0.6 , 0.61, 0.62, 0.63, 0.64, 0.65,
+       0.66, 0.67, 0.68, 0.69, 0.7 , 0.71, 0.72, 0.73, 0.74, 0.75, 0.76,
+       0.77, 0.78, 0.79, 0.8 , 0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87,
+       0.88, 0.89, 0.9 , 0.91, 0.92, 0.93, 0.94, 0.95, 0.96, 0.97, 0.98,
+       0.99, 1.  , 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07, 1.08, 1.09,
+       1.1 , 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17, 1.18, 1.19, 1.2 ,
+       1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28, 1.29, 1.3 , 1.31,
+       1.32, 1.33, 1.34, 1.35, 1.36, 1.37, 1.38, 1.39, 1.4 , 1.41, 1.42,
+       1.43, 1.44, 1.45, 1.46, 1.47, 1.48, 1.49, 1.5 , 1.51, 1.52, 1.53,
+       1.54, 1.55, 1.56, 1.57, 1.58, 1.59, 1.6 , 1.61, 1.62, 1.63, 1.64,
+       1.65, 1.66, 1.67, 1.68, 1.69, 1.7 , 1.71, 1.72, 1.73, 1.74, 1.75,
+       1.76, 1.77, 1.78, 1.79, 1.8 , 1.81, 1.82, 1.83, 1.84, 1.85, 1.86,
+       1.87, 1.88, 1.89, 1.9 , 1.91, 1.92, 1.93, 1.94, 1.95, 1.96, 1.97,
+       1.98, 1.99, 2.  , 2.01, 2.02, 2.03, 2.04, 2.05, 2.06, 2.07, 2.08,
+       2.09, 2.1 , 2.11, 2.12, 2.13, 2.14, 2.15, 2.16, 2.17, 2.18, 2.19,
+       2.2 , 2.21, 2.22, 2.23, 2.24, 2.25, 2.26, 2.27, 2.28, 2.29, 2.3 ,
+       2.31, 2.32, 2.33, 2.34, 2.35, 2.36, 2.37, 2.38, 2.39, 2.4 , 2.41,
+       2.42, 2.43, 2.44, 2.45, 2.46, 2.47, 2.48, 2.49, 2.5 , 2.51, 2.52,
+       2.53, 2.54, 2.55, 2.56, 2.57, 2.58, 2.59, 2.6 , 2.61, 2.62, 2.63,
+       2.64, 2.65, 2.66, 2.67, 2.68, 2.69, 2.7 , 2.71, 2.72, 2.73, 2.74,
+       2.75, 2.76, 2.77, 2.78, 2.79, 2.8 , 2.81, 2.82, 2.83, 2.84, 2.85,
+       2.86, 2.87, 2.88, 2.89, 2.9 , 2.91, 2.92, 2.93, 2.94, 2.95, 2.96,
+       2.97, 2.98, 2.99, 3.  , 3.01, 3.02, 3.03, 3.04, 3.05, 3.06, 3.07,
+       3.08, 3.09, 3.1 , 3.11, 3.12, 3.13, 3.14, 3.15, 3.16, 3.17, 3.18,
+       3.19, 3.2 , 3.21, 3.22, 3.23, 3.24, 3.25, 3.26, 3.27, 3.28, 3.29,
+       3.3 , 3.31, 3.32, 3.33, 3.34, 3.35, 3.36, 3.37, 3.38, 3.39, 3.4 ,
+       3.41, 3.42, 3.43, 3.44, 3.45, 3.46, 3.47, 3.48, 3.49, 3.5 , 3.51,
+       3.52, 3.53, 3.54, 3.55, 3.56, 3.57, 3.58, 3.59, 3.6 , 3.61, 3.62,
+       3.63, 3.64, 3.65, 3.66, 3.67, 3.68, 3.69, 3.7 , 3.71, 3.72, 3.73,
+       3.74, 3.75, 3.76, 3.77, 3.78, 3.79, 3.8 , 3.81, 3.82, 3.83, 3.84,
+       3.85, 3.86, 3.87, 3.88, 3.89, 3.9 , 3.91, 3.92, 3.93, 3.94, 3.95,
+       3.96, 3.97, 3.98, 3.99, 4.  ])}, 'grid_params': {'param1': ['supercell_params', 'p1_conc'], 'param2': ['supercell_params', 'size'], 'param1_values': [1e-07, 1e-06, 1e-05, 0.0001], 'param2_values': [50, 70, 85, 95]}}
+2026-02-17 11:16:31,650 Starting ensemble experiment 1
+2026-02-17 11:16:31,669 Ensemble 1 starting now:
+2026-02-17 11:16:31,669 Generating supercell: size=85, p1_conc=1e-07, seed=589836
+2026-02-17 11:16:31,672 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:16:31,929 Wrote CSV p1_conc-1e-07_size-85_atoms_ens1.csv
+2026-02-17 11:16:32,033 [ens num 1] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:16:32,033 
+[ens number 1] Starting coherence experiment:cce.
+
+2026-02-17 11:16:51,139 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:16:51,148 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens1.csv
+2026-02-17 11:16:51,148 
+[ens number 1] Starting coherence experiment:gcce.
+
+2026-02-17 11:18:00,677 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:18:00,686 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens1.csv
+2026-02-17 11:18:00,686 
+[ens number 1] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:19:28,663 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:19:28,721 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens1.csv
+2026-02-17 11:19:28,721 Rank 0 finished ensemble experiment 1 in 177.07 s
+2026-02-17 11:19:28,721 Starting ensemble experiment 2
+2026-02-17 11:19:28,764 Ensemble 2 starting now:
+2026-02-17 11:19:28,764 Generating supercell: size=85, p1_conc=1e-07, seed=589837
+2026-02-17 11:19:28,767 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:19:29,010 Wrote CSV p1_conc-1e-07_size-85_atoms_ens2.csv
+2026-02-17 11:19:29,109 [ens num 2] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:19:29,110 
+[ens number 2] Starting coherence experiment:cce.
+
+2026-02-17 11:19:48,039 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:19:48,046 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens2.csv
+2026-02-17 11:19:48,046 
+[ens number 2] Starting coherence experiment:gcce.
+
+2026-02-17 11:20:57,953 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:20:57,962 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens2.csv
+2026-02-17 11:20:57,962 
+[ens number 2] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:22:25,730 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:22:25,804 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens2.csv
+2026-02-17 11:22:25,804 Rank 0 finished ensemble experiment 2 in 177.08 s
+2026-02-17 11:22:25,804 Starting ensemble experiment 3
+2026-02-17 11:22:25,834 Ensemble 3 starting now:
+2026-02-17 11:22:25,834 Generating supercell: size=85, p1_conc=1e-07, seed=589838
+2026-02-17 11:22:25,838 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:22:26,082 Wrote CSV p1_conc-1e-07_size-85_atoms_ens3.csv
+2026-02-17 11:22:26,183 [ens num 3] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:22:26,184 
+[ens number 3] Starting coherence experiment:cce.
+
+2026-02-17 11:22:45,200 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:22:45,206 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens3.csv
+2026-02-17 11:22:45,207 
+[ens number 3] Starting coherence experiment:gcce.
+
+2026-02-17 11:23:56,728 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:23:56,736 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens3.csv
+2026-02-17 11:23:56,736 
+[ens number 3] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:25:22,509 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:25:22,607 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens3.csv
+2026-02-17 11:25:22,608 Rank 0 finished ensemble experiment 3 in 176.80 s
+2026-02-17 11:25:22,608 Starting ensemble experiment 4
+2026-02-17 11:25:22,612 Ensemble 4 starting now:
+2026-02-17 11:25:22,612 Generating supercell: size=85, p1_conc=1e-07, seed=589839
+2026-02-17 11:25:22,615 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:25:22,811 Wrote CSV p1_conc-1e-07_size-85_atoms_ens4.csv
+2026-02-17 11:25:22,909 [ens num 4] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:25:22,909 
+[ens number 4] Starting coherence experiment:cce.
+
+2026-02-17 11:25:41,984 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:25:41,992 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens4.csv
+2026-02-17 11:25:41,992 
+[ens number 4] Starting coherence experiment:gcce.
+
+2026-02-17 11:26:52,374 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:26:52,383 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens4.csv
+2026-02-17 11:26:52,383 
+[ens number 4] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:28:18,172 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:28:18,258 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens4.csv
+2026-02-17 11:28:18,258 Rank 0 finished ensemble experiment 4 in 175.65 s
+2026-02-17 11:28:18,258 Starting ensemble experiment 5
+2026-02-17 11:28:18,274 Ensemble 5 starting now:
+2026-02-17 11:28:18,274 Generating supercell: size=85, p1_conc=1e-07, seed=589840
+2026-02-17 11:28:18,279 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:28:18,476 Wrote CSV p1_conc-1e-07_size-85_atoms_ens5.csv
+2026-02-17 11:28:18,585 [ens num 5] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:28:18,586 
+[ens number 5] Starting coherence experiment:cce.
+
+2026-02-17 11:28:37,681 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:28:37,687 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens5.csv
+2026-02-17 11:28:37,687 
+[ens number 5] Starting coherence experiment:gcce.
+
+2026-02-17 11:29:49,491 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:29:49,500 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens5.csv
+2026-02-17 11:29:49,500 
+[ens number 5] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:31:17,945 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:31:17,981 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens5.csv
+2026-02-17 11:31:17,981 Rank 0 finished ensemble experiment 5 in 179.72 s
+2026-02-17 11:31:17,981 Starting ensemble experiment 6
+2026-02-17 11:31:17,982 Ensemble 6 starting now:
+2026-02-17 11:31:17,982 Generating supercell: size=85, p1_conc=1e-07, seed=589841
+2026-02-17 11:31:17,985 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:31:18,287 Wrote CSV p1_conc-1e-07_size-85_atoms_ens6.csv
+2026-02-17 11:31:18,384 [ens num 6] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:31:18,384 
+[ens number 6] Starting coherence experiment:cce.
+
+2026-02-17 11:31:37,353 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:31:37,359 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens6.csv
+2026-02-17 11:31:37,359 
+[ens number 6] Starting coherence experiment:gcce.
+
+2026-02-17 11:32:47,368 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:32:47,385 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens6.csv
+2026-02-17 11:32:47,385 
+[ens number 6] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:34:14,135 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:34:14,185 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens6.csv
+2026-02-17 11:34:14,185 Rank 0 finished ensemble experiment 6 in 176.20 s
+2026-02-17 11:34:14,185 Starting ensemble experiment 7
+2026-02-17 11:34:14,191 Ensemble 7 starting now:
+2026-02-17 11:34:14,191 Generating supercell: size=85, p1_conc=1e-07, seed=589842
+2026-02-17 11:34:14,195 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:34:14,463 Wrote CSV p1_conc-1e-07_size-85_atoms_ens7.csv
+2026-02-17 11:34:14,566 [ens num 7] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:34:14,567 
+[ens number 7] Starting coherence experiment:cce.
+
+2026-02-17 11:34:33,578 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:34:33,586 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens7.csv
+2026-02-17 11:34:33,586 
+[ens number 7] Starting coherence experiment:gcce.
+
+2026-02-17 11:35:45,261 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:35:45,272 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens7.csv
+2026-02-17 11:35:45,272 
+[ens number 7] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:37:13,195 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:37:13,240 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens7.csv
+2026-02-17 11:37:13,240 Rank 0 finished ensemble experiment 7 in 179.06 s
+2026-02-17 11:37:13,240 Starting ensemble experiment 8
+2026-02-17 11:37:13,244 Ensemble 8 starting now:
+2026-02-17 11:37:13,244 Generating supercell: size=85, p1_conc=1e-07, seed=589843
+2026-02-17 11:37:13,248 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:37:13,549 Wrote CSV p1_conc-1e-07_size-85_atoms_ens8.csv
+2026-02-17 11:37:13,650 [ens num 8] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:37:13,650 
+[ens number 8] Starting coherence experiment:cce.
+
+2026-02-17 11:37:32,611 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:37:32,618 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens8.csv
+2026-02-17 11:37:32,618 
+[ens number 8] Starting coherence experiment:gcce.
+
+2026-02-17 11:38:44,066 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:38:44,075 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens8.csv
+2026-02-17 11:38:44,075 
+[ens number 8] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:40:16,163 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:40:16,209 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens8.csv
+2026-02-17 11:40:16,209 Rank 0 finished ensemble experiment 8 in 182.97 s
+2026-02-17 11:40:16,209 Starting ensemble experiment 9
+2026-02-17 11:40:16,237 Ensemble 9 starting now:
+2026-02-17 11:40:16,237 Generating supercell: size=85, p1_conc=1e-07, seed=589844
+2026-02-17 11:40:16,241 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:40:16,484 Wrote CSV p1_conc-1e-07_size-85_atoms_ens9.csv
+2026-02-17 11:40:16,598 [ens num 9] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:40:16,598 
+[ens number 9] Starting coherence experiment:cce.
+
+2026-02-17 11:40:35,556 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:40:35,563 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens9.csv
+2026-02-17 11:40:35,563 
+[ens number 9] Starting coherence experiment:gcce.
+
+2026-02-17 11:41:50,873 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:41:50,883 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens9.csv
+2026-02-17 11:41:50,883 
+[ens number 9] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:43:19,630 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:43:19,683 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens9.csv
+2026-02-17 11:43:19,684 Rank 0 finished ensemble experiment 9 in 183.47 s
+2026-02-17 11:43:19,684 Starting ensemble experiment 10
+2026-02-17 11:43:19,706 Ensemble 10 starting now:
+2026-02-17 11:43:19,706 Generating supercell: size=85, p1_conc=1e-07, seed=589845
+2026-02-17 11:43:19,715 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:43:19,960 Wrote CSV p1_conc-1e-07_size-85_atoms_ens10.csv
+2026-02-17 11:43:20,062 [ens num 10] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:43:20,062 
+[ens number 10] Starting coherence experiment:cce.
+
+2026-02-17 11:43:39,069 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:43:39,075 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens10.csv
+2026-02-17 11:43:39,075 
+[ens number 10] Starting coherence experiment:gcce.
+
+2026-02-17 11:44:50,900 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:44:50,909 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens10.csv
+2026-02-17 11:44:50,909 
+[ens number 10] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:46:20,404 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:46:20,466 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens10.csv
+2026-02-17 11:46:20,467 Rank 0 finished ensemble experiment 10 in 180.78 s
+2026-02-17 11:46:20,467 Starting ensemble experiment 11
+2026-02-17 11:46:20,485 Ensemble 11 starting now:
+2026-02-17 11:46:20,485 Generating supercell: size=85, p1_conc=1e-07, seed=589846
+2026-02-17 11:46:20,489 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:46:20,732 Wrote CSV p1_conc-1e-07_size-85_atoms_ens11.csv
+2026-02-17 11:46:20,836 [ens num 11] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:46:20,837 
+[ens number 11] Starting coherence experiment:cce.
+
+2026-02-17 11:46:39,797 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:46:39,804 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens11.csv
+2026-02-17 11:46:39,804 
+[ens number 11] Starting coherence experiment:gcce.
+
+2026-02-17 11:47:51,827 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:47:51,844 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens11.csv
+2026-02-17 11:47:51,845 
+[ens number 11] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:49:20,127 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:49:20,176 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens11.csv
+2026-02-17 11:49:20,176 Rank 0 finished ensemble experiment 11 in 179.71 s
+2026-02-17 11:49:20,176 Starting ensemble experiment 12
+2026-02-17 11:49:20,177 Ensemble 12 starting now:
+2026-02-17 11:49:20,177 Generating supercell: size=85, p1_conc=1e-07, seed=589847
+2026-02-17 11:49:20,181 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:49:20,565 Wrote CSV p1_conc-1e-07_size-85_atoms_ens12.csv
+2026-02-17 11:49:20,690 [ens num 12] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:49:20,691 
+[ens number 12] Starting coherence experiment:cce.
+
+2026-02-17 11:49:39,675 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:49:39,682 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens12.csv
+2026-02-17 11:49:39,682 
+[ens number 12] Starting coherence experiment:gcce.
+
+2026-02-17 11:50:52,058 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:50:52,230 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens12.csv
+2026-02-17 11:50:52,230 
+[ens number 12] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:52:18,784 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:52:18,873 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens12.csv
+2026-02-17 11:52:18,873 Rank 0 finished ensemble experiment 12 in 178.70 s
+2026-02-17 11:52:18,873 Starting ensemble experiment 13
+2026-02-17 11:52:18,882 Ensemble 13 starting now:
+2026-02-17 11:52:18,882 Generating supercell: size=85, p1_conc=1e-07, seed=589848
+2026-02-17 11:52:18,885 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:52:19,143 Wrote CSV p1_conc-1e-07_size-85_atoms_ens13.csv
+2026-02-17 11:52:19,249 [ens num 13] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:52:19,249 
+[ens number 13] Starting coherence experiment:cce.
+
+2026-02-17 11:52:38,186 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:52:38,196 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens13.csv
+2026-02-17 11:52:38,196 
+[ens number 13] Starting coherence experiment:gcce.
+
+2026-02-17 11:53:48,358 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:53:48,378 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens13.csv
+2026-02-17 11:53:48,378 
+[ens number 13] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:55:15,810 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:55:15,844 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens13.csv
+2026-02-17 11:55:15,844 Rank 0 finished ensemble experiment 13 in 176.97 s
+2026-02-17 11:55:15,844 Starting ensemble experiment 14
+2026-02-17 11:55:15,846 Ensemble 14 starting now:
+2026-02-17 11:55:15,846 Generating supercell: size=85, p1_conc=1e-07, seed=589849
+2026-02-17 11:55:15,849 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:55:16,096 Wrote CSV p1_conc-1e-07_size-85_atoms_ens14.csv
+2026-02-17 11:55:16,201 [ens num 14] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:55:16,202 
+[ens number 14] Starting coherence experiment:cce.
+
+2026-02-17 11:55:35,184 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:55:35,192 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens14.csv
+2026-02-17 11:55:35,192 
+[ens number 14] Starting coherence experiment:gcce.
+
+2026-02-17 11:56:46,174 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:56:46,185 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens14.csv
+2026-02-17 11:56:46,185 
+[ens number 14] Starting coherence experiment:gcce_mc.
+
+2026-02-17 11:58:16,029 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 11:58:16,076 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens14.csv
+2026-02-17 11:58:16,077 Rank 0 finished ensemble experiment 14 in 180.23 s
+2026-02-17 11:58:16,077 Starting ensemble experiment 15
+2026-02-17 11:58:16,078 Ensemble 15 starting now:
+2026-02-17 11:58:16,078 Generating supercell: size=85, p1_conc=1e-07, seed=589850
+2026-02-17 11:58:16,081 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 11:58:16,483 Wrote CSV p1_conc-1e-07_size-85_atoms_ens15.csv
+2026-02-17 11:58:16,634 [ens num 15] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 11:58:16,635 
+[ens number 15] Starting coherence experiment:cce.
+
+2026-02-17 11:58:35,604 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 11:58:35,626 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens15.csv
+2026-02-17 11:58:35,626 
+[ens number 15] Starting coherence experiment:gcce.
+
+2026-02-17 11:59:46,902 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 11:59:46,915 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens15.csv
+2026-02-17 11:59:46,915 
+[ens number 15] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:01:16,810 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:01:16,858 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens15.csv
+2026-02-17 12:01:16,858 Rank 0 finished ensemble experiment 15 in 180.78 s
+2026-02-17 12:01:16,858 Starting ensemble experiment 16
+2026-02-17 12:01:16,860 Ensemble 16 starting now:
+2026-02-17 12:01:16,860 Generating supercell: size=85, p1_conc=1e-07, seed=589851
+2026-02-17 12:01:16,863 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:01:17,144 Wrote CSV p1_conc-1e-07_size-85_atoms_ens16.csv
+2026-02-17 12:01:17,245 [ens num 16] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:01:17,245 
+[ens number 16] Starting coherence experiment:cce.
+
+2026-02-17 12:01:36,285 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:01:36,294 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens16.csv
+2026-02-17 12:01:36,294 
+[ens number 16] Starting coherence experiment:gcce.
+
+2026-02-17 12:02:46,350 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:02:46,361 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens16.csv
+2026-02-17 12:02:46,361 
+[ens number 16] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:04:14,281 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:04:14,383 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens16.csv
+2026-02-17 12:04:14,383 Rank 0 finished ensemble experiment 16 in 177.52 s
+2026-02-17 12:04:14,383 Starting ensemble experiment 17
+2026-02-17 12:04:14,389 Ensemble 17 starting now:
+2026-02-17 12:04:14,389 Generating supercell: size=85, p1_conc=1e-07, seed=589852
+2026-02-17 12:04:14,392 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:04:14,600 Wrote CSV p1_conc-1e-07_size-85_atoms_ens17.csv
+2026-02-17 12:04:14,702 [ens num 17] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:04:14,702 
+[ens number 17] Starting coherence experiment:cce.
+
+2026-02-17 12:04:33,687 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:04:33,694 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens17.csv
+2026-02-17 12:04:33,694 
+[ens number 17] Starting coherence experiment:gcce.
+
+2026-02-17 12:05:43,853 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:05:43,862 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens17.csv
+2026-02-17 12:05:43,862 
+[ens number 17] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:07:10,629 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:07:10,755 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens17.csv
+2026-02-17 12:07:10,755 Rank 0 finished ensemble experiment 17 in 176.37 s
+2026-02-17 12:07:10,755 Starting ensemble experiment 18
+2026-02-17 12:07:10,764 Ensemble 18 starting now:
+2026-02-17 12:07:10,764 Generating supercell: size=85, p1_conc=1e-07, seed=589853
+2026-02-17 12:07:10,768 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:07:10,967 Wrote CSV p1_conc-1e-07_size-85_atoms_ens18.csv
+2026-02-17 12:07:11,070 [ens num 18] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:07:11,070 
+[ens number 18] Starting coherence experiment:cce.
+
+2026-02-17 12:07:30,119 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:07:30,126 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens18.csv
+2026-02-17 12:07:30,126 
+[ens number 18] Starting coherence experiment:gcce.
+
+2026-02-17 12:08:39,829 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:08:39,838 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens18.csv
+2026-02-17 12:08:39,838 
+[ens number 18] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:10:10,450 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:10:10,547 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens18.csv
+2026-02-17 12:10:10,548 Rank 0 finished ensemble experiment 18 in 179.79 s
+2026-02-17 12:10:10,548 Starting ensemble experiment 19
+2026-02-17 12:10:10,553 Ensemble 19 starting now:
+2026-02-17 12:10:10,553 Generating supercell: size=85, p1_conc=1e-07, seed=589854
+2026-02-17 12:10:10,556 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:10:10,806 Wrote CSV p1_conc-1e-07_size-85_atoms_ens19.csv
+2026-02-17 12:10:10,908 [ens num 19] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:10:10,909 
+[ens number 19] Starting coherence experiment:cce.
+
+2026-02-17 12:10:29,810 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:10:29,817 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens19.csv
+2026-02-17 12:10:29,817 
+[ens number 19] Starting coherence experiment:gcce.
+
+2026-02-17 12:11:43,804 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:11:43,813 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens19.csv
+2026-02-17 12:11:43,813 
+[ens number 19] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:13:13,236 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:13:13,348 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens19.csv
+2026-02-17 12:13:13,348 Rank 0 finished ensemble experiment 19 in 182.80 s
+2026-02-17 12:13:13,348 Starting ensemble experiment 20
+2026-02-17 12:13:13,357 Ensemble 20 starting now:
+2026-02-17 12:13:13,357 Generating supercell: size=85, p1_conc=1e-07, seed=589855
+2026-02-17 12:13:13,361 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:13:13,574 Wrote CSV p1_conc-1e-07_size-85_atoms_ens20.csv
+2026-02-17 12:13:13,677 [ens num 20] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:13:13,678 
+[ens number 20] Starting coherence experiment:cce.
+
+2026-02-17 12:13:34,162 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:13:34,169 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens20.csv
+2026-02-17 12:13:34,169 
+[ens number 20] Starting coherence experiment:gcce.
+
+2026-02-17 12:14:44,806 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:14:44,820 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens20.csv
+2026-02-17 12:14:44,820 
+[ens number 20] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:16:14,254 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:16:14,338 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens20.csv
+2026-02-17 12:16:14,338 Rank 0 finished ensemble experiment 20 in 180.99 s
+2026-02-17 12:16:14,338 Starting ensemble experiment 21
+2026-02-17 12:16:14,355 Ensemble 21 starting now:
+2026-02-17 12:16:14,355 Generating supercell: size=85, p1_conc=1e-07, seed=589856
+2026-02-17 12:16:14,358 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:16:14,608 Wrote CSV p1_conc-1e-07_size-85_atoms_ens21.csv
+2026-02-17 12:16:14,710 [ens num 21] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:16:14,711 
+[ens number 21] Starting coherence experiment:cce.
+
+2026-02-17 12:16:33,640 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:16:33,648 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens21.csv
+2026-02-17 12:16:33,648 
+[ens number 21] Starting coherence experiment:gcce.
+
+2026-02-17 12:17:44,280 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:17:44,293 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens21.csv
+2026-02-17 12:17:44,293 
+[ens number 21] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:19:12,062 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:19:12,188 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens21.csv
+2026-02-17 12:19:12,188 Rank 0 finished ensemble experiment 21 in 177.85 s
+2026-02-17 12:19:12,188 Starting ensemble experiment 22
+2026-02-17 12:19:12,204 Ensemble 22 starting now:
+2026-02-17 12:19:12,204 Generating supercell: size=85, p1_conc=1e-07, seed=589857
+2026-02-17 12:19:12,208 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:19:12,407 Wrote CSV p1_conc-1e-07_size-85_atoms_ens22.csv
+2026-02-17 12:19:12,510 [ens num 22] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:19:12,510 
+[ens number 22] Starting coherence experiment:cce.
+
+2026-02-17 12:19:32,545 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:19:32,552 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens22.csv
+2026-02-17 12:19:32,552 
+[ens number 22] Starting coherence experiment:gcce.
+
+2026-02-17 12:20:42,714 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:20:42,725 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens22.csv
+2026-02-17 12:20:42,725 
+[ens number 22] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:22:11,374 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:22:11,422 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens22.csv
+2026-02-17 12:22:11,422 Rank 0 finished ensemble experiment 22 in 179.23 s
+2026-02-17 12:22:11,422 Starting ensemble experiment 23
+2026-02-17 12:22:11,423 Ensemble 23 starting now:
+2026-02-17 12:22:11,423 Generating supercell: size=85, p1_conc=1e-07, seed=589858
+2026-02-17 12:22:11,427 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:22:11,754 Wrote CSV p1_conc-1e-07_size-85_atoms_ens23.csv
+2026-02-17 12:22:11,856 [ens num 23] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:22:11,857 
+[ens number 23] Starting coherence experiment:cce.
+
+2026-02-17 12:22:30,812 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:22:30,821 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens23.csv
+2026-02-17 12:22:30,821 
+[ens number 23] Starting coherence experiment:gcce.
+
+2026-02-17 12:23:41,526 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:23:41,535 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens23.csv
+2026-02-17 12:23:41,535 
+[ens number 23] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:25:08,541 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:25:08,608 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens23.csv
+2026-02-17 12:25:08,608 Rank 0 finished ensemble experiment 23 in 177.19 s
+2026-02-17 12:25:08,608 Starting ensemble experiment 24
+2026-02-17 12:25:08,643 Ensemble 24 starting now:
+2026-02-17 12:25:08,643 Generating supercell: size=85, p1_conc=1e-07, seed=589859
+2026-02-17 12:25:08,646 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:25:08,901 Wrote CSV p1_conc-1e-07_size-85_atoms_ens24.csv
+2026-02-17 12:25:09,004 [ens num 24] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:25:09,005 
+[ens number 24] Starting coherence experiment:cce.
+
+2026-02-17 12:25:27,963 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:25:27,970 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens24.csv
+2026-02-17 12:25:27,970 
+[ens number 24] Starting coherence experiment:gcce.
+
+2026-02-17 12:26:40,345 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:26:40,356 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens24.csv
+2026-02-17 12:26:40,356 
+[ens number 24] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:28:08,631 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:28:08,684 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens24.csv
+2026-02-17 12:28:08,684 Rank 0 finished ensemble experiment 24 in 180.08 s
+2026-02-17 12:28:08,684 Starting ensemble experiment 25
+2026-02-17 12:28:08,694 Ensemble 25 starting now:
+2026-02-17 12:28:08,694 Generating supercell: size=85, p1_conc=1e-07, seed=589860
+2026-02-17 12:28:08,698 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:28:08,965 Wrote CSV p1_conc-1e-07_size-85_atoms_ens25.csv
+2026-02-17 12:28:09,067 [ens num 25] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:28:09,068 
+[ens number 25] Starting coherence experiment:cce.
+
+2026-02-17 12:28:28,052 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:28:28,060 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens25.csv
+2026-02-17 12:28:28,060 
+[ens number 25] Starting coherence experiment:gcce.
+
+2026-02-17 12:29:37,258 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:29:37,268 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens25.csv
+2026-02-17 12:29:37,268 
+[ens number 25] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:31:04,429 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:31:04,553 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens25.csv
+2026-02-17 12:31:04,553 Rank 0 finished ensemble experiment 25 in 175.87 s
+2026-02-17 12:31:04,553 Starting ensemble experiment 26
+2026-02-17 12:31:04,555 Ensemble 26 starting now:
+2026-02-17 12:31:04,555 Generating supercell: size=85, p1_conc=1e-07, seed=589861
+2026-02-17 12:31:04,558 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:31:04,776 Wrote CSV p1_conc-1e-07_size-85_atoms_ens26.csv
+2026-02-17 12:31:04,878 [ens num 26] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:31:04,878 
+[ens number 26] Starting coherence experiment:cce.
+
+2026-02-17 12:31:24,010 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:31:24,017 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens26.csv
+2026-02-17 12:31:24,017 
+[ens number 26] Starting coherence experiment:gcce.
+
+2026-02-17 12:32:32,896 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:32:32,905 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens26.csv
+2026-02-17 12:32:32,905 
+[ens number 26] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:33:59,677 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:33:59,710 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens26.csv
+2026-02-17 12:33:59,710 Rank 0 finished ensemble experiment 26 in 175.16 s
+2026-02-17 12:33:59,710 Starting ensemble experiment 27
+2026-02-17 12:33:59,711 Ensemble 27 starting now:
+2026-02-17 12:33:59,711 Generating supercell: size=85, p1_conc=1e-07, seed=589862
+2026-02-17 12:33:59,715 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:34:00,010 Wrote CSV p1_conc-1e-07_size-85_atoms_ens27.csv
+2026-02-17 12:34:00,110 [ens num 27] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:34:00,111 
+[ens number 27] Starting coherence experiment:cce.
+
+2026-02-17 12:34:19,314 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:34:19,323 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens27.csv
+2026-02-17 12:34:19,323 
+[ens number 27] Starting coherence experiment:gcce.
+
+2026-02-17 12:35:28,624 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:35:28,641 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens27.csv
+2026-02-17 12:35:28,641 
+[ens number 27] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:36:55,949 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:36:56,073 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens27.csv
+2026-02-17 12:36:56,073 Rank 0 finished ensemble experiment 27 in 176.36 s
+2026-02-17 12:36:56,073 Starting ensemble experiment 28
+2026-02-17 12:36:56,078 Ensemble 28 starting now:
+2026-02-17 12:36:56,078 Generating supercell: size=85, p1_conc=1e-07, seed=589863
+2026-02-17 12:36:56,082 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:36:56,275 Wrote CSV p1_conc-1e-07_size-85_atoms_ens28.csv
+2026-02-17 12:36:56,378 [ens num 28] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:36:56,379 
+[ens number 28] Starting coherence experiment:cce.
+
+2026-02-17 12:37:15,339 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:37:15,348 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens28.csv
+2026-02-17 12:37:15,348 
+[ens number 28] Starting coherence experiment:gcce.
+
+2026-02-17 12:38:23,978 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:38:23,989 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens28.csv
+2026-02-17 12:38:23,989 
+[ens number 28] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:39:51,243 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:39:51,360 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens28.csv
+2026-02-17 12:39:51,360 Rank 0 finished ensemble experiment 28 in 175.29 s
+2026-02-17 12:39:51,360 Starting ensemble experiment 29
+2026-02-17 12:39:51,373 Ensemble 29 starting now:
+2026-02-17 12:39:51,373 Generating supercell: size=85, p1_conc=1e-07, seed=589864
+2026-02-17 12:39:51,376 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:39:51,611 Wrote CSV p1_conc-1e-07_size-85_atoms_ens29.csv
+2026-02-17 12:39:51,713 [ens num 29] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:39:51,714 
+[ens number 29] Starting coherence experiment:cce.
+
+2026-02-17 12:40:10,640 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:40:10,647 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens29.csv
+2026-02-17 12:40:10,647 
+[ens number 29] Starting coherence experiment:gcce.
+
+2026-02-17 12:41:20,219 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:41:20,229 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens29.csv
+2026-02-17 12:41:20,229 
+[ens number 29] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:42:47,732 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:42:47,780 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens29.csv
+2026-02-17 12:42:47,780 Rank 0 finished ensemble experiment 29 in 176.42 s
+2026-02-17 12:42:47,780 Starting ensemble experiment 30
+2026-02-17 12:42:47,806 Ensemble 30 starting now:
+2026-02-17 12:42:47,806 Generating supercell: size=85, p1_conc=1e-07, seed=589865
+2026-02-17 12:42:47,810 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:42:48,068 Wrote CSV p1_conc-1e-07_size-85_atoms_ens30.csv
+2026-02-17 12:42:48,170 [ens num 30] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:42:48,170 
+[ens number 30] Starting coherence experiment:cce.
+
+2026-02-17 12:43:07,938 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:43:07,946 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens30.csv
+2026-02-17 12:43:07,946 
+[ens number 30] Starting coherence experiment:gcce.
+
+2026-02-17 12:44:17,358 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:44:17,368 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens30.csv
+2026-02-17 12:44:17,368 
+[ens number 30] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:45:43,561 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:45:43,614 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens30.csv
+2026-02-17 12:45:43,614 Rank 0 finished ensemble experiment 30 in 175.83 s
+2026-02-17 12:45:43,614 Starting ensemble experiment 31
+2026-02-17 12:45:43,619 Ensemble 31 starting now:
+2026-02-17 12:45:43,619 Generating supercell: size=85, p1_conc=1e-07, seed=589866
+2026-02-17 12:45:43,622 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:45:43,965 Wrote CSV p1_conc-1e-07_size-85_atoms_ens31.csv
+2026-02-17 12:45:44,068 [ens num 31] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:45:44,069 
+[ens number 31] Starting coherence experiment:cce.
+
+2026-02-17 12:46:03,064 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:46:03,071 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens31.csv
+2026-02-17 12:46:03,071 
+[ens number 31] Starting coherence experiment:gcce.
+
+2026-02-17 12:47:12,115 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:47:12,124 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens31.csv
+2026-02-17 12:47:12,124 
+[ens number 31] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:48:38,743 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:48:38,872 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens31.csv
+2026-02-17 12:48:38,872 Rank 0 finished ensemble experiment 31 in 175.26 s
+2026-02-17 12:48:38,872 Starting ensemble experiment 32
+2026-02-17 12:48:38,882 Ensemble 32 starting now:
+2026-02-17 12:48:38,882 Generating supercell: size=85, p1_conc=1e-07, seed=589867
+2026-02-17 12:48:38,885 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:48:39,100 Wrote CSV p1_conc-1e-07_size-85_atoms_ens32.csv
+2026-02-17 12:48:39,222 [ens num 32] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:48:39,222 
+[ens number 32] Starting coherence experiment:cce.
+
+2026-02-17 12:48:58,165 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:48:58,173 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens32.csv
+2026-02-17 12:48:58,173 
+[ens number 32] Starting coherence experiment:gcce.
+
+2026-02-17 12:50:08,914 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:50:08,924 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens32.csv
+2026-02-17 12:50:08,924 
+[ens number 32] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:51:35,066 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:51:35,167 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens32.csv
+2026-02-17 12:51:35,167 Rank 0 finished ensemble experiment 32 in 176.30 s
+2026-02-17 12:51:35,167 Starting ensemble experiment 33
+2026-02-17 12:51:35,190 Ensemble 33 starting now:
+2026-02-17 12:51:35,190 Generating supercell: size=85, p1_conc=1e-07, seed=589868
+2026-02-17 12:51:35,194 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:51:35,397 Wrote CSV p1_conc-1e-07_size-85_atoms_ens33.csv
+2026-02-17 12:51:35,499 [ens num 33] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:51:35,500 
+[ens number 33] Starting coherence experiment:cce.
+
+2026-02-17 12:51:54,617 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:51:54,625 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens33.csv
+2026-02-17 12:51:54,625 
+[ens number 33] Starting coherence experiment:gcce.
+
+2026-02-17 12:53:04,481 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:53:04,491 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens33.csv
+2026-02-17 12:53:04,492 
+[ens number 33] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:54:33,810 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:54:33,854 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens33.csv
+2026-02-17 12:54:33,855 Rank 0 finished ensemble experiment 33 in 178.69 s
+2026-02-17 12:54:33,855 Starting ensemble experiment 34
+2026-02-17 12:54:33,861 Ensemble 34 starting now:
+2026-02-17 12:54:33,861 Generating supercell: size=85, p1_conc=1e-07, seed=589869
+2026-02-17 12:54:33,865 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:54:34,173 Wrote CSV p1_conc-1e-07_size-85_atoms_ens34.csv
+2026-02-17 12:54:34,277 [ens num 34] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:54:34,277 
+[ens number 34] Starting coherence experiment:cce.
+
+2026-02-17 12:54:53,366 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:54:53,374 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens34.csv
+2026-02-17 12:54:53,374 
+[ens number 34] Starting coherence experiment:gcce.
+
+2026-02-17 12:56:05,392 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:56:05,407 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens34.csv
+2026-02-17 12:56:05,407 
+[ens number 34] Starting coherence experiment:gcce_mc.
+
+2026-02-17 12:57:32,115 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 12:57:32,187 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens34.csv
+2026-02-17 12:57:32,188 Rank 0 finished ensemble experiment 34 in 178.33 s
+2026-02-17 12:57:32,188 Starting ensemble experiment 35
+2026-02-17 12:57:32,208 Ensemble 35 starting now:
+2026-02-17 12:57:32,208 Generating supercell: size=85, p1_conc=1e-07, seed=589870
+2026-02-17 12:57:32,234 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 12:57:32,458 Wrote CSV p1_conc-1e-07_size-85_atoms_ens35.csv
+2026-02-17 12:57:32,560 [ens num 35] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 12:57:32,561 
+[ens number 35] Starting coherence experiment:cce.
+
+2026-02-17 12:57:51,552 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 12:57:51,559 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens35.csv
+2026-02-17 12:57:51,559 
+[ens number 35] Starting coherence experiment:gcce.
+
+2026-02-17 12:58:59,922 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 12:58:59,931 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens35.csv
+2026-02-17 12:58:59,931 
+[ens number 35] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:00:27,984 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:00:28,067 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens35.csv
+2026-02-17 13:00:28,067 Rank 0 finished ensemble experiment 35 in 175.88 s
+2026-02-17 13:00:28,067 Starting ensemble experiment 36
+2026-02-17 13:00:28,102 Ensemble 36 starting now:
+2026-02-17 13:00:28,102 Generating supercell: size=85, p1_conc=1e-07, seed=589871
+2026-02-17 13:00:28,105 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:00:28,305 Wrote CSV p1_conc-1e-07_size-85_atoms_ens36.csv
+2026-02-17 13:00:28,408 [ens num 36] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:00:28,408 
+[ens number 36] Starting coherence experiment:cce.
+
+2026-02-17 13:00:47,409 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:00:47,417 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens36.csv
+2026-02-17 13:00:47,417 
+[ens number 36] Starting coherence experiment:gcce.
+
+2026-02-17 13:01:58,038 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:01:58,049 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens36.csv
+2026-02-17 13:01:58,049 
+[ens number 36] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:03:27,422 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:03:27,455 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens36.csv
+2026-02-17 13:03:27,455 Rank 0 finished ensemble experiment 36 in 179.39 s
+2026-02-17 13:03:27,455 Starting ensemble experiment 37
+2026-02-17 13:03:27,511 Ensemble 37 starting now:
+2026-02-17 13:03:27,511 Generating supercell: size=85, p1_conc=1e-07, seed=589872
+2026-02-17 13:03:27,515 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:03:27,766 Wrote CSV p1_conc-1e-07_size-85_atoms_ens37.csv
+2026-02-17 13:03:27,868 [ens num 37] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:03:27,868 
+[ens number 37] Starting coherence experiment:cce.
+
+2026-02-17 13:03:47,262 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:03:47,270 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens37.csv
+2026-02-17 13:03:47,270 
+[ens number 37] Starting coherence experiment:gcce.
+
+2026-02-17 13:05:00,350 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:05:00,366 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens37.csv
+2026-02-17 13:05:00,366 
+[ens number 37] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:06:30,488 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:06:30,596 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens37.csv
+2026-02-17 13:06:30,597 Rank 0 finished ensemble experiment 37 in 183.14 s
+2026-02-17 13:06:30,597 Starting ensemble experiment 38
+2026-02-17 13:06:30,598 Ensemble 38 starting now:
+2026-02-17 13:06:30,598 Generating supercell: size=85, p1_conc=1e-07, seed=589873
+2026-02-17 13:06:30,601 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:06:30,866 Wrote CSV p1_conc-1e-07_size-85_atoms_ens38.csv
+2026-02-17 13:06:30,976 [ens num 38] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:06:30,976 
+[ens number 38] Starting coherence experiment:cce.
+
+2026-02-17 13:06:50,425 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:06:50,432 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens38.csv
+2026-02-17 13:06:50,433 
+[ens number 38] Starting coherence experiment:gcce.
+
+2026-02-17 13:08:02,522 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:08:02,533 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens38.csv
+2026-02-17 13:08:02,533 
+[ens number 38] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:09:32,924 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:09:32,966 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens38.csv
+2026-02-17 13:09:32,967 Rank 0 finished ensemble experiment 38 in 182.37 s
+2026-02-17 13:09:32,967 Starting ensemble experiment 39
+2026-02-17 13:09:33,082 Ensemble 39 starting now:
+2026-02-17 13:09:33,082 Generating supercell: size=85, p1_conc=1e-07, seed=589874
+2026-02-17 13:09:33,088 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:09:33,314 Wrote CSV p1_conc-1e-07_size-85_atoms_ens39.csv
+2026-02-17 13:09:33,432 [ens num 39] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:09:33,433 
+[ens number 39] Starting coherence experiment:cce.
+
+2026-02-17 13:09:53,294 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:09:53,303 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens39.csv
+2026-02-17 13:09:53,303 
+[ens number 39] Starting coherence experiment:gcce.
+
+2026-02-17 13:11:06,582 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:11:06,607 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens39.csv
+2026-02-17 13:11:06,607 
+[ens number 39] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:12:35,004 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:12:35,073 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens39.csv
+2026-02-17 13:12:35,074 Rank 0 finished ensemble experiment 39 in 182.11 s
+2026-02-17 13:12:35,074 Starting ensemble experiment 40
+2026-02-17 13:12:35,151 Ensemble 40 starting now:
+2026-02-17 13:12:35,151 Generating supercell: size=85, p1_conc=1e-07, seed=589875
+2026-02-17 13:12:35,156 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:12:35,381 Wrote CSV p1_conc-1e-07_size-85_atoms_ens40.csv
+2026-02-17 13:12:35,496 [ens num 40] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:12:35,496 
+[ens number 40] Starting coherence experiment:cce.
+
+2026-02-17 13:12:55,085 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:12:55,093 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens40.csv
+2026-02-17 13:12:55,093 
+[ens number 40] Starting coherence experiment:gcce.
+
+2026-02-17 13:14:07,888 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:14:07,899 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens40.csv
+2026-02-17 13:14:07,899 
+[ens number 40] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:15:38,221 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:15:38,272 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens40.csv
+2026-02-17 13:15:38,273 Rank 0 finished ensemble experiment 40 in 183.20 s
+2026-02-17 13:15:38,273 Starting ensemble experiment 41
+2026-02-17 13:15:38,351 Ensemble 41 starting now:
+2026-02-17 13:15:38,352 Generating supercell: size=85, p1_conc=1e-07, seed=589876
+2026-02-17 13:15:38,355 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:15:38,555 Wrote CSV p1_conc-1e-07_size-85_atoms_ens41.csv
+2026-02-17 13:15:38,662 [ens num 41] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:15:38,662 
+[ens number 41] Starting coherence experiment:cce.
+
+2026-02-17 13:15:58,216 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:15:58,242 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens41.csv
+2026-02-17 13:15:58,242 
+[ens number 41] Starting coherence experiment:gcce.
+
+2026-02-17 13:17:08,886 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:17:08,940 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens41.csv
+2026-02-17 13:17:08,940 
+[ens number 41] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:18:38,021 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:18:38,066 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens41.csv
+2026-02-17 13:18:38,066 Rank 0 finished ensemble experiment 41 in 179.79 s
+2026-02-17 13:18:38,066 Starting ensemble experiment 42
+2026-02-17 13:18:38,113 Ensemble 42 starting now:
+2026-02-17 13:18:38,113 Generating supercell: size=85, p1_conc=1e-07, seed=589877
+2026-02-17 13:18:38,116 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:18:38,357 Wrote CSV p1_conc-1e-07_size-85_atoms_ens42.csv
+2026-02-17 13:18:38,464 [ens num 42] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:18:38,464 
+[ens number 42] Starting coherence experiment:cce.
+
+2026-02-17 13:18:57,952 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:18:57,961 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens42.csv
+2026-02-17 13:18:57,961 
+[ens number 42] Starting coherence experiment:gcce.
+
+2026-02-17 13:20:10,424 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:20:10,453 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens42.csv
+2026-02-17 13:20:10,453 
+[ens number 42] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:21:39,017 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:21:39,049 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens42.csv
+2026-02-17 13:21:39,050 Rank 0 finished ensemble experiment 42 in 180.98 s
+2026-02-17 13:21:39,050 Starting ensemble experiment 43
+2026-02-17 13:21:39,092 Ensemble 43 starting now:
+2026-02-17 13:21:39,092 Generating supercell: size=85, p1_conc=1e-07, seed=589878
+2026-02-17 13:21:39,096 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:21:39,341 Wrote CSV p1_conc-1e-07_size-85_atoms_ens43.csv
+2026-02-17 13:21:39,445 [ens num 43] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:21:39,445 
+[ens number 43] Starting coherence experiment:cce.
+
+2026-02-17 13:22:02,371 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:22:02,394 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens43.csv
+2026-02-17 13:22:02,394 
+[ens number 43] Starting coherence experiment:gcce.
+
+2026-02-17 13:23:16,007 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:23:16,019 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens43.csv
+2026-02-17 13:23:16,019 
+[ens number 43] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:24:43,617 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:24:43,751 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens43.csv
+2026-02-17 13:24:43,752 Rank 0 finished ensemble experiment 43 in 184.70 s
+2026-02-17 13:24:43,752 Starting ensemble experiment 44
+2026-02-17 13:24:43,783 Ensemble 44 starting now:
+2026-02-17 13:24:43,783 Generating supercell: size=85, p1_conc=1e-07, seed=589879
+2026-02-17 13:24:43,787 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:24:44,010 Wrote CSV p1_conc-1e-07_size-85_atoms_ens44.csv
+2026-02-17 13:24:44,114 [ens num 44] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:24:44,115 
+[ens number 44] Starting coherence experiment:cce.
+
+2026-02-17 13:25:03,085 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:25:03,092 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens44.csv
+2026-02-17 13:25:03,092 
+[ens number 44] Starting coherence experiment:gcce.
+
+2026-02-17 13:26:12,074 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:26:12,085 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens44.csv
+2026-02-17 13:26:12,085 
+[ens number 44] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:27:39,907 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:27:40,006 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens44.csv
+2026-02-17 13:27:40,006 Rank 0 finished ensemble experiment 44 in 176.25 s
+2026-02-17 13:27:40,006 Starting ensemble experiment 45
+2026-02-17 13:27:40,038 Ensemble 45 starting now:
+2026-02-17 13:27:40,038 Generating supercell: size=85, p1_conc=1e-07, seed=589880
+2026-02-17 13:27:40,042 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:27:40,267 Wrote CSV p1_conc-1e-07_size-85_atoms_ens45.csv
+2026-02-17 13:27:40,371 [ens num 45] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:27:40,372 
+[ens number 45] Starting coherence experiment:cce.
+
+2026-02-17 13:27:59,361 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:27:59,370 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens45.csv
+2026-02-17 13:27:59,370 
+[ens number 45] Starting coherence experiment:gcce.
+
+2026-02-17 13:29:08,946 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:29:08,958 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens45.csv
+2026-02-17 13:29:08,958 
+[ens number 45] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:30:37,505 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:30:37,552 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens45.csv
+2026-02-17 13:30:37,552 Rank 0 finished ensemble experiment 45 in 177.55 s
+2026-02-17 13:30:37,552 Starting ensemble experiment 46
+2026-02-17 13:30:37,631 Ensemble 46 starting now:
+2026-02-17 13:30:37,631 Generating supercell: size=85, p1_conc=1e-07, seed=589881
+2026-02-17 13:30:37,634 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:30:37,856 Wrote CSV p1_conc-1e-07_size-85_atoms_ens46.csv
+2026-02-17 13:30:37,960 [ens num 46] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:30:37,961 
+[ens number 46] Starting coherence experiment:cce.
+
+2026-02-17 13:30:56,915 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:30:56,924 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens46.csv
+2026-02-17 13:30:56,924 
+[ens number 46] Starting coherence experiment:gcce.
+
+2026-02-17 13:32:08,281 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:32:08,291 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens46.csv
+2026-02-17 13:32:08,291 
+[ens number 46] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:33:35,057 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:33:35,067 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens46.csv
+2026-02-17 13:33:35,068 Rank 0 finished ensemble experiment 46 in 177.52 s
+2026-02-17 13:33:35,068 Starting ensemble experiment 47
+2026-02-17 13:33:35,122 Ensemble 47 starting now:
+2026-02-17 13:33:35,122 Generating supercell: size=85, p1_conc=1e-07, seed=589882
+2026-02-17 13:33:35,125 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:33:35,378 Wrote CSV p1_conc-1e-07_size-85_atoms_ens47.csv
+2026-02-17 13:33:35,480 [ens num 47] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:33:35,480 
+[ens number 47] Starting coherence experiment:cce.
+
+2026-02-17 13:33:56,113 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:33:56,123 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens47.csv
+2026-02-17 13:33:56,123 
+[ens number 47] Starting coherence experiment:gcce.
+
+2026-02-17 13:35:07,366 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:35:07,378 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens47.csv
+2026-02-17 13:35:07,378 
+[ens number 47] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:36:35,348 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:36:35,382 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens47.csv
+2026-02-17 13:36:35,382 Rank 0 finished ensemble experiment 47 in 180.31 s
+2026-02-17 13:36:35,382 Starting ensemble experiment 48
+2026-02-17 13:36:35,383 Ensemble 48 starting now:
+2026-02-17 13:36:35,383 Generating supercell: size=85, p1_conc=1e-07, seed=589883
+2026-02-17 13:36:35,387 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:36:35,625 Wrote CSV p1_conc-1e-07_size-85_atoms_ens48.csv
+2026-02-17 13:36:35,728 [ens num 48] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:36:35,728 
+[ens number 48] Starting coherence experiment:cce.
+
+2026-02-17 13:36:54,788 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:36:54,797 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens48.csv
+2026-02-17 13:36:54,797 
+[ens number 48] Starting coherence experiment:gcce.
+
+2026-02-17 13:38:05,927 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:38:05,945 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens48.csv
+2026-02-17 13:38:05,945 
+[ens number 48] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:39:34,689 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:39:34,699 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens48.csv
+2026-02-17 13:39:34,700 Rank 0 finished ensemble experiment 48 in 179.32 s
+2026-02-17 13:39:34,700 Starting ensemble experiment 49
+2026-02-17 13:39:34,715 Ensemble 49 starting now:
+2026-02-17 13:39:34,715 Generating supercell: size=85, p1_conc=1e-07, seed=589884
+2026-02-17 13:39:34,720 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:39:34,943 Wrote CSV p1_conc-1e-07_size-85_atoms_ens49.csv
+2026-02-17 13:39:35,049 [ens num 49] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:39:35,050 
+[ens number 49] Starting coherence experiment:cce.
+
+2026-02-17 13:39:54,076 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:39:54,084 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens49.csv
+2026-02-17 13:39:54,084 
+[ens number 49] Starting coherence experiment:gcce.
+
+2026-02-17 13:41:06,407 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:41:06,417 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens49.csv
+2026-02-17 13:41:06,417 
+[ens number 49] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:42:35,144 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:42:35,203 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens49.csv
+2026-02-17 13:42:35,204 Rank 0 finished ensemble experiment 49 in 180.50 s
+2026-02-17 13:42:35,204 Starting ensemble experiment 50
+2026-02-17 13:42:35,282 Ensemble 50 starting now:
+2026-02-17 13:42:35,282 Generating supercell: size=85, p1_conc=1e-07, seed=589885
+2026-02-17 13:42:35,286 Built supercell: N_atoms=1218, N_P1=0, N_13C=1218
+
+2026-02-17 13:42:35,501 Wrote CSV p1_conc-1e-07_size-85_atoms_ens50.csv
+2026-02-17 13:42:35,605 [ens num 50] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 100000.0
+r_dipole: 100000.0
+order: 2
+
+Bath consists of 1218 spins.
+
+Clusters include:
+1218  clusters of order 1.
+741153  clusters of order 2.
+
+
+2026-02-17 13:42:35,606 
+[ens number 50] Starting coherence experiment:cce.
+
+2026-02-17 13:42:54,589 
+Rank 0 mpi process has finished coherence experiment:cce.
+
+2026-02-17 13:42:54,597 Wrote CSV p1_conc-1e-07_size-85_coherence_cce_ens50.csv
+2026-02-17 13:42:54,598 
+[ens number 50] Starting coherence experiment:gcce.
+
+2026-02-17 13:44:04,853 
+Rank 0 mpi process has finished coherence experiment:gcce.
+
+2026-02-17 13:44:04,864 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_ens50.csv
+2026-02-17 13:44:04,864 
+[ens number 50] Starting coherence experiment:gcce_mc.
+
+2026-02-17 13:45:32,541 
+Rank 0 mpi process has finished coherence experiment:gcce_mc.
+
+2026-02-17 13:45:32,552 Wrote CSV p1_conc-1e-07_size-85_coherence_gcce_mc_ens50.csv
+2026-02-17 13:45:32,552 Rank 0 finished ensemble experiment 50 in 177.35 s
+2026-02-17 13:45:32,552 Rank 0 finished full ensemble run p1_conc-1e-07_size-85 in 8940.90 s
+2026-02-17 13:45:32,577 Wrote final CSV for cce to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/cce.csv
+2026-02-17 13:45:32,599 Wrote final CSV for gcce to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/gcce.csv
+2026-02-17 13:45:32,619 Wrote final CSV for gcce_mc to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/gcce_mc.csv
+2026-02-17 13:45:32,629 Wrote final averaged CSV for cce to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/cce_averaged.csv
+2026-02-17 13:45:32,638 Wrote final averaged CSV for gcce to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/gcce_averaged.csv
+2026-02-17 13:45:32,647 Wrote final averaged CSV for gcce_mc to runs/2026.2.17_size/p1_conc-1e-07_size-85/final_csv_files/gcce_mc_averaged.csv
+2026-02-17 13:45:32,658 run_avg_fit_plot fit results for run_id=p1_conc-1e-07_size-85:
+2026-02-17 13:45:32,658 cce fit results --> T2 (ms), p: (0.940488, 2.48214)
+2026-02-17 13:45:32,658 gcce fit results --> T2 (ms), p: (0.940891, 2.47434)
+2026-02-17 13:45:32,658 gcce_mc fit results --> T2 (ms), p: (0.968922, 2.48599)

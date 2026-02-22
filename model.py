@@ -123,6 +123,7 @@ def get_supercell(supercell_params):
     c13_conc = supercell_params.get("c13_conc", 0.011)
     verbose = supercell_params.get("verbose", False)
     temp_debug = supercell_params.get("temp_debug", True)
+    save_supercells = supercell_params.get("save_supercells", False)
 
     # ================= MAIN CODE ================= #
     # build unit cell
@@ -162,7 +163,8 @@ def get_supercell(supercell_params):
 
         # write atoms to a separate CSV via the run logger
         field_names = list(atoms.dtype.names)
-        logger.save_csv(f"atoms_ens{current_ensemble()}", field_names,
+        if save_supercells:
+            logger.save_csv(f"atoms_ens{current_ensemble()}", field_names,
                         ([a[name] for name in field_names] for a in atoms),
                         subdir="supercells")
 
