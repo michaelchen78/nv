@@ -124,6 +124,7 @@ def get_supercell(supercell_params):
     verbose = supercell_params.get("verbose", False)
     temp_debug = supercell_params.get("temp_debug", True)
     save_supercells = supercell_params.get("save_supercells", False)
+    min_p1s = supercell_params.get("min_P1s", None)
 
     # ================= MAIN CODE ================= #
     # build unit cell
@@ -137,25 +138,47 @@ def get_supercell(supercell_params):
         logger.info(f"Ensemble {current_ensemble()} starting now:")
         logger.info("Generating supercell: size=%s, p1_conc=%g, seed=%s", size, p1_conc, seed)
 
-    atoms = diamond.gen_supercell(size, seed=seed,
-                            remove=[('C', [0., 0, 0]), ('C', [0.5, 0.5, 0.5])],  # remove NV carbons IF they're there
-                            add=[('14N', [0.5, 0.5, 0.5]), ])  # add NV nitrogen nuclei (electron added later)
-    atoms.add_type(*SPIN_TYPES)
-    assert np.allclose(atoms.A, atoms.A.flat[0])  # check that there are no hyperfine or quadrupoles
-    assert np.allclose(atoms.Q, atoms.Q.flat[0])
+    # regen configs till min number of P1s met
+    max_tries = min_p1s[1] if min_p1s else 1
+    try_count = 0
+    for attempt in range(max_tries):
+        try_count += 1
+        atoms = diamond.gen_supercell(size, seed=seed,
+                                remove=[('C', [0., 0, 0]), ('C', [0.5, 0.5, 0.5])],  # remove NV carbons IF they're there
+                                add=[('14N', [0.5, 0.5, 0.5]), ])  # add NV nitrogen nuclei (electron added later)
+        atoms.add_type(*SPIN_TYPES)
+        assert np.allclose(atoms.A, atoms.A.flat[0])  # check that there are no hyperfine or quadrupoles
+        assert np.allclose(atoms.Q, atoms.Q.flat[0])
 
-    # add in P1 nuclei and electrons
-    mask = (atoms.N == '14C')
-    idx = np.where(mask)[0]
-    atoms = append_many_same_loc(atoms, idx, 'e')  # add in electrons where 14Cs are
-    if not temp_debug:
-        # print("placing electron")  # debugging
-        idx_14n = np.where(atoms.N == '14N')[0]
-        atoms = append_many_same_loc(atoms, idx_14n, 'e')  # add in electron where NV nitrogen is
-    # else:
-        # print("no electron placed")  # debugging
-    atoms['N'][idx] = '14N'  # add in P1's by replacing the 14Cs with 14Ns
-    assert '14C' not in atoms['N']  # make sure no 14Cs left
+        # add in P1 nuclei and electrons
+        mask = (atoms.N == '14C')
+        idx = np.where(mask)[0]
+
+        if min_p1s:
+            if idx.size < min_p1s[0]:
+                if try_count == max_tries:
+                    # main logs
+                    if is_root():
+                        logger.info("failed to make supercell with %d P1s after %d tries\n", min_p1s[0], min_p1s[1])
+                        logger.info("num p1s on last try: %d\n", idx.size)
+                    raise Exception(f"failed to make supercell with %d P1s after %d tries\n", min_p1s[0], min_p1s[1])
+                if verbose and is_root():
+                    # main logs
+                    logger.info("not enough P1s, trying again. attempt %d\n", try_count)
+                seed = None
+                continue
+
+        atoms = append_many_same_loc(atoms, idx, 'e')  # add in electrons where 14Cs are
+        if not temp_debug:
+            # print("placing electron")  # debugging
+            idx_14n = np.where(atoms.N == '14N')[0]
+            atoms = append_many_same_loc(atoms, idx_14n, 'e')  # add in electron where NV nitrogen is
+        # else:
+            # print("no electron placed")  # debugging
+        atoms['N'][idx] = '14N'  # add in P1's by replacing the 14Cs with 14Ns
+        assert '14C' not in atoms['N']  # make sure no 14Cs left
+        if min_p1s and idx.size >= min_p1s[0]:
+            break
 
     if verbose and is_root():
         # main logs

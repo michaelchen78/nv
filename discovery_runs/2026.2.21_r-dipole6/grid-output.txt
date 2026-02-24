@@ -1,6 +1,6 @@
 Initialized output text file.
 
-Base config:{'run_id': '2026.2.19_size', 'base_out_dir': './runs', 'is_grid': True, 'supercell_params': {'p1_conc': -1, 'size': -1, 'verbose': True}, 'simulator_params': {'order': 2, 'r_bath': '1e5', 'r_dipole': '1e5', 'verbose': True}, 'experiment_params': {'ensemble_size': 50, 'avg_method': 'median', 'magnetic_field': [0, 0, 1900], 'pulse_id': 'hahn', 'cce_types': ['gcce_mc'], 'parallel': True, 'n_bath_states': 32, 'verbose': True, 'time_space': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
+Base config:{'run_id': '2026.2.21_r-dipole6', 'base_out_dir': './runs', 'is_grid': True, 'supercell_params': {'p1_conc': -1, 'size': -1, 'verbose': True}, 'simulator_params': {'order': 2, 'r_bath': '1e5', 'r_dipole': 6, 'verbose': True}, 'experiment_params': {'ensemble_size': 50, 'avg_method': 'median', 'magnetic_field': [0, 0, 1900], 'pulse_id': 'hahn', 'cce_types': ['cce', 'gcce', 'gcce_mc'], 'parallel': True, 'n_bath_states': 32, 'verbose': True, 'time_space': array([0.  , 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1 ,
        0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2 , 0.21,
        0.22, 0.23, 0.24, 0.25, 0.26, 0.27, 0.28, 0.29, 0.3 , 0.31, 0.32,
        0.33, 0.34, 0.35, 0.36, 0.37, 0.38, 0.39, 0.4 , 0.41, 0.42, 0.43,
@@ -36,20 +36,70 @@ Base config:{'run_id': '2026.2.19_size', 'base_out_dir': './runs', 'is_grid': Tr
        3.63, 3.64, 3.65, 3.66, 3.67, 3.68, 3.69, 3.7 , 3.71, 3.72, 3.73,
        3.74, 3.75, 3.76, 3.77, 3.78, 3.79, 3.8 , 3.81, 3.82, 3.83, 3.84,
        3.85, 3.86, 3.87, 3.88, 3.89, 3.9 , 3.91, 3.92, 3.93, 3.94, 3.95,
-       3.96, 3.97, 3.98, 3.99, 4.  ])}, 'grid_params': {'param1': ['supercell_params', 'p1_conc'], 'param2': ['supercell_params', 'size'], 'param1_values': [1e-07, 1e-06, 1e-05, 0.0001], 'param2_values': [120, 150, 200]}}.
+       3.96, 3.97, 3.98, 3.99, 4.  ])}, 'grid_params': {'param1': ['supercell_params', 'p1_conc'], 'param2': ['supercell_params', 'size'], 'param1_values': [1e-07, 1e-06, 1e-05, 0.0001], 'param2_values': [100, 200, 250]}}.
 
 Grid: param1 is ['supercell_params', 'p1_conc'], param2 is ['supercell_params', 'size']
-param1 range is [1e-07, 1e-06, 1e-05, 0.0001], param2 range is [120, 150, 200]
+param1 range is [1e-07, 1e-06, 1e-05, 0.0001], param2 range is [100, 200, 250]
 
 
-Rank 0 starting grid run: p1_conc=1e-07, size=120
-Rank 0 finished grid run: p1_conc=1e-07, size=120
-Rank 0 runtime: 44673.22072315216s
-
-
-Rank 0 starting grid run: p1_conc=1e-07, size=150
-Rank 0 finished grid run: p1_conc=1e-07, size=150
-Rank 0 runtime: 257237.9402077198s
+Rank 0 starting grid run: p1_conc=1e-07, size=100
+Rank 0 finished grid run: p1_conc=1e-07, size=100
+Rank 0 runtime: 108.8689935207367s
 
 
 Rank 0 starting grid run: p1_conc=1e-07, size=200
+Rank 0 finished grid run: p1_conc=1e-07, size=200
+Rank 0 runtime: 1103.164395570755s
+
+
+Rank 0 starting grid run: p1_conc=1e-07, size=250
+Rank 0 finished grid run: p1_conc=1e-07, size=250
+Rank 0 runtime: 3783.8224387168884s
+
+
+Rank 0 starting grid run: p1_conc=1e-06, size=100
+Rank 0 finished grid run: p1_conc=1e-06, size=100
+Rank 0 runtime: 85.21936678886414s
+
+
+Rank 0 starting grid run: p1_conc=1e-06, size=200
+Rank 0 finished grid run: p1_conc=1e-06, size=200
+Rank 0 runtime: 1128.5452027320862s
+
+
+Rank 0 starting grid run: p1_conc=1e-06, size=250
+Rank 0 finished grid run: p1_conc=1e-06, size=250
+Rank 0 runtime: 3799.806896209717s
+
+
+Rank 0 starting grid run: p1_conc=1e-05, size=100
+Rank 0 finished grid run: p1_conc=1e-05, size=100
+Rank 0 runtime: 90.26906323432922s
+
+
+Rank 0 starting grid run: p1_conc=1e-05, size=200
+Rank 0 finished grid run: p1_conc=1e-05, size=200
+Rank 0 runtime: 1154.53342628479s
+
+
+Rank 0 starting grid run: p1_conc=1e-05, size=250
+Rank 0 finished grid run: p1_conc=1e-05, size=250
+Rank 0 runtime: 3881.4376599788666s
+
+
+Rank 0 starting grid run: p1_conc=0.0001, size=100
+Rank 0 finished grid run: p1_conc=0.0001, size=100
+Rank 0 runtime: 106.55765533447266s
+
+
+Rank 0 starting grid run: p1_conc=0.0001, size=200
+Rank 0 finished grid run: p1_conc=0.0001, size=200
+Rank 0 runtime: 1285.7802481651306s
+
+
+Rank 0 starting grid run: p1_conc=0.0001, size=250
+Rank 0 finished grid run: p1_conc=0.0001, size=250
+Rank 0 runtime: 4179.354928255081s
+
+
+Rank 0 finished grid. Total rank 0 grid run time: 20850.407324790955s
