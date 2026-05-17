@@ -1,9 +1,10 @@
 #!/bin/bash -l
 
 #SBATCH --job-name=pyccempi
-#SBATCH --partition=preemptable
+#SBATCH --partitio=preemptable
 #SBATCH --nodes=1
 #SBATCH --ntasks=32
+#SBATCH --mem=480G
 #SBATCH --cpus-per-task=1
 #SBATCH --time=6-00:00:0
 #SBATCH --output=temp_slurm_out/run_%j.out
@@ -70,7 +71,7 @@ if [ -d "$RUN_DIR" ]; then
   # Copy with new names
   cp ./sim.py   "${COPIES_DIR}/sim-copy.py"
   cp ./model.py "${COPIES_DIR}/model-copy.py"
-  cp ./preprocessing1.py   "${COPIES_DIR}/preprocessing1-copy.py"
+  cp ./pp1.py   "${COPIES_DIR}/preprocessing1-copy.py"
   cp ./run.py "${COPIES_DIR}/run-copy.py"
   cp "$0"       "${COPIES_DIR}/${SCRIPT_STEM}-copy.sh"
 

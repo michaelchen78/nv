@@ -190,5 +190,40 @@ trash/
 # JetBrains
 .idea/
 *.iml
-/runs/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens1.csv
-/runs/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens2.csv
+/trash/runs/archive-12may2026/archive-30apr2026/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens1.csv
+/trash/runs/archive-12may2026/archive-30apr2026/archive-8feb2026/2026.1.12_size/supercells/2026.1.12_size_atoms_ens2.csv
+
+# ---------------- project-specific repo contents ----------------
+
+# local-only folders
+trash/
+archive-13may2026/
+
+# config: ignore everything except exactly these YAML files
+/config/*
+!/config/2026.5.14_2e2n.yaml
+!/config/2026.5.15_test.yaml
+!/config/custom.yaml
+
+# data: ignore everything except exactly these two folders
+/data/*
+!/data/2026.5.14_2e2n/
+!/data/2026.5.14_2e2n/**
+!/data/2026.5.15_test/
+!/data/2026.5.15_test/**
+
+# runs: ignore everything except exactly this one folder
+/runs/*
+!/runs/2026.5.15_test/
+!/runs/2026.5.15_test/**
+
+# never include archive directories anywhere inside config/data/runs
+/config/**/archive*/
+/data/**/archive*/
+/runs/**/archive*/
+
+# macOS / IDE
+.DS_Store
+**/.DS_Store
+.idea/
+*.iml

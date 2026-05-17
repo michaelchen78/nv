@@ -1,4 +1,6 @@
 import sys
+import warnings
+
 import numpy as np
 import yaml
 from pathlib import Path
@@ -7,6 +9,8 @@ import copy
 import logging
 import hashlib
 import csv
+
+from pp1 import clean_coherence, average_ensemble
 
 # +++++++++++++++++++++++ Ensemble context +++++++++++++++++++++++ #
 _CURRENT_ENSEMBLE = None  # type: int | None
@@ -147,55 +151,52 @@ def load_config(path):
     with open(path) as file:
         cfg = yaml.safe_load(file)
 
-    # fix any non-Pythonic yaml variables
-    time_space = cfg["experiment_params"].pop("time_space")
-    cfg["experiment_params"]["time_space"] = np.linspace(time_space[0], time_space[1], time_space[2])
-
     return cfg
 
 
 # +++++++++++++++++++++++ Primary function: run_ensemble +++++++++++++++++++++++ #
-def run_ensemble(config):
+def run_ensemble(config, out_dir_str, data_dir_str):
     """
-    Use this method to run experiments. (Rather than calling anything from model.py directly.) Runs many simulations
-    each with a unique bath configuration. A glorified for loop of model.run_experiment. Given a base output directory
-    which already exists (should be './runs/'), creates a new directory in the base output directory named run_id.
-    Outputs a primary text log, primary csv files matching the return dictionary, and optional checkpoint csv files.
+    Use this method to run experiments. Runs an ensemble of model.run_experiment()'s, cleans and averages the results.
+    Given an output `runs' and output `data' directory which already exist, outputs a primary text log to the `runs'
+    directory and averaged csv files to `data' directory. Also returns the L(t) array. Everything is MPI-compatible.
     :param config: see .yaml file for description
-    :return: A dictionary where the keys are cce_types (see .yaml) and the values are 2D arrays having shape
-    (timesteps, ensemble_size). Each column is one experiment and each rows is a time point. Each element is L(t) from
-    0 to 1.
+    :param out_dir_str: text output directory
+    :param data_dir_str: data output directory
     """
     import model  # local import to avoid circular import with model.py
 
     # set up configuration
     run_id = config["run_id"]
-    base_out_dir_str = config["base_out_dir"]
     supercell_params = config["supercell_params"]
     simulator_params = config["simulator_params"]
     experiment_params = config["experiment_params"]
 
-    # set up logging / outputs
-    run_dir = Path(base_out_dir_str) / run_id
-    if is_root():  # only root does the mkdir
-        try:
-            run_dir.mkdir()  # makes the output directory
-        except FileExistsError:  # error if already exists
-            msg = (
-                f"Run directory '{run_dir}' already exists. "
-                "Choose a new run_id or delete/rename the existing folder."
-            )
-            logger.error(msg)
-            MPI.COMM_WORLD.Abort(1)
-        except FileNotFoundError:
-            msg = f"Base output directory {base_out_dir_str} not found. This directory should already exist."
-            logger.error(msg)
-            MPI.COMM_WORLD.Abort(1)
-    COMM.Barrier()  # ensure run_dir exists before any rank uses it
-    run_dir = str(run_dir)
-    setup_run_logger(run_id, Path(run_dir))
+    ''' set up logging / outputs'''
+    out_dir = Path(out_dir_str)
+    data_dir = Path(data_dir_str)
+
+    # check that the two directories exist
     if is_root():
-        logger.info("Initialized output for run %s in %s", run_id, run_dir)
+        for dir_path, label in [
+            (out_dir, "out_dir"),
+            (data_dir, "data_dir"),]:
+            if not dir_path.exists():
+                msg = f"{label} '{dir_path}' not found. This directory should already exist."
+                logger.error(msg)
+                COMM.Abort(1)
+            if not dir_path.is_dir():
+                msg = f"{label} '{dir_path}' exists but is not a directory."
+                logger.error(msg)
+                COMM.Abort(1)
+    COMM.Barrier()
+
+    # print stuff into output text file
+    setup_run_logger(run_id, out_dir)
+    if is_root():
+        logger.info("Initialized output for run %s", run_id)
+        logger.info("Log directory: %s", out_dir)
+        logger.info("Data directory: %s", data_dir)
         logger.info("Config: %s", config)
 
     # initialize time context for this run
@@ -203,31 +204,36 @@ def run_ensemble(config):
     t_start = time.time()
     temp_time = t_start  # so we can record how long EACH ensemble run takes
 
-    # run ensemble of experiments
-    coherence_dict = {cce_type: np.empty((len(experiment_params["time_space"]), experiment_params["ensemble_size"]))
-                      for cce_type in experiment_params["cce_types"]}
-    base_seed = get_seed(run_id)
+    '''run ensemble of experiments'''
+    coherence = np.empty((len(experiment_params["time_space"]), experiment_params["ensemble_size"]),
+        dtype=np.complex128)  # empty coherence array
+
+    base_seed = get_seed(config.get("seed_id", run_id))
     for i in range(experiment_params["ensemble_size"]):
         if is_root():
             logger.info("Starting ensemble experiment %d", i+1)
+
         set_current_ensemble(i+1)  # or i + 1 if you want 1-based
 
         new_supercell_params = copy.deepcopy(supercell_params)  #  copy so we can tweak per-run
         new_supercell_params["seed"] = (base_seed + i) & 0xFFFFFFFF  # new seed each loop, deterministic though so
                                                                      # separate mpi runs will produce the same supercell
 
-        supercell = model.get_supercell(new_supercell_params)
-        simulator = model.get_simulator(supercell, simulator_params)
-        coherence = model.run_experiment(simulator, experiment_params)
+        if supercell_params.get("custom_bath", False):
+            supercell = config["supercell"]
+            nv = model.get_single_nv(supercell_params["nv_position"], supercell_params["alpha"],
+                                     supercell_params["beta"])
+        else:
+            supercell, nv = model.get_supercell(new_supercell_params)
+        simulator = model.get_simulator(supercell, nv, simulator_params)
+        traj = model.run_experiment(simulator, experiment_params)
 
-        if set(coherence.keys()) != set(coherence_dict.keys()):
-            raise RuntimeError(f"Mismatch between ensemble cce_types {set(coherence_dict.keys())} and run_experiment "
-                               f"output cce_types {set(coherence.keys())}")
-        for cce_type, traj in coherence.items():
-            coherence_dict[cce_type][:, i] = traj
+        coherence[:, i] = traj
+
         if is_root():
             logger.info("Rank 0 finished ensemble experiment %d in %.2f s", i+1, time.time() - temp_time)
             temp_time = time.time()
+
     # update time context
     t_end = time.time()
     runtime = t_end - t_start  # seconds
@@ -237,29 +243,47 @@ def run_ensemble(config):
     if is_root():
         logger.info("Rank 0 finished full ensemble run %s in %.2f s", run_id, runtime)
 
-    # make csv files
+    # Only root rank does postprocessing and filesystem writes
     if is_root():
-        final_csv_dir = Path(run_dir) / "final_csv_files"
-        try:
-            final_csv_dir.mkdir()  # error if already exists
-        except FileExistsError:
-            raise RuntimeError(f"Final CSV directory '{final_csv_dir}' already exists. "
-                               "Choose a new run_id or delete/rename the existing folder.")
-        for cce_type, arr in coherence_dict.items():
-            # each key gives one CSV file: <key>.csv
-            csv_path = final_csv_dir / f"{cce_type}.csv"
-            np.savetxt(csv_path, arr, delimiter=",")
-            logger.info("Wrote final CSV for %s to %s", cce_type, csv_path)
+        # save raw csv files if verbose
+        if experiment_params.get("verbose", False):
+            csv_path = data_dir / f"raw.csv"
+            np.savetxt(csv_path, coherence, delimiter=",")
+            logger.info("Wrote raw CSV to %s", csv_path)
 
-    return coherence_dict
+        # clean coherence data
+        coherence_cleaned, n_removed = clean_coherence(coherence)
+        logger.info("Number of unstable points was %d", n_removed)
+        if n_removed > coherence_cleaned.size*0.2:
+            warnings.warn("Number of unstable points exceed 20\% !")
 
+        # average results over the ensemble
+        coherence_avg = average_ensemble(coherence_cleaned, avg_method=config["experiment_params"]["avg_method"])
 
-def main(config_path):
-    coherence_dict = run_ensemble(load_config(config_path))
+        # add in the point (0.0, 1.0) if it is not there
+        time_space = np.asarray(config["experiment_params"]["time_space"], dtype=float)
+        coherence_avg = np.asarray(coherence_avg, dtype=np.complex128)
+        if not np.any(np.isclose(time_space, 0.0, atol=1e-20, rtol=0.0)):
+            time_space = np.insert(time_space, 0, 0.0)
+            coherence_avg = np.insert(coherence_avg, 0, 1.0 + 0.0j)
+        config["experiment_params"]["time_space"] = time_space  # this assumes all postprocessing done on root
 
+        # split averaged complex coherence into magnitude and phase
+        coherence_avg_mag = np.abs(np.asarray(coherence_avg, dtype=np.complex128))
+        coherence_avg_phase = np.angle(np.asarray(coherence_avg, dtype=np.complex128))
 
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        raise SystemExit("Usage: python sim.py <config.yaml>")
-    yaml_path = sys.argv[1]
-    main(yaml_path)
+        # save averaged csv files
+        averaged = np.column_stack((config["experiment_params"]["time_space"], coherence_avg))
+        csv_path_averaged = data_dir / f"averaged.csv"
+        np.savetxt(csv_path_averaged, averaged, delimiter=",", header="t,L_avg", comments="")
+        logger.info("Wrote final averaged CSV to %s", csv_path_averaged)
+
+        # same thing for the modulus and phase...
+        magnitude = np.column_stack((config["experiment_params"]["time_space"], coherence_avg_mag))
+        csv_path_mag = data_dir / f"averaged_mag.csv"
+        np.savetxt(csv_path_mag, magnitude, delimiter=",", header="t,modulus(L_avg)", comments="")
+        logger.info("Wrote final averaged modulus CSV to %s", csv_path_mag)
+        phase = np.column_stack((config["experiment_params"]["time_space"], coherence_avg_phase))
+        csv_path_phase = data_dir / f"averaged_phase.csv"
+        np.savetxt(csv_path_phase, phase, delimiter=",", header="t,L_avg", comments="")
+        logger.info("Wrote final averaged phase CSV to %s", csv_path_phase)

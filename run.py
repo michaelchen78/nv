@@ -1,174 +1,258 @@
 import sys
-
 import numpy as np
 from pathlib import Path
-
 import matplotlib.pyplot as plt
 import time
 import copy
-
 from mpi4py import MPI
-from numba.cuda.types import grid_group
-
-from preprocessing1 import average_ensemble, fit_curve_basic, plot_coherence_panel
 from sim import run_ensemble, load_config, get_last_runtime, logger, is_root, COMM
+from config import RUN_REGISTRY
 
 
-def run_avg_fit_plot(config, grid_axes=None):
+# +++++++++++++++++++++++ Custom run functions +++++++++++++++++++++++ #
+def grid_run(config):
     """
-    A utility method to conveniently run sim.py/sim.sh and then also average, fit, and plot the data.
-    :param config: the run configuration, see any yaml file. put straight into sim.run_ensemble.
-    :param grid_axes: if in grid mode, the axes to plot on
-    :return: Nothing, but the method will generate averaged csv files into final_csv_files/, an output text file with
-    fit results, and plots. Everything is put into the base output directory which should be ./runs/{run_id}/.
+    Utility method to conveniently runs a grid of experiments.
     """
-    # run the experiment
-    coherence_dict = run_ensemble(config)
-    runtime = get_last_runtime()
+    # ================= PARAMETERS (see yaml for explanations) ================= #
+    grid_params = config["grid_params"]
+    # required
+    param1 = grid_params['param1']
+    param2 = grid_params['param2']
+    param1_values = grid_params['param1_values']
+    param2_values = grid_params['param2_values']
+    # optional, defaults
+    # no optional params here
+    # ================= END OF PARAMETERS ================= #
 
-    # Only root rank does postprocessing, filesystem writes
-    if not is_root():
-        return
-
-    # just to improve readability...
-    time_space = config["experiment_params"]["time_space"]
-    run_id = config["run_id"]
-    cce_types = config["experiment_params"]["cce_types"]
-
-    # average results over the ensemble
-    coherence_dict_avg = average_ensemble(coherence_dict, avg_method=config["experiment_params"]["avg_method"])
-    # save averaged csv files
-    final_csv_dir = Path(config["base_out_dir"]) / run_id / "final_csv_files"
-    assert final_csv_dir.is_dir(), f"Directory does not exist: {final_csv_dir}"
-    for cce_type, arr in coherence_dict_avg.items():
-        data = np.column_stack((time_space, arr))
-        csv_path = final_csv_dir / f"{cce_type}_averaged.csv"
-        np.savetxt(csv_path, data, delimiter=",", header="t, L_avg", comments="")
-        logger.info("Wrote final averaged CSV for %s to %s", cce_type, csv_path)
-
-    # fit the curve and write to output
-    fit_results = fit_curve_basic(coherence_dict_avg, time_space)
-    logger.info("run_avg_fit_plot fit results for run_id=%s:", run_id)
-    for cce_type, (T2, p) in fit_results.items():
-        logger.info("%s fit results --> T2 (ms), p: (%g, %g)", cce_type, T2, p)
-
-    # plot the results
-    fig, ax = plt.subplots(figsize=(12, 8))
-    plot_coherence_panel(ax, time_space=time_space, coherence_dict_avg=coherence_dict_avg, config=config,
-                         cce_types=cce_types, title=run_id, fit_results=fit_results, runtime=runtime, fontsize=12)
-    fig.tight_layout()
-    fig.savefig(fname=f"{config['base_out_dir']}/{run_id}/plot.png", dpi=300)
-    plt.close(fig)
-
-    if config["is_grid"]:
-        plot_coherence_panel(grid_axes, time_space=time_space, coherence_dict_avg=coherence_dict_avg, config=config,
-                         cce_types=cce_types, title=run_id, fit_results=fit_results, runtime=runtime, fontsize=12)
-
-
-def grid_search(base_config, param1, param2, param1_values, param2_values):
-    """
-    Utility method to conveniently runs a grid of experiments using the method run_avg_fit_plot. Also returns a figure
-    with all results. Each experiment has its own output folder, as created by run_avg_fit_plot.
-    :param base_config: the base config, see any yaml file
-    :param param1: a list of two strings, the first gives the sub-config (e.g., supercell_params or experiment_params)
-    and the second gives the specific parameter, for instance size or pulse_id.
-    :param param2: same as param1
-    :param param1_values: a list, each element is some value of param1
-    :param param2_values: same as param1
-    :return: nothing
-    """
-    run_id = base_config["run_id"]
-    base_out_dir_str = base_config["base_out_dir"]
-
-    # initialize grid figure
-    n_rows = len(param1_values)
-    n_cols = len(param2_values)
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 4 * n_rows), sharex=True, sharey=True)
-    if n_rows == 1 and n_cols == 1:  # normalize axes to a 2D array so the grid figure works
-        axes = np.array([[axes]])
-    elif n_rows == 1:
-        axes = axes[np.newaxis, :]
-    elif n_cols == 1:
-        axes = axes[:, np.newaxis]
-
-    # have rank 0 initialize the outputs
-    grid_out_dir = Path(base_out_dir_str) / run_id
-    grid_out_text = None
+    # ================= MAIN CODE ================= #
+    '''manipulate custom grid parameters to make a new config'''
+    new_config = None
     if is_root():
-        # make output directory
-        try:
-            grid_out_dir.mkdir()  # makes the output directory
-        except FileExistsError:  # error if already exists
-            msg = (f"Run directory '{grid_out_dir}' already exists. "
-                    "Choose a new run_id or delete/rename the existing folder.")
-            logger.error(msg)
-            MPI.COMM_WORLD.Abort(1)
-        except FileNotFoundError:
-            msg = f"Base output directory {base_out_dir_str} not found. This directory should already exist."
-            logger.error(msg)
-            MPI.COMM_WORLD.Abort(1)
+        new_config = copy.deepcopy(config)
+        sub_run_ids = []
+        change_params = []
 
+        for i, v1 in enumerate(param1_values):
+            for j, v2 in enumerate(param2_values):
+                sub_run_ids.append(f"{param1[1]}-{v1}__{param2[1]}-{v2}")  # constructing sub_run_ids
+                change_param_dict = {}
+
+                key1 = param1[0] + "," + param1[1]
+                key2 = param2[0] + "," + param2[1]
+                change_param_dict[key1] = v1
+                change_param_dict[key2] = v2
+
+                change_params.append(change_param_dict)
+
+        new_config["multi_params"]["sub_run_ids"] = sub_run_ids
+        new_config["multi_params"]["change_params"] = change_params
+
+    new_config = MPI.COMM_WORLD.bcast(new_config, root=0)
+
+    '''run the experiment'''
+    multi_run(new_config)
+
+
+def cpmg(config):
+    """
+    cpmg custom run
+    good example to copy and paste if building a custom run
+    """
+    # ================= PARAMETERS (see yaml for explanations) ================= #
+    cpmg_params = config["cpmg_params"]
+    # required
+    T_max = cpmg_params['T_max']
+    start = cpmg_params['start']
+    delta = cpmg_params['delta']
+    n_list = cpmg_params['n_list']
+    # optional, defaults
+    logspace = cpmg_params.get("logspace", None)
+    n_linspace = cpmg_params.get("n_linspace", None)
+    # ================= END OF PARAMETERS ================= #
+
+    # ================= MAIN CODE ================= #
+    '''manipulate custom cpmg parameters to make a new config'''
+    new_config = None
+    if is_root():
+        new_config = copy.deepcopy(config)
+        sub_run_ids = []
+        change_params = []
+
+        n_space = n_list
+        if n_linspace is not None:
+            n_space = np.linspace(*n_linspace).astype(int)
+
+        for n in n_space:
+            sub_run_ids.append(f"CPMG-{n}")  # constructing sub_run_ids
+            change_param_dict = {}
+
+            if logspace is not None:
+                change_param_dict["experiment_params,time_space"] = np.logspace(np.log10(start), np.log10(T_max),
+                                                                                logspace)
+            else:
+                steps = int(round(T_max/delta)) + 1
+                change_param_dict["experiment_params,time_space"] = np.linspace(start, T_max, steps)
+
+            change_param_dict["experiment_params,pulse_id"] = int(n)
+
+            change_params.append(change_param_dict)
+
+        new_config["multi_params"]["sub_run_ids"] = sub_run_ids
+        new_config["multi_params"]["change_params"] = change_params
+
+    new_config = MPI.COMM_WORLD.bcast(new_config, root=0)
+
+    '''run the experiment'''
+    multi_run(new_config)
+
+
+# +++++++++++++++++++++++ Primary functions: unit run and multi run +++++++++++++++++++++++ #
+def unit_run(config, supercell=None):
+    """
+    The unit run method, see docs.
+    """
+
+    # time space
+    time_space = config["experiment_params"]['time_space']
+    log_time = config["experiment_params"]["log_time"]
+    if len(time_space) != 3:
+        raise ValueError("time_space must be [start, stop, num points].")
+    if log_time:
+        if time_space[0] <= 0 or time_space[1] <= 0:
+            raise ValueError("log_time=True requires positive start and stop times.")
+        new_time_space = np.logspace(np.log10(time_space[0]), np.log10(time_space[1]), int(time_space[2]))
+    else:
+        new_time_space = np.linspace(time_space[0], time_space[1], int(time_space[2]))
+    config["experiment_params"]['time_space'] = new_time_space
+
+    # custom bath
+    if supercell is not None:
+        config["supercell"] = supercell
+
+    # make output directories
+    run_id = config["run_id"]  # if single, this is just run_id; if multi it's sub_run_id
+    base_out_dir_str = config.get("base_out_dir", "./runs/")  # if single, this is just ~/data/ -->
+    base_data_dir_str = config.get("base_data_dir", "./data/")  # if multi it's ~/data/[run_id]/
+
+    out_dir = Path(base_out_dir_str) / run_id
+    data_dir = Path(base_data_dir_str) / run_id
+
+    # make directory
+    if is_root():
+        # check that parent directory is already there
+        for base_dir_str in [base_out_dir_str, base_data_dir_str]:
+            if not Path(base_dir_str).is_dir():
+                msg = f"Base directory {base_dir_str} not found. This directory should already exist."
+                logger.error(msg)
+                COMM.Abort(1)
+        # make the new directory and check that it doesn't already exist
+        for new_dir in [out_dir, data_dir]:
+            try:
+                new_dir.mkdir()
+            except FileExistsError:
+                msg = f"Directory '{new_dir}' already exists. Delete/rename it or choose a new run_id."
+                logger.error(msg)
+                COMM.Abort(1)
+    COMM.Barrier()
+
+    run_ensemble(config, str(out_dir), str(data_dir))
+
+
+def multi_run(config):
+    """
+    The basic multi run method, see docs.
+    """
+
+    # have rank 0 initialize the output directories
+    multi_run_id = config["run_id"]
+    base_out_dir_str = config.get("base_out_dir", "./runs/")
+    base_data_dir_str = config.get("base_data_dir", "./data/")
+    multi_out_dir = Path(base_out_dir_str) / multi_run_id
+    multi_data_dir = Path(base_data_dir_str) / multi_run_id
+    multi_out_text = multi_out_dir / "multi_output.txt"
+
+    if is_root():
+        # make output directories
+        for target_dir, base_dir_str in [(multi_out_dir, base_out_dir_str), (multi_data_dir, base_data_dir_str)]:
+            try:
+                target_dir.mkdir()
+            except FileExistsError:  # error if already exists
+                msg = (
+                    f"Output directory '{target_dir}' already exists. "
+                    "Choose a new run_id or delete/rename the existing folder."
+                )
+                logger.error(msg)
+                MPI.COMM_WORLD.Abort(1)
+            except FileNotFoundError:
+                msg = f"Base output directory {base_dir_str} not found. This directory should already exist."
+                logger.error(msg)
+                MPI.COMM_WORLD.Abort(1)
         # make output text file
-        grid_out_text = grid_out_dir / "grid-output.txt"
-        with grid_out_text.open("x", encoding="utf-8") as f:  # breaks if it already exists
+        with multi_out_text.open("x", encoding="utf-8") as f:  # breaks if it already exists
             f.write("Initialized output text file.\n")
-            f.write(f"\nBase config:{base_config}.\n")
-            f.write(f"\nGrid: param1 is {param1}, param2 is {param2}")
-            f.write(f"\nparam1 range is {param1_values}, param2 range is {param2_values}\n\n")
+            f.write(f"\nConfig:{config}.\n")
     COMM.Barrier()  # ensure all the initializations happen before any rank uses it
 
-    # do the grid search
-    grid_t_start = time.time()
-    for i, v1 in enumerate(param1_values):
-        for j, v2 in enumerate(param2_values):
-            if is_root():
-                with grid_out_text.open("a", encoding="utf-8") as f:
-                    f.write(f"\nRank 0 starting grid run: {param1[1]}={v1}, {param2[1]}={v2}")
+    # read in multi-run parameters
+    multi_params = config["multi_params"]
+    sub_run_ids = multi_params["sub_run_ids"]
+    change_params = multi_params["change_params"]
 
-            # first deep copy the base config
-            grid_run_config = copy.deepcopy(base_config)
+    # do multi-run
+    t_start = time.time()
+    for sub_run_id, changes in zip(sub_run_ids, change_params):
+        '''configure sub run'''
+        sub_run_config = copy.deepcopy(config)
 
-            # then set the two parameter values to their grid values
-            grid_run_config[param1[0]][param1[1]] = v1
-            grid_run_config[param2[0]][param2[1]] = v2
+        # make the new directory paths
+        sub_run_config["run_id"] = sub_run_id
+        sub_run_config["base_out_dir"] = str(multi_out_dir)
+        sub_run_config["base_data_dir"] = str(multi_data_dir)
+        sub_run_config["seed_id"] = config.get("seed_id", multi_run_id)
 
-            # set things up so output files are put in the correct directories
-            grid_run_id = f"{param1[1]}-{v1}_{param2[1]}-{v2}"
-            grid_run_config["run_id"] = grid_run_id
-            grid_run_config["base_out_dir"] = str(grid_out_dir)
+        # implement changed parameters
+        for param, value in changes.items():
+            keys = [k.strip() for k in param.split(",")]
+            if len(keys) != 2:
+                raise ValueError(f"Expected change parameter like 'section,param', got {param!r}")
+            section = keys[0]
+            name = keys[1]
+            if section not in sub_run_config:
+                raise KeyError(f"Bad change parameter {param!r}: missing section {section!r}")
+            sub_run_config[section][name] = value
 
-            # run the experiment
-            ax = axes[i, j]
-            run_avg_fit_plot(grid_run_config, grid_axes=ax)
-            ax.set_title(f"{param1[1]}={v1}, {param2[1]}={v2}")
-
-            if is_root():
-                with grid_out_text.open("a", encoding="utf-8") as f:
-                    f.write(f"\nRank 0 finished grid run: {param1[1]}={v1}, {param2[1]}={v2}\n")
-                    f.write(f"Rank 0 runtime: {get_last_runtime()}s\n\n")
-    grid_runtime = time.time() - grid_t_start
+        if is_root():
+            with multi_out_text.open("a", encoding="utf-8") as f:
+                f.write(f"\n\nRank 0 starting sub run: {sub_run_id}")
+                f.write(f"\nChanges: {changes}")
+        unit_run(sub_run_config)
+        if is_root():
+            with multi_out_text.open("a", encoding="utf-8") as f:
+                f.write(f"\nRank 0 finished sub run: {sub_run_id}")
+                f.write(f"\nRuntime: {get_last_runtime()}s")
+    multi_runtime = time.time() - t_start
     if is_root():
-        with grid_out_text.open("a", encoding="utf-8") as f:
-            f.write(f"\nRank 0 finished grid. Total rank 0 grid run time: {grid_runtime}s\n")
-    COMM.Barrier()  # this is redundant
-
-    # Only root rank makes the figure
-    if not is_root():
-        return
-    fig.suptitle(f"Coherence: grid over {param1[1]} and {param2[1]}", fontsize=16)
-    fig.tight_layout(rect=(0.0, 0.0, 1.0, 0.96))
-    fig.savefig(grid_out_dir / f"grid_{param1[1]}_{param2[1]}.png", dpi=300)
-    plt.close(fig)
+        with multi_out_text.open("a", encoding="utf-8") as f:
+            f.write(f"\nRank 0 finished multirun. Total rank 0 grid run time: {multi_runtime}s\n")
+    COMM.Barrier()  # this may be redundant
 
 
+# +++++++++++++++++++++++ main method: do not edit +++++++++++++++++++++++ #
 def main(config_path):
     config = load_config(config_path)
 
-    if config['is_grid']:
-        grid_dict = config['grid_params']
-        grid_search(config, **grid_dict)
-    else:
-        run_avg_fit_plot(config)
+    run_type = config["run_type"]
+    if run_type not in RUN_REGISTRY:
+        raise ValueError(f"Unknown run_type {run_type!r}. Valid run_types are: {sorted(RUN_REGISTRY)}")
+
+    method_name = RUN_REGISTRY[run_type]
+    method = globals().get(method_name)
+    if method is None or not callable(method):
+        raise ValueError(f"RUN_REGISTRY maps run_type {run_type!r} to method {method_name!r}, "
+            "but that function does not exist in run.py.")
+
+    method(config)
 
 
 if __name__ == '__main__':
