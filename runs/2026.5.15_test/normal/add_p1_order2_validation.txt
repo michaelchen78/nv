@@ -1,0 +1,1620 @@
+2026-05-15 06:09:41,064 Interaction validation: printing first 20 of 326 added P1 pairs.
+2026-05-15 06:09:41,065 Interaction validation for added P1 pair (0=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:09:41,065 Interaction validation for added P1 pair (1=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (2=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (3=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (4=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (5=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (6=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (7=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (8=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (9=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (10=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,066 Interaction validation for added P1 pair (11=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (12=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (13=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (14=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (15=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (16=14N, 343=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (17=14N, 344=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (18=14N, 345=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:09:41,067 Interaction validation for added P1 pair (19=14N, 346=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,988 Interaction validation: printing first 20 of 308 added P1 pairs.
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (0=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (1=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (2=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (3=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (4=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (5=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,989 Interaction validation for added P1 pair (6=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (7=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (8=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (9=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (10=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (11=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (12=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (13=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (14=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (15=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (16=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,990 Interaction validation for added P1 pair (17=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:11:48,991 Interaction validation for added P1 pair (18=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:11:48,991 Interaction validation for added P1 pair (19=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,053 Interaction validation: printing first 20 of 302 added P1 pairs.
+2026-05-15 06:13:47,054 Interaction validation for added P1 pair (0=14N, 303=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,054 Interaction validation for added P1 pair (1=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,054 Interaction validation for added P1 pair (2=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,054 Interaction validation for added P1 pair (3=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,054 Interaction validation for added P1 pair (4=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (5=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (6=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (7=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (8=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (9=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (10=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (11=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (12=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (13=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (14=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:13:47,055 Interaction validation for added P1 pair (15=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:13:47,056 Interaction validation for added P1 pair (16=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:13:47,056 Interaction validation for added P1 pair (17=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:13:47,056 Interaction validation for added P1 pair (18=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:13:47,056 Interaction validation for added P1 pair (19=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,083 Interaction validation: printing first 20 of 322 added P1 pairs.
+2026-05-15 06:15:32,084 Interaction validation for added P1 pair (0=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (1=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (2=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (3=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (4=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (5=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (6=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (7=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (8=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (9=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,085 Interaction validation for added P1 pair (10=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (11=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (12=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (13=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (14=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (15=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (16=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (17=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (18=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:15:32,086 Interaction validation for added P1 pair (19=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:34,999 Interaction validation: printing first 20 of 327 added P1 pairs.
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (0=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (1=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (2=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (3=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (4=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (5=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (6=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (7=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,000 Interaction validation for added P1 pair (8=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (9=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (10=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (11=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (12=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (13=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (14=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (15=14N, 343=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (16=14N, 344=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (17=14N, 345=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (18=14N, 346=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:17:35,001 Interaction validation for added P1 pair (19=14N, 347=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,258 Interaction validation: printing first 20 of 300 added P1 pairs.
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (0=14N, 301=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (1=14N, 302=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (2=14N, 303=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (3=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (4=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (5=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,259 Interaction validation for added P1 pair (6=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (7=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (8=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (9=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (10=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (11=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (12=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (13=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (14=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (15=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (16=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:19:51,260 Interaction validation for added P1 pair (17=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:19:51,261 Interaction validation for added P1 pair (18=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:19:51,261 Interaction validation for added P1 pair (19=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:31:43,752 Interaction validation: printing first 20 of 303 added P1 pairs.
+2026-05-15 06:31:43,753 Interaction validation for added P1 pair (0=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,753 Interaction validation for added P1 pair (1=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (2=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (3=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (4=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (5=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (6=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (7=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (8=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (9=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (10=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,754 Interaction validation for added P1 pair (11=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (12=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (13=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (14=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (15=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (16=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (17=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (18=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:31:43,755 Interaction validation for added P1 pair (19=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,463 Interaction validation: printing first 20 of 323 added P1 pairs.
+2026-05-15 06:37:48,463 Interaction validation for added P1 pair (0=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,463 Interaction validation for added P1 pair (1=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (2=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (3=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (4=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (5=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (6=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (7=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (8=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (9=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (10=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,464 Interaction validation for added P1 pair (11=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (12=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (13=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (14=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (15=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (16=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (17=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (18=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:37:48,465 Interaction validation for added P1 pair (19=14N, 343=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,278 Interaction validation: printing first 20 of 316 added P1 pairs.
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (0=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (1=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (2=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (3=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (4=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,279 Interaction validation for added P1 pair (5=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (6=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (7=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (8=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (9=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (10=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (11=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (12=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (13=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (14=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (15=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:55:27,280 Interaction validation for added P1 pair (16=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 06:55:27,281 Interaction validation for added P1 pair (17=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 06:55:27,281 Interaction validation for added P1 pair (18=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 06:55:27,281 Interaction validation for added P1 pair (19=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,182 Interaction validation: printing first 20 of 306 added P1 pairs.
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (0=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (1=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (2=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (3=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (4=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (5=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (6=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (7=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:13:47,183 Interaction validation for added P1 pair (8=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (9=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (10=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (11=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (12=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (13=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (14=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (15=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (16=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:13:47,184 Interaction validation for added P1 pair (17=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,185 Interaction validation for added P1 pair (18=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:13:47,185 Interaction validation for added P1 pair (19=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:15:38,121 Interaction validation: printing first 20 of 308 added P1 pairs.
+2026-05-15 07:15:38,122 Interaction validation for added P1 pair (0=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:15:38,122 Interaction validation for added P1 pair (1=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (2=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (3=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (4=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (5=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (6=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (7=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (8=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (9=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (10=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (11=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,123 Interaction validation for added P1 pair (12=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (13=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (14=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (15=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (16=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (17=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (18=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:15:38,124 Interaction validation for added P1 pair (19=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,450 Interaction validation: printing first 20 of 292 added P1 pairs.
+2026-05-15 07:32:55,451 Interaction validation for added P1 pair (0=14N, 293=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,451 Interaction validation for added P1 pair (1=14N, 294=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:32:55,451 Interaction validation for added P1 pair (2=14N, 295=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (3=14N, 296=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (4=14N, 297=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (5=14N, 298=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (6=14N, 299=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (7=14N, 300=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (8=14N, 301=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (9=14N, 302=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (10=14N, 303=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (11=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,452 Interaction validation for added P1 pair (12=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (13=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (14=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (15=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (16=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (17=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (18=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:32:55,453 Interaction validation for added P1 pair (19=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,596 Interaction validation: printing first 20 of 322 added P1 pairs.
+2026-05-15 07:37:36,597 Interaction validation for added P1 pair (0=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:37:36,597 Interaction validation for added P1 pair (1=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:37:36,597 Interaction validation for added P1 pair (2=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:37:36,597 Interaction validation for added P1 pair (3=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:37:36,597 Interaction validation for added P1 pair (4=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (5=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (6=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (7=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (8=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (9=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (10=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (11=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (12=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (13=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (14=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,598 Interaction validation for added P1 pair (15=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,599 Interaction validation for added P1 pair (16=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:37:36,599 Interaction validation for added P1 pair (17=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:37:36,599 Interaction validation for added P1 pair (18=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:37:36,599 Interaction validation for added P1 pair (19=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:50:58,299 Interaction validation: printing first 20 of 316 added P1 pairs.
+2026-05-15 07:50:58,304 Interaction validation for added P1 pair (0=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,304 Interaction validation for added P1 pair (1=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:50:58,304 Interaction validation for added P1 pair (2=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (3=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (4=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (5=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (6=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (7=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (8=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (9=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (10=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (11=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (12=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:50:58,305 Interaction validation for added P1 pair (13=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (14=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (15=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (16=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (17=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (18=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 07:50:58,306 Interaction validation for added P1 pair (19=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:09:05,561 Interaction validation: printing first 20 of 348 added P1 pairs.
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (0=14N, 349=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (1=14N, 350=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (2=14N, 351=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (3=14N, 352=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (4=14N, 353=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (5=14N, 354=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,562 Interaction validation for added P1 pair (6=14N, 355=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (7=14N, 356=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (8=14N, 357=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (9=14N, 358=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (10=14N, 359=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (11=14N, 360=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (12=14N, 361=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (13=14N, 362=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (14=14N, 363=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (15=14N, 364=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (16=14N, 365=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,563 Interaction validation for added P1 pair (17=14N, 366=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:09:05,564 Interaction validation for added P1 pair (18=14N, 367=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:09:05,564 Interaction validation for added P1 pair (19=14N, 368=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,093 Interaction validation: printing first 20 of 298 added P1 pairs.
+2026-05-15 08:16:09,093 Interaction validation for added P1 pair (0=14N, 299=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (1=14N, 300=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (2=14N, 301=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (3=14N, 302=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (4=14N, 303=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (5=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (6=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (7=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (8=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (9=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,094 Interaction validation for added P1 pair (10=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (11=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (12=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (13=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (14=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (15=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (16=14N, 315=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (17=14N, 316=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (18=14N, 317=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:16:09,095 Interaction validation for added P1 pair (19=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:17:59,251 Interaction validation: printing first 20 of 330 added P1 pairs.
+2026-05-15 08:17:59,251 Interaction validation for added P1 pair (0=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:17:59,251 Interaction validation for added P1 pair (1=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (2=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (3=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (4=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (5=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (6=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (7=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (8=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (9=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (10=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (11=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,252 Interaction validation for added P1 pair (12=14N, 343=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (13=14N, 344=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (14=14N, 345=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (15=14N, 346=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (16=14N, 347=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (17=14N, 348=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (18=14N, 349=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:17:59,253 Interaction validation for added P1 pair (19=14N, 350=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:20:10,603 Interaction validation: printing first 20 of 317 added P1 pairs.
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (0=14N, 318=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (1=14N, 319=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (2=14N, 320=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (3=14N, 321=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (4=14N, 322=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (5=14N, 323=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (6=14N, 324=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:20:10,604 Interaction validation for added P1 pair (7=14N, 325=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (8=14N, 326=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (9=14N, 327=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (10=14N, 328=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (11=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (12=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (13=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (14=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (15=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (16=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:20:10,605 Interaction validation for added P1 pair (17=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:20:10,606 Interaction validation for added P1 pair (18=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:20:10,606 Interaction validation for added P1 pair (19=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,009 Interaction validation: printing first 20 of 328 added P1 pairs.
+2026-05-15 08:22:18,009 Interaction validation for added P1 pair (0=14N, 329=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,009 Interaction validation for added P1 pair (1=14N, 330=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (2=14N, 331=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (3=14N, 332=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (4=14N, 333=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (5=14N, 334=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (6=14N, 335=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (7=14N, 336=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (8=14N, 337=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (9=14N, 338=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (10=14N, 339=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,010 Interaction validation for added P1 pair (11=14N, 340=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (12=14N, 341=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (13=14N, 342=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (14=14N, 343=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (15=14N, 344=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (16=14N, 345=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (17=14N, 346=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (18=14N, 347=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:22:18,011 Interaction validation for added P1 pair (19=14N, 348=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,710 Interaction validation: printing first 20 of 294 added P1 pairs.
+2026-05-15 08:24:35,710 Interaction validation for added P1 pair (0=14N, 295=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,710 Interaction validation for added P1 pair (1=14N, 296=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (2=14N, 297=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (3=14N, 298=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (4=14N, 299=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (5=14N, 300=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (6=14N, 301=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (7=14N, 302=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (8=14N, 303=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (9=14N, 304=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (10=14N, 305=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,711 Interaction validation for added P1 pair (11=14N, 306=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0.  81310.      0.]
+ [     0.      0. 114030.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (12=14N, 307=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (13=14N, 308=e): explicit imap tensor found; allclose_zero=False; J=
+[[ 81310.      0.      0.]
+ [     0. 110390. -10280.]
+ [     0. -10280.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (14=14N, 309=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (15=14N, 310=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (16=14N, 311=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (17=14N, 312=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120.  12590.   8900.]
+ [ 12590.  88580.   5140.]
+ [  8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (18=14N, 313=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]
+2026-05-15 08:24:35,712 Interaction validation for added P1 pair (19=14N, 314=e): explicit imap tensor found; allclose_zero=False; J=
+[[103120. -12590.  -8900.]
+ [-12590.  88580.   5140.]
+ [ -8900.   5140.  84950.]]

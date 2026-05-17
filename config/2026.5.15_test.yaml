@@ -1,0 +1,83 @@
+run_id: '2026.5.15_test'  # MUST match the file name!
+run_type: 'multi'  # run type, see config.RUN_REGISTRY
+# optional parameters:
+# - base_out_dir: default is './runs'
+# - base_data_dir: default is './data'
+# - seed_id: default is run_id; a string, makes the run deterministic for supercells and JT mixing
+seed_id: "park"
+
+supercell_params:
+  rm_host: false
+  c13_conc: 0
+  p1_conc: 1.0e-5
+  p1_mode: 'b'
+  size: 700  # approx length of one side of the supercell in A; default 200
+  interactions: {host_hf: false, host_quad: false}
+  # optional parameters:
+  # - interactions: all interactions are on by default. to remove an interaction, put it in the {} of the
+  #                 'interactions' parameter like {p1_hf: false, p1_quad: false} the full list of interactions can be
+  #                 found in the docs.
+  # - jt_axis: default "mixed"; can also be "A", "B", "C", or "D"
+  # - custom_bath: default false; if true, expects BathArray to be passed into run_avg_fit_plot
+  # - verbose: default false
+  # - save_supercells: default false
+  # - zdir: default [1,1,1]; the z direction of the NV defect.·
+  # - NV parameters:
+  # - - nv_position: [ 0, 0, 0 ]  # central spin position
+  # - - alpha: [ 0, 0, 1 ]  # NV qubit levels in Sz basis
+  # - - beta: [ 0, 1, 0 ]
+  verbose: true
+
+simulator_params:
+  order: 2 # CCE order
+  r_bath: 350  # bath cutoff radius in Angstroms
+  r_dipole: 300  # cutoff of pairwise clusters in Angstroms
+  # nonmandatory parameters:
+  # - verbose: default false;
+  # - polarization: default 0; polarization (gamma) of the 13C spins
+  # - custom_r_bath: default None; see docs
+  # - custom_r_dipole: default None; see docs
+  # - park_2e2n: default false; see docs
+  # - generalized_2e2n: default false; see docs
+  verbose: true
+
+experiment_params:
+  ensemble_size: 20  # number of unique baths generated
+  avg_method: mean  # a string id denoting how to average over the ensemble, see docs
+  magnetic_field: [0.0, 0.0, 500.0] # in Gauss
+  pulses: 1  # see docs
+  time_space: [0.0002, 0.01, 50]   # start, stop, step; in ms (see log_time)
+  log_time: false  # whether time_space is passed into np.linspace() or np.logspace()
+  cce_type: 'gcce'    # a string representing the method of CCE computation, see docs
+  parallel: false  # if run with MPI (on Discovery), set to true; for local runs set to false
+  # nonmandatory parameters
+  # - n_bath_states: default 20; number of random bath states to sample over (only for monte carlo cce_type)
+  #                  IMPORTANT: have it be divisible by number of mpi processes
+  # - verbose: default false
+  # - checkpoints: default false; save coherence checkpoints as your go through an ensemble
+  n_bath_states: -1
+  verbose: true
+
+multi_params:  # if doing ANY multi-run must include this section
+  sub_run_ids: ["normal",
+                "custom"]
+  change_params: [{},
+                  {"supercell_params,c13_conc": 0.011,
+                   "simulator_params,custom_r_bath": {"13C": 40.0},
+                   "simulator_params,custom_r_dipole": {"13C,13C": 6.0, "13C,e":30.0, "13C,14N":30.0}}]
+
+grid_params:  # if doing a grid run include these. if not, you can delete or keep them, and it will make no difference
+  param1: ["supercell_params", "jt_axis"]
+  param2: ["simulator_params", "order"]
+  param1_values:  ["mixed", "A"]
+  param2_values: [2]
+
+cpmg_params: # if doing a cpmg run include these. if not, you can delete or keep them, and it will make no difference
+  T_max: 0.50  # last element of timespace unless tau_max is on
+  start: 0.0005  # should be zero unless it's logtime
+  delta: -1  # step size; delta should divide both T_max and tau_max. num steps is T_max / delta or tau_max*n / delta.
+  n_list: [1, 4, 12, 64, 128]
+  # nonmandatory parameters
+  # - logspace: default None; if not None: num steps in timespace, which becomes logarithmic; delta is overridden.
+  # - n_linspace: default None; if not None: 3-item list for np.linspace(n_start, n_stop, n_steps); n_list is overridden.
+  logspace: 51

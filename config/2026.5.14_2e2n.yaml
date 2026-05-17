@@ -1,0 +1,82 @@
+# anything which is not commented on in this file is in the docs
+run_id: '2026.5.14_2e2n'  # MUST match the file name!
+run_type: 'multi'  # run type
+                   # 'single' - a single PyCCE run.
+                   # 'multi' - basic multi run structure
+                   # 'grid' - grid where all runs have the same pulse sequence.
+                   # 'cpmg' - a CPMG run.
+# optional parameters:
+# - base_out_dir: default is './runs'
+# - base_data_dir: default is './data'
+# - seed_id: default is run_id; a string, makes the run deterministic for supercells and JT mixing
+seed_id: "park"
+
+supercell_params:
+  rm_host: false
+  c13_conc: 0
+  p1_conc: 1.0e-6
+  p1_mode: 'b'
+  size: 1700  # approx length of one side of the supercell in A; default 200
+  interactions: {host_hf: false, host_quad: false}
+  # optional parameters:
+  # - interactions: all interactions are on by default. to remove an interaction, put it in the {} of the
+  #                 'interactions' parameter like {p1_hf: false, p1_quad: false} the full list of interactions can be
+  #                 found in the docs.
+  # - jt_axis: default "mixed"; can also be "A", "B", "C", or "D"
+  # - custom_bath: default false; if true, expects BathArray to be passed into run_avg_fit_plot
+  # - seed: default None; seed for random configuration of supercell; used by the method model.run_ensemble
+  # - verbose: default false
+  # - save_supercells: default false
+  # - zdir: default [1,1,1]; the z direction of the NV defect.·
+  # - NV parameters:
+  # - - nv_position: [ 0, 0, 0 ]  # central spin position
+  # - - alpha: [ 0, 0, 1 ]  # NV qubit levels in Sz basis
+  # - - beta: [ 0, 1, 0 ]
+  verbose: true
+
+simulator_params:
+  order: 2 # CCE order
+  r_bath: 850  # bath cutoff radius in Angstroms
+  r_dipole: 620  # cutoff of pairwise clusters in Angstroms
+  # nonmandatory parameters:
+  # - polarization: default 0; polarization (gamma) of the 13C spins
+  # - verbose: default false;
+  # - custom_r_bath: default None; see docs
+  # - custom_r_dipole: default None; see docs
+  # - park_2e2n: default false; see docs
+  # - generalized_2e2n: default false; see docs
+  verbose: true
+  park_2e2n: true
+  generalized_2e2n: false
+
+experiment_params:  # parameters for computing the coherence function
+  ensemble_size: 20  # number of unique baths generated
+  avg_method: mean  # a string id denoting how to average over the ensemble; only used by run.sh, not used by sim.sh.txt
+                      # currently, only 'mean' and 'median' are supported, and they are straightforward implementations
+  magnetic_field: [0.0, 0.0, 500.0] # in Gauss
+  pulse_id: 1  # a string id representing pulse sequence. right now it is simply 'hahn' is x-axis pi Hahn echo
+                # and 'FID' is FID. see the function model.get_pulses.
+                # if in CPMG mode, this is overridden
+  time_space: [0.01, 1.0, 100]   # start, stop, step; in milliseconds; if in cpmg mode this is overriden.
+  log_time: false  # true if log time; if false uses linear time
+  cce_type: 'gcce_mc'    # a string representing the method of CCE computation.
+                                      # Currently the options are:
+                                      # 'cce' conventional cce
+                                      # 'gcce' generalized cce 'MC' for generalized with Monte
+                                      # 'cce_mc' conventional cce with monte carlo random bath sampling
+                                      # 'gcce_mc' generalized cce with monte carlo random bath sampling
+  parallel: true  # if run with MPI (on Discovery), set to true; for local runs set to false
+  # nonmandatory parameters
+  # - n_bath_states: number of random bath states to sample over (only for monte carlo cce_type); set at 20
+  #                  have it be divisible by number of mpi processes
+  # - verbose: set at false
+  # - checkpoints: save coherence checkpoints as your go through an ensemble; set at false
+  n_bath_states: 64
+
+multi_params:  # if doing a multirun include these. if not, you can delete or keep them, and it will make no difference.
+  sub_run_ids: ["JT_mixed",
+                "JT_A",
+                "HF_off"]
+  change_params: [{"supercell_params,jt_axis": "mixed"},
+                  {"supercell_params,jt_axis": "A"},
+                  {"supercell_params,interactions": {host_hf: false, host_quad: false, p1_hf: false}}]

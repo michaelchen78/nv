@@ -217,11 +217,6 @@ archive-13may2026/
 !/runs/2026.5.15_test/
 !/runs/2026.5.15_test/**
 
-# never include archive directories anywhere inside config/data/runs
-/config/**/archive*/
-/data/**/archive*/
-/runs/**/archive*/
-
 # macOS / IDE
 .DS_Store
 **/.DS_Store

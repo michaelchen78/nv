@@ -1,0 +1,23 @@
+multi_params:  # if doing ANY multi-run must include these
+  sub_run_ids: ["JT_mixed",
+                "JT_A",
+                "HF_off"]
+  change_params: [{"supercell_params,jt_axis": "mixed"},
+                  {"supercell_params,jt_axis": "A"},
+                  {"supercell_params,interactions": {host_hf: false, host_quad: false, p1_hf: false}}]
+
+grid_params:  # if doing a grid run include these. if not, you can delete or keep them, and it will make no difference
+  param1: ["supercell_params", "jt_axis"]
+  param2: ["simulator_params", "order"]
+  param1_values:  ["mixed", "A"]
+  param2_values: [2]
+
+cpmg_params: # if doing a cpmg run include these. if not, you can delete or keep them, and it will make no difference
+  T_max: 0.50  # last element of timespace unless tau_max is on
+  start: 0.0005  # should be zero unless it's logtime
+  delta: -1  # step size; delta should divide both T_max and tau_max. num steps is T_max / delta or tau_max*n / delta.
+  n_list: [1, 4, 12, 64, 128]
+  # nonmandatory parameters
+  # - logspace: default None; if not None: num steps in timespace, which becomes logarithmic; delta is overridden.
+  # - n_linspace: default None; if not None: 3-item list for np.linspace(n_start, n_stop, n_steps); n_list is overridden.
+  logspace: 51

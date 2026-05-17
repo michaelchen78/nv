@@ -1,0 +1,636 @@
+2026-05-15 06:09:38,704 Initialized output for run normal
+2026-05-15 06:09:38,704 Log directory: runs/2026.5.15_test/normal
+2026-05-15 06:09:38,704 Data directory: data/2026.5.15_test/normal
+2026-05-15 06:09:38,704 Config: {'run_id': 'normal', 'run_type': 'multi', 'seed_id': 'park', 'supercell_params': {'rm_host': False, 'c13_conc': 0, 'p1_conc': 1e-05, 'p1_mode': 'b', 'size': 700, 'interactions': {'host_hf': False, 'host_quad': False}, 'verbose': True}, 'simulator_params': {'order': 2, 'r_bath': 350, 'r_dipole': 300, 'verbose': True}, 'experiment_params': {'ensemble_size': 20, 'avg_method': 'mean', 'magnetic_field': [0.0, 0.0, 500.0], 'pulses': 1, 'time_space': array([0.0002, 0.0004, 0.0006, 0.0008, 0.001 , 0.0012, 0.0014, 0.0016,
+       0.0018, 0.002 , 0.0022, 0.0024, 0.0026, 0.0028, 0.003 , 0.0032,
+       0.0034, 0.0036, 0.0038, 0.004 , 0.0042, 0.0044, 0.0046, 0.0048,
+       0.005 , 0.0052, 0.0054, 0.0056, 0.0058, 0.006 , 0.0062, 0.0064,
+       0.0066, 0.0068, 0.007 , 0.0072, 0.0074, 0.0076, 0.0078, 0.008 ,
+       0.0082, 0.0084, 0.0086, 0.0088, 0.009 , 0.0092, 0.0094, 0.0096,
+       0.0098, 0.01  ]), 'log_time': False, 'cce_type': 'gcce', 'parallel': False, 'n_bath_states': -1, 'verbose': True}, 'multi_params': {'sub_run_ids': ['normal', 'custom'], 'change_params': [{}, {'supercell_params,c13_conc': 0.011, 'simulator_params,custom_r_bath': {'13C': 40.0}, 'simulator_params,custom_r_dipole': {'13C,13C': 6.0, '13C,e': 30.0, '13C,14N': 30.0}}]}, 'grid_params': {'param1': ['supercell_params', 'jt_axis'], 'param2': ['simulator_params', 'order'], 'param1_values': ['mixed', 'A'], 'param2_values': [2]}, 'cpmg_params': {'T_max': 0.5, 'start': 0.0005, 'delta': -1, 'n_list': [1, 4, 12, 64, 128], 'logspace': 51}, 'base_out_dir': 'runs/2026.5.15_test', 'base_data_dir': 'data/2026.5.15_test'}
+2026-05-15 06:09:38,705 Starting ensemble experiment 1
+2026-05-15 06:09:38,707 Ensemble 1 starting now:
+2026-05-15 06:09:38,707 Generating supercell: size=700, p1_conc=1e-05, seed=1918365528
+2026-05-15 06:09:39,492 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:09:39,522 [ens num 1] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 653 spins.
+
+Clusters include:
+653  clusters of order 1.
+70976  clusters of order 2.
+
+
+2026-05-15 06:09:41,064 Added 326 missing colocated P1 e-14N order-2 clusters. order-2 count: 70976 -> 71302
+2026-05-15 06:09:41,072 
+[ens number 1] Starting coherence experiment.
+
+2026-05-15 06:09:41,072 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 653, 2: 71302} (starting compute now)
+2026-05-15 06:11:46,797 
+[ens number 1] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:11:46,798 Rank 0 finished ensemble experiment 1 in 128.09 s
+2026-05-15 06:11:46,798 Starting ensemble experiment 2
+2026-05-15 06:11:46,799 Ensemble 2 starting now:
+2026-05-15 06:11:46,799 Generating supercell: size=700, p1_conc=1e-05, seed=1918365529
+2026-05-15 06:11:47,521 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:11:47,549 [ens num 2] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 617 spins.
+
+Clusters include:
+617  clusters of order 1.
+65958  clusters of order 2.
+
+
+2026-05-15 06:11:48,987 Added 308 missing colocated P1 e-14N order-2 clusters. order-2 count: 65958 -> 66266
+2026-05-15 06:11:48,996 
+[ens number 2] Starting coherence experiment.
+
+2026-05-15 06:11:48,996 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 617, 2: 66266} (starting compute now)
+2026-05-15 06:13:45,005 
+[ens number 2] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:13:45,008 Rank 0 finished ensemble experiment 2 in 118.21 s
+2026-05-15 06:13:45,008 Starting ensemble experiment 3
+2026-05-15 06:13:45,009 Ensemble 3 starting now:
+2026-05-15 06:13:45,010 Generating supercell: size=700, p1_conc=1e-05, seed=1918365530
+2026-05-15 06:13:45,719 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:13:45,743 [ens num 3] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 605 spins.
+
+Clusters include:
+605  clusters of order 1.
+58344  clusters of order 2.
+
+
+2026-05-15 06:13:47,052 Added 302 missing colocated P1 e-14N order-2 clusters. order-2 count: 58344 -> 58646
+2026-05-15 06:13:47,060 
+[ens number 3] Starting coherence experiment.
+
+2026-05-15 06:13:47,060 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 605, 2: 58646} (starting compute now)
+2026-05-15 06:15:29,735 
+[ens number 3] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:15:29,736 Rank 0 finished ensemble experiment 3 in 104.73 s
+2026-05-15 06:15:29,736 Starting ensemble experiment 4
+2026-05-15 06:15:29,737 Ensemble 4 starting now:
+2026-05-15 06:15:29,737 Generating supercell: size=700, p1_conc=1e-05, seed=1918365531
+2026-05-15 06:15:30,568 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:15:30,597 [ens num 4] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 645 spins.
+
+Clusters include:
+645  clusters of order 1.
+68730  clusters of order 2.
+
+
+2026-05-15 06:15:32,082 Added 322 missing colocated P1 e-14N order-2 clusters. order-2 count: 68730 -> 69052
+2026-05-15 06:15:32,092 
+[ens number 4] Starting coherence experiment.
+
+2026-05-15 06:15:32,092 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 645, 2: 69052} (starting compute now)
+2026-05-15 06:17:32,733 
+[ens number 4] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:17:32,734 Rank 0 finished ensemble experiment 4 in 123.00 s
+2026-05-15 06:17:32,734 Starting ensemble experiment 5
+2026-05-15 06:17:32,735 Ensemble 5 starting now:
+2026-05-15 06:17:32,735 Generating supercell: size=700, p1_conc=1e-05, seed=1918365532
+2026-05-15 06:17:33,446 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:17:33,473 [ens num 5] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 655 spins.
+
+Clusters include:
+655  clusters of order 1.
+75752  clusters of order 2.
+
+
+2026-05-15 06:17:34,998 Added 327 missing colocated P1 e-14N order-2 clusters. order-2 count: 75752 -> 76079
+2026-05-15 06:17:35,007 
+[ens number 5] Starting coherence experiment.
+
+2026-05-15 06:17:35,007 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 655, 2: 76079} (starting compute now)
+2026-05-15 06:19:48,838 
+[ens number 5] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:19:48,839 Rank 0 finished ensemble experiment 5 in 136.10 s
+2026-05-15 06:19:48,839 Starting ensemble experiment 6
+2026-05-15 06:19:48,841 Ensemble 6 starting now:
+2026-05-15 06:19:48,841 Generating supercell: size=700, p1_conc=1e-05, seed=1918365533
+2026-05-15 06:19:49,968 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:19:49,991 [ens num 6] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 601 spins.
+
+Clusters include:
+601  clusters of order 1.
+62128  clusters of order 2.
+
+
+2026-05-15 06:19:51,257 Added 300 missing colocated P1 e-14N order-2 clusters. order-2 count: 62128 -> 62428
+2026-05-15 06:19:51,266 
+[ens number 6] Starting coherence experiment.
+
+2026-05-15 06:19:51,266 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 601, 2: 62428} (starting compute now)
+2026-05-15 06:31:41,644 
+[ens number 6] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:31:41,646 Rank 0 finished ensemble experiment 6 in 712.81 s
+2026-05-15 06:31:41,646 Starting ensemble experiment 7
+2026-05-15 06:31:41,647 Ensemble 7 starting now:
+2026-05-15 06:31:41,647 Generating supercell: size=700, p1_conc=1e-05, seed=1918365534
+2026-05-15 06:31:42,417 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:31:42,446 [ens num 7] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 607 spins.
+
+Clusters include:
+607  clusters of order 1.
+63478  clusters of order 2.
+
+
+2026-05-15 06:31:43,751 Added 303 missing colocated P1 e-14N order-2 clusters. order-2 count: 63478 -> 63781
+2026-05-15 06:31:43,760 
+[ens number 7] Starting coherence experiment.
+
+2026-05-15 06:31:43,760 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 607, 2: 63781} (starting compute now)
+2026-05-15 06:37:46,165 
+[ens number 7] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:37:46,166 Rank 0 finished ensemble experiment 7 in 364.52 s
+2026-05-15 06:37:46,166 Starting ensemble experiment 8
+2026-05-15 06:37:46,167 Ensemble 8 starting now:
+2026-05-15 06:37:46,167 Generating supercell: size=700, p1_conc=1e-05, seed=1918365535
+2026-05-15 06:37:46,958 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:37:46,990 [ens num 8] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 647 spins.
+
+Clusters include:
+647  clusters of order 1.
+67884  clusters of order 2.
+
+
+2026-05-15 06:37:48,462 Added 323 missing colocated P1 e-14N order-2 clusters. order-2 count: 67884 -> 68207
+2026-05-15 06:37:48,470 
+[ens number 8] Starting coherence experiment.
+
+2026-05-15 06:37:48,470 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 647, 2: 68207} (starting compute now)
+2026-05-15 06:55:25,066 
+[ens number 8] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 06:55:25,067 Rank 0 finished ensemble experiment 8 in 1058.90 s
+2026-05-15 06:55:25,067 Starting ensemble experiment 9
+2026-05-15 06:55:25,069 Ensemble 9 starting now:
+2026-05-15 06:55:25,069 Generating supercell: size=700, p1_conc=1e-05, seed=1918365536
+2026-05-15 06:55:25,802 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 06:55:25,839 [ens num 9] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 633 spins.
+
+Clusters include:
+633  clusters of order 1.
+65598  clusters of order 2.
+
+
+2026-05-15 06:55:27,277 Added 316 missing colocated P1 e-14N order-2 clusters. order-2 count: 65598 -> 65914
+2026-05-15 06:55:27,286 
+[ens number 9] Starting coherence experiment.
+
+2026-05-15 06:55:27,286 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 633, 2: 65914} (starting compute now)
+2026-05-15 07:13:45,187 
+[ens number 9] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 07:13:45,188 Rank 0 finished ensemble experiment 9 in 1100.12 s
+2026-05-15 07:13:45,188 Starting ensemble experiment 10
+2026-05-15 07:13:45,189 Ensemble 10 starting now:
+2026-05-15 07:13:45,189 Generating supercell: size=700, p1_conc=1e-05, seed=1918365537
+2026-05-15 07:13:45,825 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 07:13:45,849 [ens num 10] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 613 spins.
+
+Clusters include:
+613  clusters of order 1.
+62036  clusters of order 2.
+
+
+2026-05-15 07:13:47,181 Added 306 missing colocated P1 e-14N order-2 clusters. order-2 count: 62036 -> 62342
+2026-05-15 07:13:47,189 
+[ens number 10] Starting coherence experiment.
+
+2026-05-15 07:13:47,189 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 613, 2: 62342} (starting compute now)
+2026-05-15 07:15:35,988 
+[ens number 10] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 07:15:35,989 Rank 0 finished ensemble experiment 10 in 110.80 s
+2026-05-15 07:15:35,989 Starting ensemble experiment 11
+2026-05-15 07:15:35,990 Ensemble 11 starting now:
+2026-05-15 07:15:35,990 Generating supercell: size=700, p1_conc=1e-05, seed=1918365538
+2026-05-15 07:15:36,753 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 07:15:36,782 [ens num 11] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 617 spins.
+
+Clusters include:
+617  clusters of order 1.
+65750  clusters of order 2.
+
+
+2026-05-15 07:15:38,120 Added 308 missing colocated P1 e-14N order-2 clusters. order-2 count: 65750 -> 66058
+2026-05-15 07:15:38,129 
+[ens number 11] Starting coherence experiment.
+
+2026-05-15 07:15:38,129 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 617, 2: 66058} (starting compute now)
+2026-05-15 07:32:53,616 
+[ens number 11] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 07:32:53,617 Rank 0 finished ensemble experiment 11 in 1037.63 s
+2026-05-15 07:32:53,617 Starting ensemble experiment 12
+2026-05-15 07:32:53,618 Ensemble 12 starting now:
+2026-05-15 07:32:53,618 Generating supercell: size=700, p1_conc=1e-05, seed=1918365539
+2026-05-15 07:32:54,207 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 07:32:54,230 [ens num 12] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 585 spins.
+
+Clusters include:
+585  clusters of order 1.
+57018  clusters of order 2.
+
+
+2026-05-15 07:32:55,449 Added 292 missing colocated P1 e-14N order-2 clusters. order-2 count: 57018 -> 57310
+2026-05-15 07:32:55,457 
+[ens number 12] Starting coherence experiment.
+
+2026-05-15 07:32:55,457 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 585, 2: 57310} (starting compute now)
+2026-05-15 07:37:34,337 
+[ens number 12] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 07:37:34,338 Rank 0 finished ensemble experiment 12 in 280.72 s
+2026-05-15 07:37:34,338 Starting ensemble experiment 13
+2026-05-15 07:37:34,339 Ensemble 13 starting now:
+2026-05-15 07:37:34,339 Generating supercell: size=700, p1_conc=1e-05, seed=1918365540
+2026-05-15 07:37:35,105 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 07:37:35,139 [ens num 13] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 645 spins.
+
+Clusters include:
+645  clusters of order 1.
+66712  clusters of order 2.
+
+
+2026-05-15 07:37:36,595 Added 322 missing colocated P1 e-14N order-2 clusters. order-2 count: 66712 -> 67034
+2026-05-15 07:37:36,604 
+[ens number 13] Starting coherence experiment.
+
+2026-05-15 07:37:36,604 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 645, 2: 67034} (starting compute now)
+2026-05-15 07:50:55,996 
+[ens number 13] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 07:50:55,998 Rank 0 finished ensemble experiment 13 in 801.66 s
+2026-05-15 07:50:55,998 Starting ensemble experiment 14
+2026-05-15 07:50:55,999 Ensemble 14 starting now:
+2026-05-15 07:50:55,999 Generating supercell: size=700, p1_conc=1e-05, seed=1918365541
+2026-05-15 07:50:56,860 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 07:50:56,888 [ens num 14] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 633 spins.
+
+Clusters include:
+633  clusters of order 1.
+70138  clusters of order 2.
+
+
+2026-05-15 07:50:58,298 Added 316 missing colocated P1 e-14N order-2 clusters. order-2 count: 70138 -> 70454
+2026-05-15 07:50:58,311 
+[ens number 14] Starting coherence experiment.
+
+2026-05-15 07:50:58,311 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 633, 2: 70454} (starting compute now)
+2026-05-15 08:09:02,993 
+[ens number 14] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:09:02,994 Rank 0 finished ensemble experiment 14 in 1087.00 s
+2026-05-15 08:09:02,994 Starting ensemble experiment 15
+2026-05-15 08:09:02,995 Ensemble 15 starting now:
+2026-05-15 08:09:02,996 Generating supercell: size=700, p1_conc=1e-05, seed=1918365542
+2026-05-15 08:09:03,756 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:09:03,787 [ens num 15] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 697 spins.
+
+Clusters include:
+697  clusters of order 1.
+83116  clusters of order 2.
+
+
+2026-05-15 08:09:05,561 Added 348 missing colocated P1 e-14N order-2 clusters. order-2 count: 83116 -> 83464
+2026-05-15 08:09:05,570 
+[ens number 15] Starting coherence experiment.
+
+2026-05-15 08:09:05,570 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 697, 2: 83464} (starting compute now)
+2026-05-15 08:16:06,925 
+[ens number 15] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:16:06,925 Rank 0 finished ensemble experiment 15 in 423.93 s
+2026-05-15 08:16:06,925 Starting ensemble experiment 16
+2026-05-15 08:16:06,926 Ensemble 16 starting now:
+2026-05-15 08:16:06,926 Generating supercell: size=700, p1_conc=1e-05, seed=1918365543
+2026-05-15 08:16:07,704 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:16:07,727 [ens num 16] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 597 spins.
+
+Clusters include:
+597  clusters of order 1.
+60738  clusters of order 2.
+
+
+2026-05-15 08:16:09,092 Added 298 missing colocated P1 e-14N order-2 clusters. order-2 count: 60738 -> 61036
+2026-05-15 08:16:09,099 
+[ens number 16] Starting coherence experiment.
+
+2026-05-15 08:16:09,100 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 597, 2: 61036} (starting compute now)
+2026-05-15 08:17:57,081 
+[ens number 16] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:17:57,083 Rank 0 finished ensemble experiment 16 in 110.16 s
+2026-05-15 08:17:57,083 Starting ensemble experiment 17
+2026-05-15 08:17:57,084 Ensemble 17 starting now:
+2026-05-15 08:17:57,084 Generating supercell: size=700, p1_conc=1e-05, seed=1918365544
+2026-05-15 08:17:57,692 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:17:57,718 [ens num 17] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 661 spins.
+
+Clusters include:
+661  clusters of order 1.
+72536  clusters of order 2.
+
+
+2026-05-15 08:17:59,250 Added 330 missing colocated P1 e-14N order-2 clusters. order-2 count: 72536 -> 72866
+2026-05-15 08:17:59,258 
+[ens number 17] Starting coherence experiment.
+
+2026-05-15 08:17:59,258 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 661, 2: 72866} (starting compute now)
+2026-05-15 08:20:08,359 
+[ens number 17] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:20:08,360 Rank 0 finished ensemble experiment 17 in 131.28 s
+2026-05-15 08:20:08,360 Starting ensemble experiment 18
+2026-05-15 08:20:08,361 Ensemble 18 starting now:
+2026-05-15 08:20:08,361 Generating supercell: size=700, p1_conc=1e-05, seed=1918365545
+2026-05-15 08:20:09,168 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:20:09,194 [ens num 18] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 635 spins.
+
+Clusters include:
+635  clusters of order 1.
+69778  clusters of order 2.
+
+
+2026-05-15 08:20:10,603 Added 317 missing colocated P1 e-14N order-2 clusters. order-2 count: 69778 -> 70095
+2026-05-15 08:20:10,611 
+[ens number 18] Starting coherence experiment.
+
+2026-05-15 08:20:10,611 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 635, 2: 70095} (starting compute now)
+2026-05-15 08:22:15,761 
+[ens number 18] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:22:15,762 Rank 0 finished ensemble experiment 18 in 127.40 s
+2026-05-15 08:22:15,762 Starting ensemble experiment 19
+2026-05-15 08:22:15,763 Ensemble 19 starting now:
+2026-05-15 08:22:15,763 Generating supercell: size=700, p1_conc=1e-05, seed=1918365546
+2026-05-15 08:22:16,466 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:22:16,490 [ens num 19] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 657 spins.
+
+Clusters include:
+657  clusters of order 1.
+76462  clusters of order 2.
+
+
+2026-05-15 08:22:18,008 Added 328 missing colocated P1 e-14N order-2 clusters. order-2 count: 76462 -> 76790
+2026-05-15 08:22:18,017 
+[ens number 19] Starting coherence experiment.
+
+2026-05-15 08:22:18,017 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 657, 2: 76790} (starting compute now)
+2026-05-15 08:24:33,783 
+[ens number 19] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:24:33,784 Rank 0 finished ensemble experiment 19 in 138.02 s
+2026-05-15 08:24:33,784 Starting ensemble experiment 20
+2026-05-15 08:24:33,785 Ensemble 20 starting now:
+2026-05-15 08:24:33,785 Generating supercell: size=700, p1_conc=1e-05, seed=1918365547
+2026-05-15 08:24:34,466 Built supercell: N_atoms=1225, N_P1=612, N_13C=0
+
+2026-05-15 08:24:34,489 [ens num 20] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 350.0
+r_dipole: 300.0
+order: 2
+
+Bath consists of 589 spins.
+
+Clusters include:
+589  clusters of order 1.
+54808  clusters of order 2.
+
+
+2026-05-15 08:24:35,709 Added 294 missing colocated P1 e-14N order-2 clusters. order-2 count: 54808 -> 55102
+2026-05-15 08:24:35,716 
+[ens number 20] Starting coherence experiment.
+
+2026-05-15 08:24:35,716 FINAL clusters passed to calc.compute: keys=[1, 2], counts={1: 589, 2: 55102} (starting compute now)
+2026-05-15 08:26:12,438 
+[ens number 20] Rank 0 mpi process has finished coherence experiment.
+
+2026-05-15 08:26:12,440 Rank 0 finished ensemble experiment 20 in 98.66 s
+2026-05-15 08:26:12,440 Rank 0 finished full ensemble run normal in 8193.74 s
+2026-05-15 08:26:12,451 Wrote raw CSV to data/2026.5.15_test/normal/raw.csv
+2026-05-15 08:26:12,453 Number of unstable points was 0
+2026-05-15 08:26:12,458 Wrote final averaged CSV to data/2026.5.15_test/normal/averaged.csv
+2026-05-15 08:26:12,459 Wrote final averaged modulus CSV to data/2026.5.15_test/normal/averaged_mag.csv
+2026-05-15 08:26:12,459 Wrote final averaged phase CSV to data/2026.5.15_test/normal/averaged_phase.csv
