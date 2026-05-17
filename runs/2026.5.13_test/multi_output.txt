@@ -1,0 +1,20 @@
+Initialized output text file.
+
+Config:{'run_id': '2026.5.13_test', 'run_type': 'multi', 'supercell_params': {'rm_host': False, 'c13_conc': 0, 'p1_conc': 0.0004, 'p1_mode': 'b', 'size': 500, 'interactions': {'host_hf': False, 'host_quad': False}, 'verbose': True}, 'simulator_params': {'order': 2, 'r_bath': 160, 'r_dipole': 6, 'verbose': True, 'park_2e2n': False}, 'experiment_params': {'ensemble_size': 5, 'avg_method': 'mean', 'magnetic_field': [0.0, 0.0, 500.0], 'pulse_id': 1, 'time_space': [0.001, 0.1, 100], 'log_time': False, 'cce_type': 'gcce', 'parallel': False, 'n_bath_states': -1}, 'multi_params': {'sub_run_ids': ['JT_mixed', 'JT_A', 'HF_off'], 'change_params': [{'supercell_params,jt_axis': 'mixed'}, {'supercell_params,jt_axis': 'A'}, {'supercell_params,interactions': {'host_hf': False, 'host_quad': False, 'p1_hf': False}}]}, 'grid_params': {'param1': ['supercell_params', 'jt_axis'], 'param2': ['simulator_params', 'order'], 'param1_values': ['mixed', 'A'], 'param2_values': [2]}, 'cpmg_params': {'T_max': 0.5, 'start': 0.0005, 'delta': -1, 'n_list': [1, 4, 12, 64, 128], 'logspace': 51}}.
+
+
+Rank 0 starting sub run: JT_mixed
+Changes: {'supercell_params,jt_axis': 'mixed'}
+Rank 0 finished sub run: JT_mixed
+Runtime: 120.00760817527771s
+
+Rank 0 starting sub run: JT_A
+Changes: {'supercell_params,jt_axis': 'A'}
+Rank 0 finished sub run: JT_A
+Runtime: 119.23394203186035s
+
+Rank 0 starting sub run: HF_off
+Changes: {'supercell_params,interactions': {'host_hf': False, 'host_quad': False, 'p1_hf': False}}
+Rank 0 finished sub run: HF_off
+Runtime: 119.31385016441345s
+Rank 0 finished multirun. Total rank 0 grid run time: 358.7051730155945s

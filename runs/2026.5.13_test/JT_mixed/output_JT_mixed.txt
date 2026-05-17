@@ -1,0 +1,140 @@
+2026-05-13 17:44:14,768 Initialized output for run JT_mixed
+2026-05-13 17:44:14,768 Log directory: runs/2026.5.13_test/JT_mixed
+2026-05-13 17:44:14,769 Data directory: data/2026.5.13_test/JT_mixed
+2026-05-13 17:44:14,769 Config: {'run_id': 'JT_mixed', 'run_type': 'multi', 'supercell_params': {'rm_host': False, 'c13_conc': 0, 'p1_conc': 0.0004, 'p1_mode': 'b', 'size': 500, 'interactions': {'host_hf': False, 'host_quad': False}, 'verbose': True, 'jt_axis': 'mixed'}, 'simulator_params': {'order': 2, 'r_bath': 160, 'r_dipole': 6, 'verbose': True, 'park_2e2n': False}, 'experiment_params': {'ensemble_size': 5, 'avg_method': 'mean', 'magnetic_field': [0.0, 0.0, 500.0], 'pulse_id': 1, 'time_space': array([0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009,
+       0.01 , 0.011, 0.012, 0.013, 0.014, 0.015, 0.016, 0.017, 0.018,
+       0.019, 0.02 , 0.021, 0.022, 0.023, 0.024, 0.025, 0.026, 0.027,
+       0.028, 0.029, 0.03 , 0.031, 0.032, 0.033, 0.034, 0.035, 0.036,
+       0.037, 0.038, 0.039, 0.04 , 0.041, 0.042, 0.043, 0.044, 0.045,
+       0.046, 0.047, 0.048, 0.049, 0.05 , 0.051, 0.052, 0.053, 0.054,
+       0.055, 0.056, 0.057, 0.058, 0.059, 0.06 , 0.061, 0.062, 0.063,
+       0.064, 0.065, 0.066, 0.067, 0.068, 0.069, 0.07 , 0.071, 0.072,
+       0.073, 0.074, 0.075, 0.076, 0.077, 0.078, 0.079, 0.08 , 0.081,
+       0.082, 0.083, 0.084, 0.085, 0.086, 0.087, 0.088, 0.089, 0.09 ,
+       0.091, 0.092, 0.093, 0.094, 0.095, 0.096, 0.097, 0.098, 0.099,
+       0.1  ]), 'log_time': False, 'cce_type': 'gcce', 'parallel': False, 'n_bath_states': -1}, 'multi_params': {'sub_run_ids': ['JT_mixed', 'JT_A', 'HF_off'], 'change_params': [{'supercell_params,jt_axis': 'mixed'}, {'supercell_params,jt_axis': 'A'}, {'supercell_params,interactions': {'host_hf': False, 'host_quad': False, 'p1_hf': False}}]}, 'grid_params': {'param1': ['supercell_params', 'jt_axis'], 'param2': ['simulator_params', 'order'], 'param1_values': ['mixed', 'A'], 'param2_values': [2]}, 'cpmg_params': {'T_max': 0.5, 'start': 0.0005, 'delta': -1, 'n_list': [1, 4, 12, 64, 128], 'logspace': 51}, 'base_out_dir': 'runs/2026.5.13_test', 'base_data_dir': 'data/2026.5.13_test', 'seed_id': '2026.5.13_test'}
+2026-05-13 17:44:14,770 Starting ensemble experiment 1
+2026-05-13 17:44:14,773 Ensemble 1 starting now:
+2026-05-13 17:44:14,774 Generating supercell: size=500, p1_conc=0.0004, seed=347771624
+2026-05-13 17:44:15,115 Built supercell: N_atoms=17941, N_P1=8970, N_13C=0
+
+2026-05-13 17:44:15,422 [ens num 1] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 160.0
+r_dipole: 6.0
+order: 2
+
+Bath consists of 2471 spins.
+
+Clusters include:
+2471  clusters of order 1.
+132  clusters of order 2.
+
+
+2026-05-13 17:44:36,542 Added 1235 missing colocated P1 e-14N order-2 clusters. order-2 count: 132 -> 1367
+2026-05-13 17:44:40,476 Rank 0 finished ensemble experiment 1 in 25.71 s
+2026-05-13 17:44:40,477 Starting ensemble experiment 2
+2026-05-13 17:44:40,477 Ensemble 2 starting now:
+2026-05-13 17:44:40,477 Generating supercell: size=500, p1_conc=0.0004, seed=347771625
+2026-05-13 17:44:40,757 Built supercell: N_atoms=17941, N_P1=8970, N_13C=0
+
+2026-05-13 17:44:41,083 [ens num 2] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 160.0
+r_dipole: 6.0
+order: 2
+
+Bath consists of 2481 spins.
+
+Clusters include:
+2481  clusters of order 1.
+160  clusters of order 2.
+
+
+2026-05-13 17:45:02,064 Added 1240 missing colocated P1 e-14N order-2 clusters. order-2 count: 160 -> 1400
+2026-05-13 17:45:05,672 Rank 0 finished ensemble experiment 2 in 25.20 s
+2026-05-13 17:45:05,672 Starting ensemble experiment 3
+2026-05-13 17:45:05,673 Ensemble 3 starting now:
+2026-05-13 17:45:05,673 Generating supercell: size=500, p1_conc=0.0004, seed=347771626
+2026-05-13 17:45:05,962 Built supercell: N_atoms=17941, N_P1=8970, N_13C=0
+
+2026-05-13 17:45:06,238 [ens num 3] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 160.0
+r_dipole: 6.0
+order: 2
+
+Bath consists of 2277 spins.
+
+Clusters include:
+2277  clusters of order 1.
+174  clusters of order 2.
+
+
+2026-05-13 17:45:23,927 Added 1138 missing colocated P1 e-14N order-2 clusters. order-2 count: 174 -> 1312
+2026-05-13 17:45:27,146 Rank 0 finished ensemble experiment 3 in 21.47 s
+2026-05-13 17:45:27,146 Starting ensemble experiment 4
+2026-05-13 17:45:27,147 Ensemble 4 starting now:
+2026-05-13 17:45:27,147 Generating supercell: size=500, p1_conc=0.0004, seed=347771627
+2026-05-13 17:45:27,438 Built supercell: N_atoms=17941, N_P1=8970, N_13C=0
+
+2026-05-13 17:45:27,755 [ens num 4] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 160.0
+r_dipole: 6.0
+order: 2
+
+Bath consists of 2431 spins.
+
+Clusters include:
+2431  clusters of order 1.
+120  clusters of order 2.
+
+
+2026-05-13 17:45:47,978 Added 1215 missing colocated P1 e-14N order-2 clusters. order-2 count: 120 -> 1335
+2026-05-13 17:45:51,202 Rank 0 finished ensemble experiment 4 in 24.06 s
+2026-05-13 17:45:51,202 Starting ensemble experiment 5
+2026-05-13 17:45:51,203 Ensemble 5 starting now:
+2026-05-13 17:45:51,203 Generating supercell: size=500, p1_conc=0.0004, seed=347771628
+2026-05-13 17:45:51,497 Built supercell: N_atoms=17941, N_P1=8970, N_13C=0
+
+2026-05-13 17:45:51,827 [ens num 5] Built simulator:
+Simulator for center array of size 1.
+magnetic field:
+array([0., 0., 0.])
+
+Parameters of cluster expansion:
+r_bath: 160.0
+r_dipole: 6.0
+order: 2
+
+Bath consists of 2387 spins.
+
+Clusters include:
+2387  clusters of order 1.
+160  clusters of order 2.
+
+
+2026-05-13 17:46:11,399 Added 1193 missing colocated P1 e-14N order-2 clusters. order-2 count: 160 -> 1353
+2026-05-13 17:46:14,777 Rank 0 finished ensemble experiment 5 in 23.58 s
+2026-05-13 17:46:14,778 Rank 0 finished full ensemble run JT_mixed in 120.01 s
+2026-05-13 17:46:14,780 Number of unstable points was 4
+2026-05-13 17:46:14,782 Wrote final averaged CSV to data/2026.5.13_test/JT_mixed/averaged.csv
+2026-05-13 17:46:14,782 Wrote final averaged modulus CSV to data/2026.5.13_test/JT_mixed/averaged_mag.csv
+2026-05-13 17:46:14,783 Wrote final averaged phase CSV to data/2026.5.13_test/JT_mixed/averaged_phase.csv

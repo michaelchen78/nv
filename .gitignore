@@ -216,6 +216,8 @@ archive-13may2026/
 /runs/*
 !/runs/2026.5.15_test/
 !/runs/2026.5.15_test/**
+!/runs/2026.5.13_test/
+!/runs/2026.5.13_test/**
 
 # macOS / IDE
 .DS_Store
