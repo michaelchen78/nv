@@ -1,8 +1,10 @@
+import csv
 from pathlib import Path
 import numpy as np
 from matplotlib import pyplot as plt
-from scipy.optimize import curve_fit
+from scipy.optimize import curve_fit, nnls
 from matplotlib.lines import Line2D
+from mpl_toolkits.mplot3d import Axes3D
 import re
 from scipy.interpolate import PchipInterpolator
 from scipy.signal import hilbert
@@ -13,9 +15,35 @@ import matplotlib.tri as mtri
 import warnings
 from scipy.signal import find_peaks, peak_prominences, peak_widths, savgol_filter
 from scipy.optimize import least_squares
+from collections import Counter
+from functools import lru_cache
+from time import perf_counter
+from scipy.integrate import quad
+from sympy import false
 
 
 # +++++++++++++++++++++++ Basic preprocessing and utility methods +++++++++++++++++++++++ #
+def clean_populations(coherence):
+    """
+    reduce impact of unstable points
+    """
+
+    n_removed = 0
+
+    y = np.asarray(coherence, dtype=np.complex128)
+
+    if y.ndim not in (1, 2):
+        raise ValueError(f"Expected 1D or 2D coherence array got shape {y.shape}")
+
+    # change large-magnitude outliers to 1
+    y_clean = y.copy()
+    bad_mask = [False]*len(y_clean) # np.abs(y_clean) > 100.0  # THIS IS HOW OUTLIERS ARE DEALT WITH
+    n_removed += int(np.count_nonzero(bad_mask))
+    y_clean[bad_mask] = np.complex128(0.0)
+
+    return y_clean, n_removed
+
+
 def clean_coherence(coherence):
     """
     reduce impact of unstable points
@@ -68,6 +96,10 @@ def average_ensemble(coherence, avg_method):
 
 def stretch(t, T2, p):
     return np.exp(- (t / T2) ** p)
+
+
+def exp(t, R):
+    return np.exp(- R * t)
 
 
 def fourier(csv_path, num_labeled_peaks=8, min_peak_height_ratio=0.1):
@@ -168,7 +200,7 @@ def fourier(csv_path, num_labeled_peaks=8, min_peak_height_ratio=0.1):
 
         for idx in peak_indices:
             plt.annotate(
-                f"{freqs[idx]:.4g} kHz",
+                f"{freqs[idx]:.12e} kHz",
                 xy=(freqs[idx], fft_mag[idx]),
                 xytext=(0, 5),
                 textcoords="offset points",
@@ -186,6 +218,25 @@ def fourier(csv_path, num_labeled_peaks=8, min_peak_height_ratio=0.1):
 
 
 # +++++++++++++++++++++++ Fitting and plotting +++++++++++++++++++++++ #
+def fit_exp(y, t, t_cutoff=None):
+    """
+    Fit y to exp(-R t).
+    Returns R.
+    """
+    t = np.asarray(t, dtype=float)
+    y = np.asarray(y, dtype=float)
+
+    if t_cutoff is not None:
+        mask = t <= t_cutoff
+        t, y = t[mask], y[mask]
+
+    decay_guess = 1 / t[np.argmin(np.abs(y - np.exp(-1)))]
+
+    decay_constant, = curve_fit(exp, t, y, p0=[decay_guess], bounds=(0, np.inf), maxfev=10000, )[0]
+
+    return decay_constant
+
+
 def fit_stretch(y, t, t_cutoff=None):
     """
     Fit to exp(-(t/T2)^p).
@@ -505,9 +556,11 @@ def fit_stretch_linear(y, t, t_cutoff=None):
     return t2, p
 
 
-def plot_trajectory(ax, trajectories, scatter=True, x_label="Time (ms)", y_label="L(t)", plot_text=None):
+def plot_trajectory(ax, trajectories, scatter=True, x_label="Time (ms)", y_label="L(t)", plot_text=None,
+                    just_scatter=False):
     """
     Draws a trajectory on the given axes. May plot multiple trajectories.
+    :param just_scatter:
     :param ax: the axes to plot on
     :param trajectories: dictionary where keys are labels and values are 2D arrays 1st column time, 2nd column L(t).
     :param scatter:
@@ -520,9 +573,13 @@ def plot_trajectory(ax, trajectories, scatter=True, x_label="Time (ms)", y_label
     for label, trajectory in trajectories.items():
         time_space = trajectory[:,0]
         coherence = trajectory[:,1]
-        line, = ax.plot(time_space, coherence, label=label)
-        if scatter:
-            ax.scatter(time_space, coherence, marker="x", color=line.get_color(), s=30)
+        if just_scatter:
+            ax.scatter(time_space, coherence, marker="x", s=30)
+            # ax.plot(time_space, [1] * len(time_space), label="1", color="r", alpha=0.3)
+        else:
+            line, = ax.plot(time_space, coherence, label=label)
+            if scatter:
+                ax.scatter(time_space, coherence, marker="x", s=30, color=line.get_color())
 
     ax.set_xlabel(x_label)
     ax.set_ylabel(y_label)
@@ -610,20 +667,946 @@ def fit_plot(run_id, csv_name="averaged_mag.csv", data_dir="./data", plot_name="
     plt.close(fig)
 
 
+# +++++++++++++++++++++++ custom experiments +++++++++++++++++++++++ #
+def get_FFs(base_sequences_ms, T_ms):
+    """
+    Build Fourier-transform functions directly from pulse-time base sequences.
+
+    Returns:
+        list of length p, at index p the object is:
+        FF(omega) = ∫_0^T dt exp(+ i omega t) y_p(t)
+    where y_p(t) starts at +1 and flips sign at every pulse.
+
+    Units:
+        base_sequences_ms and T_ms are in ms
+        omega must be in rad/ms
+    """
+
+    FFs = []
+
+    for idx, base_seq in enumerate(base_sequences_ms):
+        # check base sequences are formatted correctly
+        pulse_times = np.asarray(base_seq, dtype=float)
+        if np.any((pulse_times <= 0.0) | (pulse_times > T_ms)):
+            raise Exception(f"Base sequence {idx} has pulse times outside (0, T_ms]: "
+                            f"T_ms={T_ms}, pulse_times={pulse_times}")
+        if np.any(np.diff(pulse_times) <= 0.0):
+            raise Exception(f"Base sequence {idx} is not strictly increasing: {pulse_times}")
+        # prevent double counting, note end pulses dont affect the filter function
+        new_pulse_times = pulse_times[pulse_times < T_ms]
+
+        # edges is time boundaries of intervals where y(t)mis constant
+        edges = np.concatenate(([0.0], new_pulse_times, [T_ms]))
+        # value of y(t) on each interval. len(edges) always = len(signs) + 1
+        signs = (-1.0) ** np.arange(len(edges) - 1)
+
+        def F(omega, edges=edges, signs=signs):
+            scalar_input = np.ndim(omega) == 0
+            omega_arr = np.atleast_1d(np.asarray(omega, dtype=float))
+
+            out = np.zeros(omega_arr.shape, dtype=complex)
+
+            # handles omega = nonzero / zero separately
+            nonzero = np.abs(omega_arr) > 1.0e-14
+            # omega nonzero case
+            if np.any(nonzero):
+                w = omega_arr[nonzero]
+
+                exp_edges = np.exp(1j * w[:, None] * edges[None, :])
+
+                interval_integrals = (
+                    exp_edges[:, 1:] - exp_edges[:, :-1]
+                ) / (1j * w[:, None])
+
+                out[nonzero] = interval_integrals @ signs
+            # omega zero case
+            if np.any(~nonzero):
+                durations = edges[1:] - edges[:-1]
+                out[~nonzero] = np.sum(signs * durations)
+
+            # return
+            if scalar_input:
+                return out[0]
+            return out
+
+        FFs.append(F)
+
+    return FFs
+
+
+def norris_bispectrum(run_id, mu_B=0, data_dir="./data", csv_name="raw.csv"):
+    """
+    Norris 2016 post-processing --> MLE version
+    :param mu_B: MUST BE IN RAD/MS
+    :param num_harmonics:
+    :param run_id:
+    :param data_dir:
+    :param csv_name:
+    :return:
+    """
+
+    '''get params'''
+    config_path = Path("./config") / (run_id + ".yaml")
+    import yaml
+    with open(config_path) as file:
+        config = yaml.safe_load(file)
+    norris_params = config["norris_params"]
+    P = norris_params["P"]  # number of base sequences
+    T = norris_params['T']  # duration of base sequences in ms
+    delta = norris_params['delta']  # T = q*delta
+    M = norris_params['M']  # number of cycles of each base sequence
+    tau = norris_params['tau']  # minimum spacing between pulses
+    min_pulses = norris_params.get('min_pulses', None)
+
+    '''get data'''
+    # find csv files for the various sequences indexed by p
+    data_dir_path = Path(data_dir) / run_id
+    csv_paths = sorted(data_dir_path.glob(f"*/{csv_name}"), key=lambda p: int(p.parent.name.rsplit("-", 1)[1]))
+    if len(csv_paths) == 0:
+        raise Exception(f"No CSVs found under {data_dir_path} matching */{csv_name}")
+    csv_p_idxs = [int(p.parent.name.rsplit("-", 1)[1]) for p in csv_paths]
+    if csv_p_idxs != list(range(P)):
+        raise Exception(f"Expected CSV subruns p=0 through p={P - 1}, but found {csv_p_idxs}")
+    if csv_p_idxs[-1] != P - 1:
+        raise Exception(f"FID should be last with p={P - 1}, but last CSV index is p={csv_p_idxs[-1]}")
+
+    # each raw.csv contains a single row with [ensemble_size] columns
+    # coherences is a 2D array: each row is an index p and the # of columns is ensemble size
+    sample_size = config["experiment_params"]["ensemble_size"]
+    coherences = np.zeros(shape=(P, sample_size), dtype=np.complex128)
+    for csv_path in csv_paths:
+        data = np.loadtxt(csv_path, delimiter=",", ndmin=2, dtype=np.complex128)
+        if data.shape[0] != 1:
+            raise Exception(f"{csv_path} should have exactly one data row, found {data.shape[0]}")
+        if data.shape[1] != sample_size:
+            raise Exception(f"{csv_path} should have exactly {sample_size} columns, found {data.shape[1]}")
+        p_idx = int(csv_path.parent.name.rsplit("-", 1)[1])
+        coherences[p_idx, :] = data[0, :]
+
+    '''get statistics'''
+    # ensemble means
+    a = coherences.real
+    b = coherences.imag
+    b = b  # no conjugate for Norris's sigma+ because pycce gcce returns sigma+
+    a_bar = np.mean(a, axis=1)
+    b_bar = np.mean(b, axis=1)
+    da = a - a_bar[:, None]
+    db = b - b_bar[:, None]
+
+    # variance and covariance of the ensemble mean
+    var_a_bar = np.sum(da * da, axis=1) / (sample_size * (sample_size - 1))
+    var_b_bar = np.sum(db * db, axis=1) / (sample_size * (sample_size - 1))
+    cov_ab_bar = np.sum(da * db, axis=1) / (sample_size * (sample_size - 1))
+
+    # Sung SI eq 18 analog
+    phis = np.unwrap(np.angle(a_bar + 1j*b_bar))
+    var_phi = ( a_bar**2 * var_a_bar + b_bar**2 * var_b_bar
+                + 2.0 * a_bar * b_bar * cov_ab_bar ) / (a_bar**2 + b_bar**2)**2
+
+    '''get filter functions'''
+    # get base sequences from csv
+    base_sequences_ms: list = [None] * P
+    with open(data_dir_path / "base_sequences.csv", "r", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            sequence_idx = int(row["sequence_idx"])
+            pulse_idx = int(row["pulse_idx"])
+            time_ms = float(row["time_ms"])
+            if base_sequences_ms[sequence_idx] is None:
+                base_sequences_ms[sequence_idx] = []
+            # FID sentinel row: sequence_idx=P-1, pulse_idx=-1, time_ms=nan
+            if pulse_idx == -1:
+                if sequence_idx != P - 1:
+                    raise Exception(f"FID row should have sequence_idx=P-1={P - 1}, got {sequence_idx}")
+                base_sequences_ms[sequence_idx] = []
+                continue
+            base_sequences_ms[sequence_idx].append((pulse_idx, time_ms))
+    for sequence_idx in range(P):
+        if base_sequences_ms[sequence_idx] is None:
+            raise Exception(f"Missing sequence_idx={sequence_idx} in sequences.csv")
+        if sequence_idx == P - 1:
+            base_sequences_ms[sequence_idx] = np.array([], dtype=float)
+        else:
+            sequence = sorted(base_sequences_ms[sequence_idx], key=lambda x: x[0])
+            # additional check
+            pulse_idxs = [pulse_idx for pulse_idx, _ in sequence]
+            if pulse_idxs != list(range(len(pulse_idxs))):
+                raise Exception(f"Bad pulse_idx sequence for sequence {sequence_idx}: {pulse_idxs}")
+            base_sequences_ms[sequence_idx] = np.array([time_ms for _, time_ms in sequence], dtype=float)
+    if len(base_sequences_ms[-1]) != 0:
+        raise Exception(f"FID should be last at sequence_idx=P-1={P - 1}")
+    print("\nBASE SEQUENCES:", base_sequences_ms, "\n\n")
+    # subtract noise-mean phase using full executed sequences
+    full_sequences_ms = []
+    F0_full = np.zeros(P, dtype=float)
+    for p, base_seq in enumerate(base_sequences_ms):
+        M_eff = 1 if p == P - 1 else M  # FID is last and has M=1
+        total_time_ms = T * M_eff
+        if len(base_seq) == 0:
+            full_seq = np.array([], dtype=float)
+        else:
+            full_seq = np.concatenate([
+                np.asarray(base_seq, dtype=float) + m * T
+                for m in range(M_eff)
+            ])
+        full_sequences_ms.append(full_seq)
+        # F(0) over the full executed sequence
+        pulse_times = full_seq[(full_seq > 0.0) & (full_seq < total_time_ms)]
+        edges = np.concatenate(([0.0], pulse_times, [total_time_ms]))
+        signs = (-1.0) ** np.arange(len(edges) - 1)
+        F0_full[p] = np.sum(signs * np.diff(edges))
+    total_phis = phis.copy()
+    mean_phase = mu_B * F0_full
+    phis = total_phis - mean_phase
+    print("\nTOTAL PHASES ϕ:")
+    print(total_phis)
+    print("\nFULL-SEQUENCE F(0):")
+    print(F0_full)
+    print("\nMEAN PHASE μ_B F(0):")
+    print(mean_phase)
+    print("\nNON-GAUSSIAN PHASES φ = ϕ - μ_B F(0):")
+    print(phis)
+    # get base FFs
+    filter_functions = get_FFs(base_sequences_ms, T)
+    if len(filter_functions) != len(coherences):
+        raise Exception(f"Number of filter functions ({len(filter_functions)}) does not match "
+                        f"number of coherences ({len(coherences)})")
+
+    '''set up Sung Eq. 7 linear system'''
+    # make k omega_h
+    omega_h = 2 * np.pi / T  # rad/ms
+    # Sung test set
+    k_pairs = [
+        (0, 0),
+        (1, 0),
+        (2, 0),
+        (1, 1),
+        (3, 0),
+        (2, 1),
+        (4, 0),
+        (3, 1),
+        (2, 2),
+        (4, 1),
+        (3, 2),
+    ]
+    N = len(k_pairs)
+    def bispectrum_multiplicity(k1, k2):
+        if k1 == 0 and k2 == 0:
+            return 1
+        if k2 == 0 or k1 == k2:
+            return 6
+        return 12
+
+    # system of linear equations
+    matrix = np.zeros((P, N), dtype=float)
+    for p, F_p in enumerate(filter_functions):
+        M_eff = 1 if p == P - 1 else M  # FID is last
+        for n, (k1, k2) in enumerate(k_pairs):
+            w1 = k1 * omega_h
+            w2 = k2 * omega_h
+            G = F_p(w1) * F_p(w2) * F_p(-(w1 + w2))
+            m = bispectrum_multiplicity(k1, k2)
+            matrix[p, n] = -(M_eff / (6.0 * T ** 2)) * m * np.real(G)
+    print("\nK_PAIRS:")
+    print(k_pairs)
+    print("\nBISPECTRUM MATRIX A:")
+    print(matrix)
+
+    '''solve linear system'''
+    sigma_phi = np.sqrt(np.maximum(var_phi, 1e-30))
+    matrix_w = matrix / sigma_phi[:, None]
+    phi_w = phis / sigma_phi
+    S2_est, residuals, rank, singular_values = np.linalg.lstsq(matrix_w, phi_w, rcond=None)
+    print("\nS2_EST_WEIGHTED_MLE:")
+    print(S2_est)
+    print("\nLSTSQ RESIDUALS:")
+    print(residuals)
+    print("\nRANK:")
+    print(rank)
+    print("\nSINGULAR VALUES:")
+    print(singular_values)
+    print("\nCONDITION NUMBER:")
+    print(singular_values[0] / singular_values[-1])
+    print("\nSTANDARDIZED RESIDUALS:")
+    print((matrix @ S2_est - phis) / sigma_phi)
+    if rank < N:
+        raise Exception(f"Rank deficient: rank={rank}, unknowns={N}")
+
+    '''Plot reconstructed bispectrum'''
+    def bispectrum_orbit(k1, k2):
+        pts = [
+            (k1, k2),
+            (k2, k1),
+            (-k2, k1 + k2),
+            (-k1, k1 + k2),
+            (-(k1 + k2), k1),
+            (-(k1 + k2), k2),
+            (-k1, -k2),
+            (-k2, -k1),
+            (k2, -(k1 + k2)),
+            (k1, -(k1 + k2)),
+            (k1 + k2, -k1),
+            (k1 + k2, -k2),
+        ]
+        # remove duplicates (important on boundaries like (w,0), (w,w), (0,0))
+        return list(dict.fromkeys(pts))
+    S2_plot = S2_est * 1.0e3  # convert to 1/s
+    full_vals = {}  # extend principal-domain values to the full plane
+    for (k1, k2), val in zip(k_pairs, S2_plot):
+        for pt in bispectrum_orbit(k1, k2):
+            full_vals[pt] = val
+    # build rectangular harmonic grid
+    all_k1 = [pt[0] for pt in full_vals]
+    all_k2 = [pt[1] for pt in full_vals]
+    k1_min, k1_max = min(all_k1), max(all_k1)
+    k2_min, k2_max = min(all_k2), max(all_k2)
+    k1_grid = np.arange(k1_min, k1_max + 1)
+    k2_grid = np.arange(k2_min, k2_max + 1)
+    K1, K2 = np.meshgrid(k1_grid, k2_grid)
+    Z = np.zeros_like(K1, dtype=float)
+    for i in range(K1.shape[0]):
+        for j in range(K1.shape[1]):
+            Z[i, j] = full_vals.get((K1[i, j], K2[i, j]), 0.0)
+
+    # convert harmonic indices to omega/2pi in MHz
+    F1 = ((omega_h * K1) / (2 * np.pi)) * 1.0e-3
+    F2 = ((omega_h * K2) / (2 * np.pi)) * 1.0e-3
+
+    fig = plt.figure(figsize=(7, 6))
+    ax = fig.add_subplot(111, projection='3d')
+    surf = ax.plot_surface(
+        F1, F2, Z,
+        cmap="viridis",
+        edgecolor="k",
+        linewidth=0.35,
+        antialiased=True
+    )
+    ax.set_xlabel(r'$\omega_1 / 2\pi$ (MHz)')
+    ax.set_ylabel(r'$\omega_2 / 2\pi$ (MHz)')
+    ax.set_zlabel(r'$S_2(\omega_1,\omega_2)$ $(1/s)$')
+    ax.set_title(r'Reconstructed bispectrum')
+    ax.view_init(elev=28, azim=-58)
+    fig.savefig(data_dir_path / "S2_bispectrum_3d.png", dpi=300)
+    plt.close(fig)
+
+
+def norris_psd_mle(run_id, num_harmonics, data_dir="./data", csv_name="raw.csv"):
+    """
+    Norris 2016 post-processing --> MLE version
+    :param num_harmonics:
+    :param run_id:
+    :param data_dir:
+    :param csv_name:
+    :return:
+    """
+
+    '''get params'''
+    config_path = Path("./config") / (run_id + ".yaml")
+    import yaml
+    with open(config_path) as file:
+        config = yaml.safe_load(file)
+    norris_params = config["norris_params"]
+    P = norris_params["P"]  # number of base sequences
+    T = norris_params['T']  # duration of base sequences in ms
+    delta = norris_params['delta']  # T = q*delta
+    M = norris_params['M']  # number of cycles of each base sequence
+    tau = norris_params['tau']  # minimum spacing between pulses
+    min_pulses = norris_params.get('min_pulses', None)
+
+    '''get data'''
+    # find csv files for the various sequences indexed by p
+    data_dir_path = Path(data_dir) / run_id
+    csv_paths = sorted(data_dir_path.glob(f"*/{csv_name}"), key=lambda p: int(p.parent.name.rsplit("-", 1)[1]))
+    if len(csv_paths) == 0:
+        raise Exception(f"No CSVs found under {data_dir_path} matching */{csv_name}")
+    csv_p_idxs = [int(p.parent.name.rsplit("-", 1)[1]) for p in csv_paths]
+    if csv_p_idxs != list(range(P)):
+        raise Exception(f"Expected CSV subruns p=0 through p={P - 1}, but found {csv_p_idxs}")
+    if csv_p_idxs[-1] != P - 1:
+        raise Exception(f"FID should be last with p={P - 1}, but last CSV index is p={csv_p_idxs[-1]}")
+
+    # each raw.csv contains a single row with [ensemble_size] columns
+    # coherences is a 2D array: each row is an index p and the # of columns is ensemble size
+    sample_size = config["experiment_params"]["ensemble_size"]
+    coherences = np.zeros(shape=(P, sample_size), dtype=np.complex128)
+    for csv_path in csv_paths:
+        data = np.loadtxt(csv_path, delimiter=",", ndmin=2, dtype=np.complex128)
+        if data.shape[0] != 1:
+            raise Exception(f"{csv_path} should have exactly one data row, found {data.shape[0]}")
+        if data.shape[1] != sample_size:
+            raise Exception(f"{csv_path} should have exactly {sample_size} columns, found {data.shape[1]}")
+        p_idx = int(csv_path.parent.name.rsplit("-", 1)[1])
+        coherences[p_idx, :] = data[0, :]
+
+    # '''get statistics'''
+    # # ensemble means
+    # a = coherences.real
+    # b = coherences.imag
+    # b = -b  # because we take the conjugate for Norris's \sigma_+
+    # a_bar = np.mean(a, axis=1)
+    # b_bar = np.mean(b, axis=1)
+    # da = a - a_bar[:, None]
+    # db = b - b_bar[:, None]
+    #
+    # # variance and covariance of the ensemble mean
+    # var_a_bar = np.sum(da * da, axis=1) / (sample_size * (sample_size - 1))
+    # var_b_bar = np.sum(db * db, axis=1) / (sample_size * (sample_size - 1))
+    # cov_ab_bar = np.sum(da * db, axis=1) / (sample_size * (sample_size - 1))
+    #
+    # # Sung SI eq 18 analog
+    # chis = -0.5 * np.log(a_bar ** 2 + b_bar ** 2)
+    # var_chi = ( a_bar**2 * var_a_bar + b_bar**2 * var_b_bar
+    #             + 2.0 * a_bar * b_bar * cov_ab_bar ) / (a_bar**2 + b_bar**2)**2
+
+    '''get statistics'''
+    # For PSD, compute chi per ensemble member first.
+    # This avoids artificial decay from phase cancellation between different supercells.
+    abs_L = np.abs(coherences)
+
+    if np.any(~np.isfinite(abs_L)) or np.any(abs_L <= 0.0):
+        raise Exception(f"Bad coherence magnitudes in raw data: min={np.nanmin(abs_L)}, max={np.nanmax(abs_L)}")
+
+    if np.any(abs_L > 1.0 + 1e-12):
+        raise Exception(f"Coherence magnitudes exceed 1 after cleaning: max={np.max(abs_L)}")
+
+    chi_samples = -np.log(abs_L)
+
+    chis = np.mean(chi_samples, axis=1)
+    var_chi = np.var(chi_samples, axis=1, ddof=1) / sample_size
+
+    # diagnostics: compare against old complex-mean chi
+    L_bar = np.mean(coherences, axis=1)
+    chis_complex_mean = -np.log(np.abs(L_bar))
+
+    print("\nCHIS FROM MEAN OF PER-ENSEMBLE CHI:")
+    print(chis)
+    print("\nCHIS FROM -log(abs(mean complex L)) OLD METHOD:")
+    print(chis_complex_mean)
+    print("\nDIFFERENCE, OLD - NEW:")
+    print(chis_complex_mean - chis)
+
+    '''get filter functions'''
+    # get base sequences from csv
+    base_sequences_ms: list = [None] * P
+    with open(data_dir_path / "base_sequences.csv", "r", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            sequence_idx = int(row["sequence_idx"])
+            pulse_idx = int(row["pulse_idx"])
+            time_ms = float(row["time_ms"])
+            if base_sequences_ms[sequence_idx] is None:
+                base_sequences_ms[sequence_idx] = []
+            # FID sentinel row: sequence_idx=P-1, pulse_idx=-1, time_ms=nan
+            if pulse_idx == -1:
+                if sequence_idx != P - 1:
+                    raise Exception(f"FID row should have sequence_idx=P-1={P - 1}, got {sequence_idx}")
+                base_sequences_ms[sequence_idx] = []
+                continue
+            base_sequences_ms[sequence_idx].append((pulse_idx, time_ms))
+    for sequence_idx in range(P):
+        if base_sequences_ms[sequence_idx] is None:
+            raise Exception(f"Missing sequence_idx={sequence_idx} in sequences.csv")
+        if sequence_idx == P - 1:
+            base_sequences_ms[sequence_idx] = np.array([], dtype=float)
+        else:
+            sequence = sorted(base_sequences_ms[sequence_idx], key=lambda x: x[0])
+            # additional check
+            pulse_idxs = [pulse_idx for pulse_idx, _ in sequence]
+            if pulse_idxs != list(range(len(pulse_idxs))):
+                raise Exception(f"Bad pulse_idx sequence for sequence {sequence_idx}: {pulse_idxs}")
+            base_sequences_ms[sequence_idx] = np.array([time_ms for _, time_ms in sequence], dtype=float)
+    if len(base_sequences_ms[-1]) != 0:
+        raise Exception(f"FID should be last at sequence_idx=P-1={P - 1}")
+    print("\nBASE SEQUENCES:", base_sequences_ms, "\n\n")
+    # get FFs
+    filter_functions = get_FFs(base_sequences_ms, T)
+    if len(filter_functions) != len(coherences):
+        raise Exception(f"Number of filter functions ({len(filter_functions)}) does not match "
+                        f"number of coherences ({len(coherences)})")
+
+    '''set up Sung Eq. 7 linear system'''
+    # make k omega_h
+    omega_h = 2 * np.pi / T  # rad/ms
+    harmonics = harmonics = np.asarray(np.arange(num_harmonics), dtype=int)  # np.asarray([5, 6, 7, 8], dtype=int)
+
+    # system of linear equations
+    matrix = np.zeros((P, len(harmonics)), dtype=float)
+    for p, F_p in enumerate(filter_functions):
+        M_eff = 1 if p == P - 1 else M  # FID is last
+        for k, harmonic_k in enumerate(harmonics):
+            zero_factor = (2.0 - int(harmonic_k == 0)) / 2.0
+            matrix[p, k] = (M_eff / T) * zero_factor * np.abs(F_p(harmonic_k * omega_h))**2
+    print("\nHARMONIC OMEGAS rad/ms:")
+    print(harmonics * omega_h)
+    print("\nEQ 7 MATRIX:")
+    print(matrix)
+
+    '''solve linear system'''
+    # Diagnostic only: unconstrained least squares
+    S_lstsq, residuals, rank, singular_values = np.linalg.lstsq(matrix, chis, rcond=None)
+    print("\nS_LSTSQ:")
+    print(S_lstsq)
+    print("\nLSTSQ RESIDUALS:")
+    print(residuals)
+    print("\nRANK:")
+    print(rank)
+    print("\nSINGULAR VALUES:")
+    print(singular_values)
+    print("\nLSTSQ RESIDUAL NORM:")
+    print(np.linalg.norm(matrix @ S_lstsq - chis))
+    cond = singular_values[0] / singular_values[-1]
+    print("\nCONDITION NUMBER:", cond)
+    if rank < len(harmonics):
+        raise Exception(f"Rank deficient: rank={rank}, unknowns={len(harmonics)}")
+
+    # Actual physical estimate: nonnegative weighted least squares
+    sigma_chi = np.sqrt(np.maximum(var_chi, 1e-30))
+    sigma_floor = 0.10 * np.median(sigma_chi[np.isfinite(sigma_chi)])
+    sigma_chi = np.maximum(sigma_chi, sigma_floor)
+    # matrix_w = matrix / sigma_chi[:, None]
+    # chis_w = chis / sigma_chi
+    # S_est, residual_nnls = nnls(matrix_w, chis_w)
+
+    fit_mask = np.ones(P, dtype=bool)
+    fit_mask[P - 1] = False  # drop FID row from PSD fit
+    matrix_fit = matrix[fit_mask, :]
+    chis_fit = chis[fit_mask]
+    sigma_fit = sigma_chi[fit_mask]
+    matrix_w = matrix_fit / sigma_fit[:, None]
+    chis_w = chis_fit / sigma_fit
+    S_est, residual_nnls = nnls(matrix_w, chis_w)
+    print("\nSTANDARDIZED RESIDUALS, NON-FID ONLY:")
+    print((matrix_fit @ S_est - chis_fit) / sigma_fit)
+
+    print("\nFID STANDARDIZED RESIDUAL, DIAGNOSTIC ONLY:")
+    print((matrix[P - 1, :] @ S_est - chis[P - 1]) / sigma_chi[P - 1])
+
+    print("\nS_WEIGHTED_NNLS / S_MLE:")
+    print(S_est)
+    print("\nWEIGHTED NNLS RESIDUAL:")
+    print(residual_nnls)
+    print("\nWEIGHTED NNLS RESIDUAL NORM:")
+    print(np.linalg.norm(matrix_w @ S_est - chis_w))
+    print("\nUNWEIGHTED RESIDUAL NORM OF WEIGHTED SOLUTION:")
+    print(np.linalg.norm(matrix @ S_est - chis))
+    print("\nCHIS:")
+    print(chis)
+    print("\nVAR_CHI:")
+    print(var_chi)
+    print("\nSIGMA_CHI:")
+    print(sigma_chi)
+    print("\nSTANDARDIZED RESIDUALS:")
+    print((matrix @ S_est - chis) / sigma_chi)
+    print("\nUNWEIGHTED NNLS COMPARISON:")
+    S_unweighted_nnls, residual_unweighted_nnls = nnls(matrix, chis)
+    print(S_unweighted_nnls)
+    print("unweighted nnls residual:", residual_unweighted_nnls)
+    print("weighted objective for unweighted nnls:",
+          np.linalg.norm((matrix @ S_unweighted_nnls - chis) / sigma_chi))
+
+    '''Plot reconstructed S(omega) versus omega / 2pi in MHz'''
+    omega_plotting = ((omega_h*harmonics) / (2 * np.pi)) * 1.0e-3
+    fig, ax = plt.subplots(figsize=(8, 5))
+    S_est_per_s = S_est * 1.0e+3
+    ax.plot(omega_plotting, S_est_per_s, marker="o", linewidth=1.5)
+    ax.axhline(0.0, linestyle="--", linewidth=1.0)
+    for k, freq, S_val in zip(harmonics, omega_plotting, S_est_per_s):
+        ax.annotate(f"k={k}", xy=(freq, S_val), xytext=(0, 6), textcoords="offset points", ha="center", fontsize=8)
+    ax.set_xlabel(r"$\omega/2\pi$ (MHz)")
+    ax.set_ylabel(r"$S(\omega) (1/s)$")
+    ax.set_title(r"Reconstructed $S(\omega)$")
+    fig.tight_layout()
+    fig.savefig(data_dir_path / "S_omega-mle.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def norris_psd_least_sq(run_id, num_harmonics, data_dir="./data", csv_name="averaged.csv"):
+    """
+    Norris 2016 post-processing
+    :param num_harmonics:
+    :param run_id:
+    :param data_dir:
+    :param csv_name:
+    :return:
+    """
+
+    '''get params'''
+    config_path = Path("./config") / (run_id + ".yaml")
+    import yaml
+    with open(config_path) as file:
+        config = yaml.safe_load(file)
+    norris_params = config["norris_params"]
+    P = norris_params["P"]  # number of base sequences
+    T = norris_params['T']  # duration of base sequences in ms
+    delta = norris_params['delta']  # T = q*delta
+    M = norris_params['M']  # number of cycles of each base sequence
+    tau = norris_params['tau']  # minimum spacing between pulses
+    min_pulses = norris_params.get('min_pulses', None)
+
+    '''get data'''
+    # find csv files for the various sequences indexed by p
+    data_dir_path = Path(data_dir) / run_id
+    csv_paths = sorted(data_dir_path.glob(f"*/{csv_name}"), key=lambda p: int(p.parent.name.rsplit("-", 1)[1]))
+    if len(csv_paths) == 0:
+        raise Exception(f"No CSVs found under {data_dir_path} matching */{csv_name}")
+    csv_p_idxs = [int(p.parent.name.rsplit("-", 1)[1]) for p in csv_paths]
+    if csv_p_idxs != list(range(P)):
+        raise Exception(f"Expected CSV subruns p=0 through p={P - 1}, but found {csv_p_idxs}")
+    if csv_p_idxs[-1] != P - 1:
+        raise Exception(f"FID should be last with p={P - 1}, but last CSV index is p={csv_p_idxs[-1]}")
+    # pull coherences from csv files
+    times = []
+    coherences = []
+    for csv_path in csv_paths:
+        data = np.loadtxt(csv_path, delimiter=",", skiprows=1, ndmin=2, dtype=np.complex128)
+        if data.shape[0] != 1:
+            raise Exception(f"{csv_path} should have exactly one data row, found {data.shape[0]}")
+        if data.shape[1] != 2:
+            raise Exception(f"{csv_path} should have exactly two columns, found {data.shape[1]}")
+        time = data[0, 0]
+        coherence = data[0, 1]
+        times.append(time)
+        coherences.append(coherence)
+    # data processing on times
+    times = np.asarray(times)
+    if not np.iscomplexobj(times):
+        raise Exception(f"times should be complex before dropping imaginary part: dtype={times.dtype}")
+    if not np.allclose(times.imag, 0.0, rtol=0.0, atol=1e-12):
+        raise Exception(f"Some time entries have nonzero imaginary parts: {times}")
+    times = times.real.astype(float)
+    if np.any(times <= 0):
+        raise Exception(f"All final times should be positive: {times}")
+    if not np.allclose(times, times[0], rtol=0.0, atol=1e-9):
+        raise Exception(f"Not all CSV time entries are the same: {times}")
+    if not np.isclose(times[0], T * M, rtol=0.0, atol=1e-9):
+        raise Exception(f"CSV time={times[0]} is not close to T*M={T * M}")
+    # data processing on coherence
+    coherences = np.asarray(coherences, dtype=np.complex128)
+    if len(coherences) != P:
+        raise Exception(f"Number of coherences ({len(coherences)}) does not match P={P}")
+
+    # final 1D array
+    coherences = np.asarray(coherences)
+    print("\nCOHERENCES: ", coherences, "\n\n")
+
+    '''get filter functions'''
+    # get base sequences from csv
+    base_sequences_ms: list = [None] * P
+    with open(data_dir_path / "base_sequences.csv", "r", newline="") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            sequence_idx = int(row["sequence_idx"])
+            pulse_idx = int(row["pulse_idx"])
+            time_ms = float(row["time_ms"])
+            if base_sequences_ms[sequence_idx] is None:
+                base_sequences_ms[sequence_idx] = []
+            # FID sentinel row: sequence_idx=P-1, pulse_idx=-1, time_ms=nan
+            if pulse_idx == -1:
+                if sequence_idx != P - 1:
+                    raise Exception(f"FID row should have sequence_idx=P-1={P - 1}, got {sequence_idx}")
+                base_sequences_ms[sequence_idx] = []
+                continue
+            base_sequences_ms[sequence_idx].append((pulse_idx, time_ms))
+    for sequence_idx in range(P):
+        if base_sequences_ms[sequence_idx] is None:
+            raise Exception(f"Missing sequence_idx={sequence_idx} in sequences.csv")
+        if sequence_idx == P - 1:
+            base_sequences_ms[sequence_idx] = np.array([], dtype=float)
+        else:
+            sequence = sorted(base_sequences_ms[sequence_idx], key=lambda x: x[0])
+            # additional check
+            pulse_idxs = [pulse_idx for pulse_idx, _ in sequence]
+            if pulse_idxs != list(range(len(pulse_idxs))):
+                raise Exception(f"Bad pulse_idx sequence for sequence {sequence_idx}: {pulse_idxs}")
+            base_sequences_ms[sequence_idx] = np.array([time_ms for _, time_ms in sequence], dtype=float)
+    if len(base_sequences_ms[-1]) != 0:
+        raise Exception(f"FID should be last at sequence_idx=P-1={P - 1}")
+    print("\nBASE SEQUENCES:", base_sequences_ms, "\n\n")
+    # get FFs
+    filter_functions = get_FFs(base_sequences_ms, T)
+    if len(filter_functions) != len(coherences):
+        raise Exception(f"Number of filter functions ({len(filter_functions)}) does not match "
+                        f"number of coherences ({len(coherences)})")
+
+    '''set up Sung Eq. 7 linear system'''
+    # make k omega_h
+    omega_h = 2 * np.pi / T  # rad/ms
+    harmonics = np.asarray(np.arange(num_harmonics), dtype=int)
+
+    # make chi
+    coherence_abs = np.abs(coherences)
+    if np.any(~np.isfinite(coherence_abs)) or np.any(coherence_abs <= 0):
+        raise Exception(f"Cannot take log of bad coherence magnitudes: {coherence_abs}")
+    if np.any(coherence_abs > 1.0 + 1e-12):
+        raise Exception(f"Coherence magnitudes exceed 1: {coherence_abs}")
+    chis = -np.log(coherence_abs)  # p-long vector
+
+    # system of linear equations
+    matrix = np.zeros((P, len(harmonics)), dtype=float)
+    for p, F_p in enumerate(filter_functions):
+        M_eff = 1 if p == P - 1 else M  # FID is last
+        for k, harmonic_k in enumerate(harmonics):
+            zero_factor = (2.0 - int(harmonic_k == 0)) / 2.0
+            matrix[p, k] = (M_eff / T) * zero_factor * np.abs(F_p(harmonic_k * omega_h))**2
+    print("\nCHI:")
+    print(chis)
+    print("\nHARMONIC OMEGAS rad/ms:")
+    print(harmonics * omega_h)
+    print("\nEQ 7 MATRIX:")
+    print(matrix)
+
+    '''solve linear system'''
+    # Diagnostic only: unconstrained least squares
+    S_lstsq, residuals, rank, singular_values = np.linalg.lstsq(matrix, chis, rcond=None)
+    print("\nS_LSTSQ:")
+    print(S_lstsq)
+    print("\nLSTSQ RESIDUALS:")
+    print(residuals)
+    print("\nRANK:")
+    print(rank)
+    print("\nSINGULAR VALUES:")
+    print(singular_values)
+    print("\nLSTSQ RESIDUAL NORM:")
+    print(np.linalg.norm(matrix @ S_lstsq - chis))
+    cond = singular_values[0] / singular_values[-1]
+    print("\nCONDITION NUMBER:", cond)
+    if rank < len(harmonics):
+        raise Exception(f"Rank deficient: rank={rank}, unknowns={len(harmonics)}")
+
+    # Actual physical estimate: nonnegative least squares
+    S_est, residual_nnls = nnls(matrix, chis)
+    print("\nS_NNLS:")
+    print(S_est)
+    print("\nNNLS RESIDUAL:")
+    print(residual_nnls)
+    print("\nNNLS RESIDUAL NORM:")
+    print(np.linalg.norm(matrix @ S_est - chis))
+
+    '''Plot reconstructed S(omega) versus omega / 2pi in MHz'''
+    omega_plotting = ((omega_h*harmonics) / (2 * np.pi)) * 1.0e-3
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    S_est_per_s = S_est * 1.0e+3
+    ax.plot(omega_plotting, S_est_per_s, marker="o", linewidth=1.5)
+    ax.axhline(0.0, linestyle="--", linewidth=1.0)
+    for k, freq, S_val in zip(harmonics, omega_plotting, S_est_per_s):
+        ax.annotate(f"k={k}", xy=(freq, S_val), xytext=(0, 6), textcoords="offset points", ha="center", fontsize=8)
+    ax.set_xlabel(r"$\omega/2\pi$ (MHz)")
+    ax.set_ylabel(r"$S(\omega) (1/s)$")
+    ax.set_title(r"Reconstructed $S(\omega)$")
+    fig.tight_layout()
+    fig.savefig(data_dir_path / "S_omega.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def mean_fid(run_id, data_dir="./data", csv_name="averaged.csv"):
+    """
+    Sung/Jin style FID protocol to measure the noise mean
+    :param run_id:
+    :param data_dir:
+    :param csv_name:
+    :return:
+    """
+
+    '''get data'''
+    data_dir_path = Path(data_dir) / run_id
+    csv_path = data_dir_path / csv_name
+    data = np.loadtxt(csv_path, delimiter=",", skiprows=1, ndmin=2, dtype=np.complex128)
+
+    '''data processing'''
+    # make it real
+    b = np.imag(data[:, 1])
+    frac_bad = np.count_nonzero(np.abs(b) > 1.0e-10) / data[:, 1].size
+    if frac_bad > 0.1:
+        raise Exception(f"More than 10% of points have nonzero imaginary part: {frac_bad:.2%}")
+    data = np.real(data)
+    # remove outliers
+    finite = np.isfinite(data[:,1])
+    # cutoff = np.nanpercentile(y, 99)
+    keep = finite # & (y < cutoff)
+    data = data[keep]
+    print("number of non-finite points: ", np.count_nonzero(~finite) ,"\n\n")
+    # change large-magnitude outliers to 0
+    n_removed = 0
+    y_clean = data[:,1].copy()
+    bad_mask = ~((-1.0 <= y_clean) & (y_clean <= 1.0))
+    n_removed += int(np.count_nonzero(bad_mask))
+    y_clean[bad_mask] = 0.0
+    # data[:,1] = y_clean
+    data = data[~bad_mask]
+    print("\nNUMBER OF UNSTABLE POINTS: ", n_removed, "out of a total ", len(data[:, 1]), " points" ,"\n\n")
+    np.savetxt(data_dir_path / "final.csv", data, header="t,L_avg", delimiter=",", comments="")
+    ''' take sigma_z / tau '''
+    beta_vals = data[:,1] / data[:,0]
+
+    '''mean and error bars'''
+    beta_mean = np.mean(beta_vals)
+    beta_std = np.std(beta_vals, ddof=1)
+    beta_sem = beta_std / np.sqrt(beta_vals.size)
+    print(f"beta mean = {beta_mean:.6e}")
+    print(f"beta std  = {beta_std:.6e}")
+    print(f"beta SEM  = {beta_sem:.6e}")
+
+    '''plot the inset'''
+    fig, ax = plt.subplots(figsize=(20, 8))
+
+    trajectories = {"beta": np.column_stack((data[:, 0], data[:,1]))}
+    plot_trajectory(
+        ax,
+        trajectories,
+        scatter=True,
+        y_label="rk",
+        just_scatter=True,
+    )
+
+    # ax.axhline(beta_mean, linestyle="--", linewidth=2, label=f"mean = {beta_mean:.3e}")
+    # ax.fill_between(
+    #     data[:, 0],
+    #     beta_mean - beta_sem,
+    #     beta_mean + beta_sem,
+    #     alpha=0.2,
+    #     label=f"SEM = {beta_sem:.3e}",
+    # )
+
+    ax.legend()
+    fig.tight_layout(rect=(0.0, 0.08, 1.0, 1.0))
+    fig.savefig(fname=f"{str(data_dir_path)}/mean.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
+def alvarez_pp(run_id, data_dir="./data", csv_name="averaged_mag.csv"):
+    """
+    alvarez and suter post processing
+    :param num_cycles:
+    :param run_id:
+    :param data_dir:
+    :param csv_name:
+    :return:
+    """
+
+    '''get params'''
+    config_path = Path("./config") / (run_id + ".yaml")
+    import yaml
+    with open(config_path) as file:
+        config = yaml.safe_load(file)
+    alvarez_params = config["alvarez_params"]
+    num_cycles = alvarez_params['num_cycles']  # big M
+    tau_max = alvarez_params['tau_max']
+    num_measurements = alvarez_params['num_measurements']  # little m
+
+    '''get data'''
+    data_dir_path = Path(data_dir) / run_id
+    csv_paths = sorted(data_dir_path.glob(f"*/{csv_name}"), key=lambda p: int(p.parent.name.rsplit("-", 1)[1]))
+
+    taus = tau_max / np.arange(num_measurements, 0, -1)  # tau_0, tau_1, ... , tau_{m-1}
+    cycles = np.arange(1, num_cycles + 1)  # 1, 2, 3, ..., M
+    coh = np.array([np.loadtxt(p, delimiter=",", skiprows=1)[:, 1] for p in csv_paths]).T
+    times = 2 * np.outer(taus, cycles)
+
+    # list of 2D arrays, first col is timespace second col is coherence
+    # each 2D array is a stroboscopic CPMG run with tau = tau_idx
+    runs = list(np.dstack((times, coh)))
+
+    # add 0.0, 1.0 to all the runs
+    for idx, run in enumerate(runs):
+        runs[idx] = np.vstack(([0.0, 1.0], run))
+
+    '''plot the inset'''
+    fig, ax = plt.subplots(figsize=(12, 8))
+    plot_idxs = [0, 1, 2]
+    trajectories = {}
+    fits = {}
+    for plot_idx in plot_idxs:
+        data = runs[plot_idx]
+        print(plot_idx, "plot idx", data)
+        trajectories[f"tau-{taus[plot_idx]*10**3:.8f} (mu s)"] = data
+
+        # fit the curve
+        decay_parameter = fit_exp(data[:,1], data[:,0])
+        fit_curve = exp(np.asarray(data[:,0]), decay_parameter)
+        fit_traj = np.column_stack((data[:,0], fit_curve))
+        fits[f"tau-{taus[plot_idx]*10**3:.2f} (mu s)"] = fit_traj
+    plot_trajectory(ax, trajectories, scatter=True)  # plot points
+    # plot_trajectory(ax, fits, scatter=False)  # plot fits
+    ax.set_yscale("log")
+    fig.tight_layout(rect=(0.0, 0.08, 1.0, 1.0))
+    fig.savefig(fname=f"{str(data_dir_path)}/fig1-inset", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+    '''plot fig 1'''
+    decay_parameters = []
+    for idx in np.arange(len(runs)):
+        data = np.asarray(runs[idx])
+        decay_parameter = fit_exp(data[:,1], data[:,0])
+        decay_parameters.append(decay_parameter)
+    relaxations = 1.0 / np.asarray(decay_parameters)
+    fig, ax = plt.subplots(figsize=(12, 8))
+    plot_trajectory(ax, {"R^-1": np.column_stack((taus, relaxations))}, scatter=True,
+                    y_label="Relaxation time (ms)", x_label="Pulse delay tau (ms)")  # plot fits
+    ax.set_yscale("log")
+    ax.set_xscale("log")
+    fig.tight_layout(rect=(0.0, 0.08, 1.0, 1.0))
+    fig.savefig(fname=f"{str(data_dir_path)}/fig1", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+    '''make reconstruction matrix U'''
+    decay_parameters = np.asarray(decay_parameters, dtype=float)
+    assert num_measurements == len(decay_parameters)
+    decay_parameters = decay_parameters[::-1]
+
+    # U[n-1, j-1] = sum_k A_k^2 delta_{j,nk}
+    U = np.zeros((num_measurements, num_measurements), dtype=float)
+    for n in range(1, num_measurements + 1):  # n = 1, ..., m
+        for k in range(1, num_measurements // n + 1):  # k = 1, ..., floor(m/n)
+            j = n * k  # j = nk
+            if k % 2 == 1:
+                A_k_squared = 1.0 / k ** 2
+            else:
+                A_k_squared = 0.0
+            U[n - 1, j - 1] = A_k_squared
+    # Solve U S = R, equivalent to S = U^{-1} R
+    spectral_density_values = np.linalg.solve(U, decay_parameters)
+
+    '''Plot reconstructed S(omega) versus omega / 2pi in MHz'''
+    omega_min = np.pi / tau_max  # rad/ms
+    j_values = np.arange(1, num_measurements + 1)  # j = 1, ..., m
+    omega_values = j_values * omega_min  # rad/ms
+    omega_plotting = (omega_values / (2.0 * np.pi)) * 1.0e-3  # MHz
+    S_est_per_s = spectral_density_values * 1.0e3  # 1/ms -> 1/s
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(omega_plotting, S_est_per_s, marker="o", linewidth=1.5)
+    ax.axhline(0.0, linestyle="--", linewidth=1.0)
+    for j, freq, S_val in zip(j_values, omega_plotting, S_est_per_s):
+        ax.annotate(
+            f"j={j}",
+            xy=(freq, S_val),
+            xytext=(0, 6),
+            textcoords="offset points",
+            ha="center",
+            fontsize=8,
+        )
+    ax.set_xlabel(r"$\omega/2\pi$ (MHz)")
+    ax.set_ylabel(r"$S(\omega)$ (1/s)")
+    ax.set_title(r"Reconstructed $S(\omega)$")
+    fig.tight_layout()
+    fig.savefig(data_dir_path / "S_omega_alvarez.png", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
 # +++++++++++++++++++++++ Specialized plots +++++++++++++++++++++++ #
-def plot_cpmg_ethan(run_path, csv_name="gcce_mc_averaged_modulus.csv", save_path=None, logtime=False,
+def plot_cpmg_ethan(run_path, csv_name="averaged_mag.csv", save_path=None, logtime=False,
                     T_max=None, tau_max=None, noise_floor=None, T_min=None, tau_min=None, y_lim=None, x_lim=None):
     """
     Build a 2D τ–t_d heatmap for many cpmg runs as in Ethan's thesis.
 
     Assumes directory structure like:
         run_path/
-            CPMG-1/final_csv_files/csv_name.csv
-            CPMPG-5/ final_csv_files/csv_name.csv
+            CPMG-1/csv_name.csv
+            CPMPG-5/csv_name.csv
             ...
 
     Each csv file should have two columns:
-        T (ms),  L(T)
+        T (ms),  total_length(T)
     """
 
     '''get the data'''
@@ -640,10 +1623,10 @@ def plot_cpmg_ethan(run_path, csv_name="gcce_mc_averaged_modulus.csv", save_path
         if not m:
             continue
         N = int(m.group(1))
-        csv_path = d / "final_csv_files" / csv_name
+        csv_path = d / csv_name
         if csv_path.is_file():
             run_info.append((N, d, csv_path))
-    print("run_info for 2d plot: ", run_info)
+    print(f"Found {len(run_info)} CPMG runs for 2D plot")
     if not run_info:
         raise RuntimeError(
             f"No run directories with pattern 'pulse_id-N' and {csv_name} "
@@ -764,8 +1747,10 @@ def plot_cpmg_ethan(run_path, csv_name="gcce_mc_averaged_modulus.csv", save_path
     ax1.set_ylim(bottom=np.min(T_plot), top=np.max(T_plot))
     ax2.set_ylim(bottom=np.min(T_plot), top=np.max(T_plot))
     if y_lim is not None:
+        ax1.set_ylim(*y_lim)
         ax2.set_ylim(*y_lim)
     if x_lim is not None:
+        ax1.set_xlim(*x_lim)
         ax2.set_xlim(*x_lim)
     ax1.set_xlabel(r"$\tau$ (ms)")
     ax1.set_ylabel(r"$T$ (ms)")
@@ -945,8 +1930,8 @@ def plot_park_s13(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_na
     return output_path
 
 
-def plot_park_fig2(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_name=None, logtime=False, noise_floor=None,
-                   keep_ns=None, y_lim=None, x_lim=None):
+def plot_park_fig2(cpmg_run_dir, averaged_csv_name="averaged_mag.csv", output_name="park_fig2.png", logtime=False,
+                   noise_floor=None, y_lim=None, x_lim=None):
     """
     Park AOM 2026 Figure 2 style plots.
 
@@ -957,48 +1942,38 @@ def plot_park_fig2(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_n
     """
 
     '''set up'''
-    cpmg_run_dir = Path(cpmg_run_dir)
-    if output_name is None:
-        output_name = f"park_fig2.png"
-    if not averaged_name.endswith(".csv"):
-        averaged_csv_name = f"{averaged_name}.csv"
-    else:
-        averaged_csv_name = averaged_name
-        averaged_name = averaged_name[:-4]
+    cpmg_run_dir = "data" / Path(cpmg_run_dir)
     if not cpmg_run_dir.is_dir():
         raise FileNotFoundError(f"CPMG run directory does not exist: {cpmg_run_dir}")
     cpmg_dirs = sorted([p for p in cpmg_run_dir.iterdir() if p.is_dir() and p.name.startswith("CPMG-")],
                        key=_parse_cpmg_n,)
     if not cpmg_dirs:
         raise FileNotFoundError(f"No CPMG-* subdirectories found in: {cpmg_run_dir}")
-    if keep_ns is not None:
-        keep_ns = set(keep_ns)
-        cpmg_dirs = [p for p in cpmg_dirs if _parse_cpmg_n(p) in keep_ns]
 
     '''make plot'''
     fig, ax = plt.subplots(figsize=(6, 5.5))
     n_plotted = 0
     colors = plt.cm.viridis_r(np.linspace(0, 1, len(cpmg_dirs)))
 
+    # plot data
     original_num_points_total = 0
     n_removed_noise_total = 0
     for color, subdir in zip(colors, cpmg_dirs):
-        csv_path = subdir / "final_csv_files" / averaged_csv_name
-
+        n = _parse_cpmg_n(subdir)
+        # load data
+        csv_path = subdir / averaged_csv_name
         if not csv_path.is_file():
             print(f"Skipping {subdir.name}: missing {csv_path}")
             continue
-
         data = np.loadtxt(csv_path, delimiter=",", skiprows=1)
-
         if data.ndim != 2 or data.shape[1] < 2:
             print(f"Skipping {subdir.name}: bad CSV shape {data.shape}")
             continue
-
         t = data[:, 0]
         L_avg = data[:, 1]
         original_num_points = len(L_avg)
         original_num_points_total += original_num_points
+        # implement noise floor
         if noise_floor is not None:
             above_noise = L_avg > noise_floor
             n_removed_noise = np.sum(~above_noise)
@@ -1006,32 +1981,25 @@ def plot_park_fig2(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_n
             t = t[above_noise]
             L_avg = L_avg[above_noise]
         ln_L = -np.log(L_avg)
-
+        # implement logtime
         if logtime:
             mask = t > 0
             if not np.any(mask):
                 print(f"Skipping {subdir.name}: no positive time values for log x-axis")
                 continue
-
             if np.any(~mask):
                 print(f"Skipping nonpositive time values in {subdir.name} for log x-axis")
-
             t = t[mask]
             ln_L = ln_L[mask]
-
             if np.any(ln_L <= 0):
-                raise ValueError(
-                    f"Cannot use log y-axis for {subdir.name} because -ln(L) contains values <= 0."
-                )
-
-        n = _parse_cpmg_n(subdir)
-        label = rf"$n={int(n)}$" if n != float("inf") else subdir.name
-
-        line, = ax.plot(t, ln_L, label=label, color=color, linewidth=2.0)
+                raise ValueError(f"Cannot use log y-axis for {subdir.name} because -ln(L) contains values <= 0.")
+        # plot
+        line, = ax.plot(t, ln_L, label=rf"$n={int(n)}$" if n != float("inf") else subdir.name,
+                        color=color, linewidth=2.0)
         ax.scatter(t, ln_L, marker="x", color=color, s=45, linewidths=1.5)
         n_plotted += 1
 
-    # plot formattng
+    # plot formatting
     if logtime:
         ax.set_xscale("log")
         ax.set_yscale("log")
@@ -1051,14 +2019,12 @@ def plot_park_fig2(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_n
 
         ax.tick_params(axis="x", which="major", length=7)
         ax.tick_params(axis="x", which="minor", length=3)
-    # ax.set_title(f"{averaged_name} coherence across CPMG runs")
     if noise_floor is not None:
         fig.text(0.5, 0.01,
             f"Removed {n_removed_noise_total} pts below noise floor: {noise_floor}, out of {original_num_points_total} pts total",
             ha="center")
     ax.set_xlabel(r"Evolution time (ms)", fontsize=24)
-    ax.set_ylabel(r"$-\ln |L|$", fontsize=24)
-
+    ax.set_ylabel(r"$-\ln |L(t)|$", fontsize=24)
     if y_lim is not None:
         ax.set_ylim(*y_lim)
     if x_lim is not None:
@@ -1066,16 +2032,12 @@ def plot_park_fig2(cpmg_run_dir, averaged_name="gcce_averaged_modulus", output_n
     ax.tick_params(axis="both", which="both", direction="in", top=True, right=True)
     ax.tick_params(axis="both", which="major", labelsize=18, length=7, width=1.2)
     ax.tick_params(axis="both", which="minor", length=4, width=1.0)
-
-    # ax.grid(True, alpha=0.3, which="both")
     ax.grid(False)
     ax.legend(frameon=False, fontsize=16, loc="lower right")
     fig.tight_layout()
     output_path = cpmg_run_dir / output_name
     fig.savefig(output_path, dpi=300)
     plt.close(fig)
-
-    return output_path
 
 
 def plot_overlay(data_dir, output_name="overlay.png", logtime=False, xlim=None):
@@ -1150,9 +2112,32 @@ def plot_overlay(data_dir, output_name="overlay.png", logtime=False, xlim=None):
 
 
 def main():
-    fit_plot("2026.5.15_test", fit_method=fit_stretch_linear, plot_fit=False)
-    # plot_cpmg_ethan("data/2026.5.13_ethan-combined", logtime=True, tau_min=1.4e-3,
-    #                 tau_max=0.56, T_max=3, )
+    # mean_fid("2026.5.29_mean-nobath")
+    # fourier("data/2026.5.26_mean/final.csv")
+    # alvarez_pp("2026.5.26_alvarez")
+    norris_psd_least_sq("2026.5.28_psd-norris-500", 15)
+    norris_psd_mle("2026.5.28_psd-norris-500", 15)
+    # norris_bispectrum("2026.5.29_bispectrum-norris-polarized", mu_B=172)
+    # plot_park_fig2("2026.5.27_park-100-1",
+    #                  logtime=True,
+    # #                noise_floor=1.0e-2,
+    #                  x_lim = [7.35e-4, 1.84e-1],
+    #                  y_lim = [1.00e-1, 3.00]
+    #                )
+    # fit_plot("2026.5.29_bispectrum",
+    #          plot_fit=false,
+    #          # data_dir="data/2026.5.21_park-100/CPMG-64",
+    #          log_time=False,
+    #          csv_name="averaged_phase.csv",
+    #          plot_name="phase.png",
+    #          # t_cutoff=0.004,
+    #        )
+    # fourier("data/2026.5.29_bispectrum/final.csv")
+    # plot_cpmg_ethan("data/2026.5.26_ethan",
+    #                 logtime=True,
+    #                 tau_min=1.4e-3,
+    #                 tau_max=0.56,
+    #                 T_max=3,)
 
 
 if __name__ == '__main__':

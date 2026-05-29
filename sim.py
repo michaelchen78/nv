@@ -10,7 +10,7 @@ import logging
 import hashlib
 import csv
 
-from pp1 import clean_coherence, average_ensemble
+from pp1 import clean_coherence, average_ensemble, clean_populations
 
 # +++++++++++++++++++++++ Ensemble context +++++++++++++++++++++++ #
 _CURRENT_ENSEMBLE = None  # type: int | None
@@ -159,7 +159,7 @@ def run_ensemble(config, out_dir_str, data_dir_str):
     """
     Use this method to run experiments. Runs an ensemble of model.run_experiment()'s, cleans and averages the results.
     Given an output `runs' and output `data' directory which already exist, outputs a primary text log to the `runs'
-    directory and averaged csv files to `data' directory. Also returns the L(t) array. Everything is MPI-compatible.
+    directory and averaged csv files to `data' directory. Also returns the total_length(t) array. Everything is MPI-compatible.
     :param config: see .yaml file for description
     :param out_dir_str: text output directory
     :param data_dir_str: data output directory
@@ -197,7 +197,11 @@ def run_ensemble(config, out_dir_str, data_dir_str):
         logger.info("Initialized output for run %s", run_id)
         logger.info("Log directory: %s", out_dir)
         logger.info("Data directory: %s", data_dir)
-        logger.info("Config: %s", config)
+        print_config = copy.deepcopy(config)
+        print_config["experiment_params"]["pulses"] = "print too long"
+        if "multi_params" in print_config.keys():
+            print_config["multi_params"]["change_params"] = "print too long"
+        logger.info("Config: %s", print_config)
 
     # initialize time context for this run
     _reset_time_context()
@@ -205,20 +209,20 @@ def run_ensemble(config, out_dir_str, data_dir_str):
     temp_time = t_start  # so we can record how long EACH ensemble run takes
 
     '''run ensemble of experiments'''
-    coherence = np.empty((len(experiment_params["time_space"]), experiment_params["ensemble_size"]),
+    time_count = len(experiment_params["time_space"])
+    coherence = np.empty((time_count, experiment_params["ensemble_size"]),
         dtype=np.complex128)  # empty coherence array
 
     base_seed = get_seed(config.get("seed_id", run_id))
     for i in range(experiment_params["ensemble_size"]):
         if is_root():
             logger.info("Starting ensemble experiment %d", i+1)
-
         set_current_ensemble(i+1)  # or i + 1 if you want 1-based
+        new_supercell_params = copy.deepcopy(supercell_params)
+        # new seed each loop, deterministic though so separate mpi runs will produce the same supercell
+        new_supercell_params["seed"] = (base_seed + i) & 0xFFFFFFFF
 
-        new_supercell_params = copy.deepcopy(supercell_params)  #  copy so we can tweak per-run
-        new_supercell_params["seed"] = (base_seed + i) & 0xFFFFFFFF  # new seed each loop, deterministic though so
-                                                                     # separate mpi runs will produce the same supercell
-
+        # handle custom bath
         if supercell_params.get("custom_bath", False):
             supercell = config["supercell"]
             nv = model.get_single_nv(supercell_params["nv_position"], supercell_params["alpha"],
@@ -226,10 +230,12 @@ def run_ensemble(config, out_dir_str, data_dir_str):
         else:
             supercell, nv = model.get_supercell(new_supercell_params)
         simulator = model.get_simulator(supercell, nv, simulator_params)
+
+        # run the experiment
         traj = model.run_experiment(simulator, experiment_params)
-
+        if traj.shape != (time_count,):
+            raise ValueError(f"Expected traj shape {(time_count,)}, got {traj.shape}")
         coherence[:, i] = traj
-
         if is_root():
             logger.info("Rank 0 finished ensemble experiment %d in %.2f s", i+1, time.time() - temp_time)
             temp_time = time.time()
@@ -245,28 +251,35 @@ def run_ensemble(config, out_dir_str, data_dir_str):
 
     # Only root rank does postprocessing and filesystem writes
     if is_root():
-        # save raw csv files if verbose
-        if experiment_params.get("verbose", False):
-            csv_path = data_dir / f"raw.csv"
-            np.savetxt(csv_path, coherence, delimiter=",")
-            logger.info("Wrote raw CSV to %s", csv_path)
+        if config["experiment_params"].get("populations", False):
+            # clean coherence data
+            coherence_cleaned, n_removed = clean_populations(coherence)
+            logger.info("Number of unstable points was %d", n_removed)
+            if n_removed > coherence_cleaned.size * 0.2:
+                warnings.warn("Number of unstable points exceed 20\% !")
+        else:
+            # clean coherence data
+            coherence_cleaned, n_removed = clean_coherence(coherence)
+            logger.info("Number of unstable points was %d", n_removed)
+            if n_removed > coherence_cleaned.size*0.2:
+                warnings.warn("Number of unstable points exceed 20\% !")
 
-        # clean coherence data
-        coherence_cleaned, n_removed = clean_coherence(coherence)
-        logger.info("Number of unstable points was %d", n_removed)
-        if n_removed > coherence_cleaned.size*0.2:
-            warnings.warn("Number of unstable points exceed 20\% !")
+        # save raw, cleaned csv files
+        csv_path = data_dir / f"raw.csv"
+        np.savetxt(csv_path, coherence_cleaned, delimiter=",")
+        logger.info("Wrote raw (cleaned) CSV to %s", csv_path)
 
         # average results over the ensemble
         coherence_avg = average_ensemble(coherence_cleaned, avg_method=config["experiment_params"]["avg_method"])
 
-        # add in the point (0.0, 1.0) if it is not there
-        time_space = np.asarray(config["experiment_params"]["time_space"], dtype=float)
-        coherence_avg = np.asarray(coherence_avg, dtype=np.complex128)
-        if not np.any(np.isclose(time_space, 0.0, atol=1e-20, rtol=0.0)):
-            time_space = np.insert(time_space, 0, 0.0)
-            coherence_avg = np.insert(coherence_avg, 0, 1.0 + 0.0j)
-        config["experiment_params"]["time_space"] = time_space  # this assumes all postprocessing done on root
+        if experiment_params.get("add_zero", True):
+            # add in the point (0.0, 1.0) if it is not there
+            time_space = np.asarray(config["experiment_params"]["time_space"], dtype=float)
+            coherence_avg = np.asarray(coherence_avg, dtype=np.complex128)
+            if not np.any(np.isclose(time_space, 0.0, atol=1e-20, rtol=0.0)):
+                time_space = np.insert(time_space, 0, 0.0)
+                coherence_avg = np.insert(coherence_avg, 0, 1.0 + 0.0j)
+            config["experiment_params"]["time_space"] = time_space  # this assumes all postprocessing done on root
 
         # split averaged complex coherence into magnitude and phase
         coherence_avg_mag = np.abs(np.asarray(coherence_avg, dtype=np.complex128))
@@ -275,7 +288,7 @@ def run_ensemble(config, out_dir_str, data_dir_str):
         # save averaged csv files
         averaged = np.column_stack((config["experiment_params"]["time_space"], coherence_avg))
         csv_path_averaged = data_dir / f"averaged.csv"
-        np.savetxt(csv_path_averaged, averaged, delimiter=",", header="t,L_avg", comments="")
+        np.savetxt(csv_path_averaged, averaged, delimiter=",", header="t,L_avg,beta", comments="")
         logger.info("Wrote final averaged CSV to %s", csv_path_averaged)
 
         # same thing for the modulus and phase...

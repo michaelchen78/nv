@@ -11,6 +11,10 @@ import warnings
 from pathlib import Path
 import logging
 
+# for custom polarization
+import pycce.run.mc as pycce_mc
+from pycce.utilities import gen_state_list
+
 
 # +++++++++++++++++++++++ small utility helpers +++++++++++++++++++++++ #
 def current_ensemble():
@@ -140,6 +144,90 @@ def _set_or_remove_cluster_order(calc, order, rows):
         calc.clusters.pop(order, None)
     else:
         calc.clusters[order] = rows
+
+
+# +++++++++++++++++++++++ custom polarization +++++++++++++++++++++++ #
+def install_custom_polarization():
+    """
+    PyCCE MC polarization patch
+
+    Keeps PyCCE's monte carlo bath state sampling, but changes the MC sampling distribution.
+
+    If pycce_mc.POLARIZATION_GAMMA is None:
+        exact default behavior: uniform Iz sampling for all bath spins.
+
+    If pycce_mc.POLARIZATION_GAMMA is a float:
+        e and 13C spins are sampled with Gaussian polarization:
+            P(+1/2) = 0.5 + 0.5 * exp[-(r/gamma)^2]
+            P(-1/2) = 0.5 - 0.5 * exp[-(r/gamma)^2]
+        all other spins remain uniformly sampled.
+    """
+    if getattr(pycce_mc, "_polarized_sampler_installed", False):
+        return
+
+    default_generate_bath_state = pycce_mc.generate_bath_state
+    pycce_mc.POLARIZATION_GAMMA = None
+
+    def generate_polarized_bath_state(bath, nbstates, seed=None, parallel=False):
+        gamma = getattr(pycce_mc, "POLARIZATION_GAMMA", None)
+
+        # original PyCCE behavior when no polarization is active.
+        if gamma is None:
+            yield from default_generate_bath_state(bath, nbstates, seed=seed, parallel=parallel,)
+            return
+
+        rgen = np.random.default_rng(seed)
+
+        rank = 0
+        comm = None
+
+        if parallel:
+            try:
+                import mpi4py
+                comm = mpi4py.MPI.COMM_WORLD
+                rank = comm.Get_rank()
+            except ImportError:
+                raise Exception("parallel broken")
+
+        for _ in range(nbstates):
+            bath_state = np.empty(bath.shape, dtype=np.float64)
+            dimensions = np.empty(bath.shape, dtype=np.int32)
+
+            if rank == 0:
+                dist = bath.dist()
+
+                for raw_name in np.unique(bath.N):
+                    name = str(raw_name)
+                    mask = np.equal(bath.N, raw_name)
+                    count = int(np.count_nonzero(mask))
+
+                    spin = float(bath.types[name].s)
+                    dim = int(round(2 * spin + 1))
+                    dimensions[mask] = dim
+
+                    if name == "e" or name == "13C":
+                        # polos = np.exp(-(dist[mask] / float(gamma)) ** 2) * 0.5
+                        # p_up = 0.5 + polos
+                        # bath_state[mask] = np.where(rgen.random(count) < p_up, spin, -spin,)
+                        p_up = float(gamma)
+                        if not (0.0 <= p_up <= 1.0):
+                            raise Exception(f"polarization must be a probability in [0, 1], got {p_up}")
+                        bath_state[mask] = np.where(
+                            rgen.random(count) < p_up,
+                            spin,
+                            -spin,
+                        )
+                    else:
+                        bath_state[mask] = rgen.integers(dim, size=count) - spin
+
+            if parallel:
+                comm.Bcast(bath_state, root=0)
+                comm.Bcast(dimensions, root=0)
+
+            yield gen_state_list(bath_state, dimensions)
+
+    pycce_mc.generate_bath_state = generate_polarized_bath_state
+    pycce_mc._polarized_sampler_installed = True
 
 
 # +++++++++++++++++++++++ run_experiment() helpers +++++++++++++++++++++++ #
@@ -1237,7 +1325,8 @@ def get_supercell(supercell_params):
     zero_dipoles(atoms, interactions, host_idx)  # highly important this is before p1_hyperfine_quad
 
     # handling p1 internal hyperfines and quadrupoles (jt-axis dependent)
-    p1_hyperfine_quad(atoms, interactions['p1_hf'], interactions['p1_quad'], host_idx, jt_axis=jt_axis, seed=seed)
+    if p1_conc > 0:
+        p1_hyperfine_quad(atoms, interactions['p1_hf'], interactions['p1_quad'], host_idx, jt_axis=jt_axis, seed=seed)
 
     # handles host defect interactions with bad, and host defect quadrupole
     if not interactions['host_bath_dip'] and host_idx is not None:
@@ -1276,7 +1365,7 @@ def get_simulator(atoms, central_spin, simulator_params):
     r_dipole = float(simulator_params['r_dipole'])
     # optional, defaults
     verbose = simulator_params.get("verbose", False)
-    polarization = simulator_params.get("polarization", 0)
+    polarization = simulator_params.get("polarization", None)
     custom_r_bath = simulator_params.get("custom_r_bath", None)
     custom_r_dipole = simulator_params.get("custom_r_dipole", None)
     park_2e2n = simulator_params.get("park_2e2n", False)
@@ -1303,18 +1392,14 @@ def get_simulator(atoms, central_spin, simulator_params):
         logger.info(f"[ens num {current_ensemble()}] Built simulator:\n{calc}\n")
 
     '''make changes to simulator'''
-    # polarization of carbon 13
-    if polarization != 0:
-        gamma = polarization
-        polos = np.exp(-(calc.bath.dist() / gamma) ** 2) * 0.5
-        for a, pol in zip(calc.bath, polos):
-            if a.N != '13C':
-                continue  # Skip 14N and electrons
-            # Generate density matrix
-            dm = np.zeros((2, 2), dtype=np.complex128)
-            dm[0, 0] = 0.5 + pol
-            dm[1, 1] = 0.5 - pol
-            a.state = dm
+    # custom polarization
+    install_custom_polarization()
+    if polarization is None:  # default behavior
+        if is_root():
+            print("\n\n\nno polarization\n\n\n")
+    else:
+        assert type(polarization) is float
+        calc.polarization_gamma = float(polarization)
 
     # implement custom_r_dipole
     if custom_r_dipole is not None:
@@ -1324,10 +1409,6 @@ def get_simulator(atoms, central_spin, simulator_params):
     add_p1_order2(calc)
 
     # implement park_2e2n
-    if (park_2e2n or generalized_2e2n) and order != 2:
-        raise Exception("order must be 2 for park_2e2n and generalized_2e2n")
-    if generalized_2e2n and not park_2e2n:
-        raise Exception("park_2e2n must be on to use generalized 2e_2n")
     if park_2e2n:
         # First build Park-style order-4 clusters using the original spin-level order-2 graph.
         calc = add_park_2e2n_clusters(calc)
@@ -1407,7 +1488,9 @@ def run_experiment(calc, experiment_params):
     cce_type = experiment_params['cce_type']
     parallel = experiment_params['parallel']
     # optional, defaults
-    n_bath_states = experiment_params.get("n_bath_states", 20)
+    n_bath_states = experiment_params.get("n_bath_states", None)
+    populations = experiment_params.get("populations", False)
+    mc_seed_base = experiment_params.get("mc_seed", 8805)
     verbose = experiment_params.get("verbose", False)
     checkpoints = experiment_params.get("checkpoints", False)
     # ================= END OF PARAMETERS ================= #
@@ -1419,6 +1502,7 @@ def run_experiment(calc, experiment_params):
         magnetic_field=magnetic_field,
         pulses=pulses,
         parallel=parallel,
+        masked=False,
     )
 
     if verbose and is_root():
@@ -1430,6 +1514,15 @@ def run_experiment(calc, experiment_params):
         if parallel:
             calc_params['parallel_states'] = True
         calc_params['nbstates'] = n_bath_states
+
+        if mc_seed_base is not None:
+            ens = current_ensemble()
+            ens = 0 if ens is None else int(ens)
+
+            # Same ensemble index gets the same MC seed across multi sub-runs.
+            # Different ensemble indices get different MC seeds.
+            # seed is used for MC sampling
+            calc_params['seed'] = (int(mc_seed_base) + ens) % (2 ** 32)
     if base_cce_type == 'cce':
         calc_params['method'] = 'cce'
     elif base_cce_type == 'gcce':
@@ -1457,8 +1550,24 @@ def run_experiment(calc, experiment_params):
                 exc,
             )
 
+    # custom polarization
+    pycce_mc.POLARIZATION_GAMMA = getattr(calc, "polarization_gamma", None)
+
+    # # trying to 'polarize' the bath
+    # if experiment_params.get("force_bath_up", False):
+    #     proj = np.array([calc.bath.types[str(name)].s for name in calc.bath.N], dtype=float)
+    #     calc.bath.state = gen_state_list(proj, calc.bath.dim)
+    #     print(calc.bath.state)
+
+    # print(calc.bath)
     # calculate coherence and add it to results
-    coherence = calc.compute(time_space, **calc_params)
+    if not populations:
+        coherence = calc.compute(time_space, **calc_params)
+    else:
+        calc_params['normalized'] = False
+        rho00 = calc.compute(time_space, i=calc.center.alpha, j=calc.center.alpha, **calc_params)
+        rho11 = calc.compute(time_space, i=calc.center.beta, j=calc.center.beta, **calc_params)
+        coherence = np.asarray(rho00) - np.asarray(rho11)
 
     if is_root():
         logger.info(f"\n[ens number {current_ensemble()}] Rank 0 mpi process has finished coherence experiment.\n")

@@ -62,12 +62,20 @@ NV_HYPERFINE = [[-2.63 * 1e3, 0.0, 0.0],
 
 """CODING"""
 # registry of run types; if implementing a custom run must add to here
-RUN_REGISTRY = {
+RUN_REGISTRY = {  # yaml flag: method name
     "unit": "unit_run",
     "multi": "multi_run",
     "grid": "grid_run",
     "cpmg": "cpmg",
+    "alvarez": "alvarez2011",
+    "norris": "norris2016",
+    "mean": "mean_fid",
 }
+# 'unit' - a single PyCCE run.
+# 'multi' - basic multi run structure
+# 'grid' - grid where all runs have the same pulse sequence.
+# 'cpmg' - a CPMG run.
+# 'alvarez' - Measuring the Colored Spectrum
 
 # NPC bath interactions
 INTERACTION_DEFAULTS = {
